@@ -2,3 +2,12 @@
     width: 50%;
     height: auto;
 }
+
+h1, h2 {
+    font-family: 'Roboto Slab', serif;
+}
+
+p {
+    font-family: 'Fira Sans', sans-serif;
+}
+
