@@ -1,0 +1,1 @@
+document.getElementById("graph1").textContent = "ciao"
