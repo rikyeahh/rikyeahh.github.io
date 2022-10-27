@@ -1,4 +1,4 @@
-// append the svg3 object to the body of the page 
+// append the svg3 object to the body of the page
 var svg3 = d3.select("#graph3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
