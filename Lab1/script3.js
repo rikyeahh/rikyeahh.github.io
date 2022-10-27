@@ -1,15 +1,11 @@
-var margin3 = {top: 10, right: 30, bottom: 30, left: 40},
-    width = 460 - margin3.left - margin3.right,
-    height = 400 - margin3.top - margin3.bottom;
-
 // append the svg3 object to the body of the page
 var svg3 = d3.select("#graph3")
   .append("svg")
-    .attr("width", width + margin3.left + margin3.right)
-    .attr("height", height + margin3.top + margin3.bottom)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform",
-          "translate(" + margin3.left + "," + margin3.top + ")");
+          "translate(" + margin.left + "," + margin.top + ")");
 
 // get the data
 d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", function(data) {
