@@ -10,6 +10,7 @@ const svg3 = d3.select("#graph3")
 //d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv").then( function(data) {
 d3.csv("../assets/data2.csv").then( function(data) {
 
+    console.log(data)
   // List of subgroups = header of the csv files = soil condition here
   const subgroups = data.columns.slice(1)
 
