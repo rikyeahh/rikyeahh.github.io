@@ -1,5 +1,5 @@
 #capybaraTitleImage {
-    width: 50%;
+    width: 30%;
     height: auto;
 }
 
@@ -11,3 +11,7 @@ p {
     font-family: 'Fira Sans', sans-serif;
 }
 
+.titleAndPhoto {
+    display: flex;
+    flex-direction: row;
+}
