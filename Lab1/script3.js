@@ -1,61 +1,87 @@
-// append the svg object to the body of the page
-const svg3 = d3.select("#graph3")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
+const svg3 = d3.select('#graph3')
+    .append('svg')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+    .append('g')
+    .attr('transform', `translate(${margin.left},${margin.top})`);
 
-// Parse the Data
-d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv").then( function(data) {
-//d3.csv("../assets/data2.csv").then( function(data) {
+// data
+// get the data
+d3.csv("../assets/data2.csv").then( function(data) {
+  console.log(data[1])
 
-    console.log(data)
-  // List of subgroups = header of the csv files = soil condition here
-  const subgroups = data.columns.slice(1)
+  const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
+  console.log(plants)
+  const circoscrizioni = data.map(d => d.circoscrizione);
+  console.log(circoscrizioni)
 
-  // List of groups = species here = value of the first column called group -> I show them on the X axis
-  const groups = data.map(d => (d.group))
-
-  // Add X axis
-  const x = d3.scaleBand()
-      .domain(groups)
-      .range([0, width])
-      .padding([0.2])
-  svg3.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x).tickSizeOuter(0));
-
-  // Add Y axis
-  const y = d3.scaleLinear()
-    .domain([0, 60])
-    .range([ height, 0 ]);
-  svg3.append("g")
-    .call(d3.axisLeft(y));
-
-  // color palette = one color per subgroup
-  const color = d3.scaleOrdinal()
-    .domain(subgroups)
-    .range(['#e41a1c','#377eb8','#4daf4a'])
-
-  //stack the data? --> stack per subgroup
   const stackedData = d3.stack()
-    .keys(subgroups)
-    (data)
+      .keys(plants)(data);
+  console.log(d3.stack().keys(plants))
 
-  // Show the bars
+  const xMax = d3.max(stackedData[stackedData.length - 1], d => d[1]);
+  console.log(stackedData[stackedData.length - 1])
+  console.log(xMax)
+  // scales
+
+
+  const x = d3.scaleLinear()
+      .domain([0, xMax]).nice()
+      .range([0, width]);
+
+  const y = d3.scaleBand()
+      .domain(circoscrizioni)
+      .range([0, height])
+      .padding(0.25);
+  const color = d3.scaleOrdinal()
+      .domain(plants)
+      .range(d3.schemeTableau10);
+
+// axes
+
+  const xAxis = d3.axisBottom(x).ticks(5, '~s');
+  const yAxis = d3.axisLeft(y);
+
+  svg3.append('g')
+      .attr('transform', `translate(0,${height})`)
+      .call(xAxis)
+      .call(g => g.select('.domain').remove());
+
   svg3.append("g")
-    .selectAll("g")
-    // Enter in the stack data = loop key per key = group per group
-    .data(stackedData)
-    .join("g")
-      .attr("fill", d => color(d.key))
-      .selectAll("rect")
-      // enter a second time = loop subgroup per subgroup to add all rectangles
-      .data(d => d)
-      .join("rect")
-        .attr("x", d => x(d.data.group))
-        .attr("y", d => y(d[1]))
-        .attr("height", d => y(d[0]) - y(d[1]))
-        .attr("width",x.bandwidth())
+      .call(yAxis)
+      .call(g => g.select('.domain').remove());
+
+// draw bars
+
+// create one group for each fruit
+  const layers = svg3.append('g')
+      .selectAll('g')
+      .data(stackedData)
+      .join('g')
+      .attr('fill', d => color(d.key));
+
+// transition for bars
+  const duration = 1000;
+  const t = d3.transition()
+      .duration(duration)
+      .ease(d3.easeLinear);
+
+  layers.each(function(_, i) {
+    // this refers to the group for a given fruit
+    d3.select(this)
+        .selectAll('rect')
+        .data(d => d)
+        .join('rect')
+        .attr('x', d => x(d[0]))
+        .attr('y', d => y(d.data.circoscrizione))
+        .attr('height', y.bandwidth())
+        .transition(t)
+        // i is the index of this fruit.
+        // this will give the bars for each fruit a different delay
+        // so that the fruits will be revealed one at a time.
+        // using .each() instead of a normal data join is needed
+        // so that we have access to what fruit each bar belongs to.
+        .delay(i * duration)
+        .attr('width', d => x(d[1]) - x(d[0]));
+  });
 })
