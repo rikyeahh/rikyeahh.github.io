@@ -1,48 +1,64 @@
-// append the svg3 object to the body of the page
-var svg3 = d3.select("#graph3")
+// set the dimensions and margins of the graph
+const margin = {top: 10, right: 30, bottom: 20, left: 50},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+const svg = d3.select("#graph3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// get the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", function(data) {
+// Parse the Data
+d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv").then( function(data) {
 
-  // X axis: scale and draw:
-  var x = d3.scaleLinear()
-      .domain([0, 1000])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
-      .range([0, width]);
-  svg3.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+  // List of subgroups = header of the csv files = soil condition here
+  const subgroups = data.columns.slice(1)
 
-  // set the parameters for the histogram
-  var histogram = d3.histogram()
-      .value(function(d) { return d.price; })   // I need to give the vector of value
-      .domain(x.domain())  // then the domain of the graphic
-      .thresholds(x.ticks(70)); // then the numbers of bins
+  // List of groups = species here = value of the first column called group -> I show them on the X axis
+  const groups = data.map(d => (d.group))
 
-  // And apply this function to data to get the bins
-  var bins = histogram(data);
+  // Add X axis
+  const x = d3.scaleBand()
+      .domain(groups)
+      .range([0, width])
+      .padding([0.2])
+  svg.append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x).tickSizeOuter(0));
 
-  // Y axis: scale and draw:
-  var y = d3.scaleLinear()
-      .range([height, 0]);
-      y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
-  svg3.append("g")
-      .call(d3.axisLeft(y));
+  // Add Y axis
+  const y = d3.scaleLinear()
+    .domain([0, 60])
+    .range([ height, 0 ]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
 
-  // append the bar rectangles to the svg element
-  svg3.selectAll("rect")
-      .data(bins)
-      .enter()
-      .append("rect")
-        .attr("x", 1)
-        .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
-        .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
-        .attr("height", function(d) { return height - y(d.length); })
-        .style("fill", "#69b3a2")
+  // color palette = one color per subgroup
+  const color = d3.scaleOrdinal()
+    .domain(subgroups)
+    .range(['#e41a1c','#377eb8','#4daf4a'])
 
-});
+  //stack the data? --> stack per subgroup
+  const stackedData = d3.stack()
+    .keys(subgroups)
+    (data)
+
+  // Show the bars
+  svg.append("g")
+    .selectAll("g")
+    // Enter in the stack data = loop key per key = group per group
+    .data(stackedData)
+    .join("g")
+      .attr("fill", d => color(d.key))
+      .selectAll("rect")
+      // enter a second time = loop subgroup per subgroup to add all rectangles
+      .data(d => d)
+      .join("rect")
+        .attr("x", d => x(d.data.group))
+        .attr("y", d => y(d[1]))
+        .attr("height", d => y(d[0]) - y(d[1]))
+        .attr("width",x.bandwidth())
+})
