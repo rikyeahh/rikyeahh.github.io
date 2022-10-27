@@ -30,7 +30,7 @@ d3.csv("../assets/data2.csv").then( function(data) {
   const y = d3.scaleBand()
       .domain(circoscrizioni)
       .range([0, height])
-      .padding(0.25);
+      .padding(0.1);
   const color = d3.scaleOrdinal()
       .domain(plants)
       .range(d3.schemeTableau10);
