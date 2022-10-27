@@ -9,8 +9,15 @@ const svg2 = d3.select("#graph2")
   .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
+// https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv 
 // Parse the Data
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv").then( function(data) {
+d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv").then( function(data) {
+    circoscrizioni = []
+    data.map(data => {circoscrizioni.push(data.circoscrizione)}); 
+    circoscrizioni.pop()
+    console.log(circoscrizioni)
+        
+
 
   // List of subgroups = header of the csv files = soil condition here
   const subgroups = data.columns.slice(1)
@@ -18,9 +25,11 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
   // List of groups = species here = value of the first column called group -> I show them on the X axis
   const groups = data.map(d => (d.group))
 
+
+
   // Add X axis
   const x = d3.scaleBand()
-      .domain(groups)
+      .domain(circoscrizioni)
       .range([0, width])
       .padding([0.2])
   svg2.append("g")
