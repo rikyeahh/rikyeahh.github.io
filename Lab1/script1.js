@@ -16,8 +16,6 @@ const svg = d3.select("#graph1")
 d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data1.csv").then( function(data) {
 
 data = data.slice(0, 10)
-console.log(data)
-console.log("MAX", Math.max(...data.map(x => x.count)))
 // X axis
 const x = d3.scaleLinear()
     .domain([0, Math.max(...data.map(x => x.count))])

@@ -8,9 +8,9 @@ var width,
     gap = 1,
     theData = [];  
 
-var color = d3.scale.category10();
+var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-d3.csv("data.csv", function(error, data)
+d3.csv("../assets/data.csv", function(error, data)
 {
   //total
   total = d3.sum(data, function(d) { return d.population; });
@@ -37,7 +37,7 @@ d3.csv("data.csv", function(error, data)
   width = (squareSize*widthSquares) + widthSquares*gap + 25;
   height = (squareSize*heightSquares) + heightSquares*gap + 25;
 
-  var waffle = d3.select("graph4")
+  var waffle = d3.select("#graph4")
       .append("svg")
       .attr("width", width)
       .attr("height", height)
