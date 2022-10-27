@@ -20,7 +20,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
       .domain(groups)
       .range([0, width])
       .padding([0.2])
-  svg.append("g")
+  svg3.append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x).tickSizeOuter(0));
 
@@ -28,7 +28,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
   const y = d3.scaleLinear()
     .domain([0, 60])
     .range([ height, 0 ]);
-  svg.append("g")
+  svg3.append("g")
     .call(d3.axisLeft(y));
 
   // color palette = one color per subgroup
@@ -42,7 +42,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
     (data)
 
   // Show the bars
-  svg.append("g")
+  svg3.append("g")
     .selectAll("g")
     // Enter in the stack data = loop key per key = group per group
     .data(stackedData)
