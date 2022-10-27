@@ -7,8 +7,8 @@ const svg3 = d3.select("#graph3")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
 // Parse the Data
-//d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv").then( function(data) {
-d3.csv("../assets/data2.csv").then( function(data) {
+d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv").then( function(data) {
+//d3.csv("../assets/data2.csv").then( function(data) {
 
     console.log(data)
   // List of subgroups = header of the csv files = soil condition here
