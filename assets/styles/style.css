@@ -13,5 +13,10 @@ p {
 
 .titleAndPhoto {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    flex-direction: column;
+}
+
+section {
+    margin-left: 2rem;
 }
