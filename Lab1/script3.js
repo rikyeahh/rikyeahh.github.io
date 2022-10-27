@@ -2,7 +2,7 @@ var margin = {top: 10, right: 30, bottom: 30, left: 40},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
+// append the svg3 object to the body of the page
 var svg3 = d3.select("#graph3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -18,7 +18,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
   var x = d3.scaleLinear()
       .domain([0, 1000])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
       .range([0, width]);
-  svg.append("g")
+  svg3.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
@@ -35,11 +35,11 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
   var y = d3.scaleLinear()
       .range([height, 0]);
       y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
-  svg.append("g")
+  svg3.append("g")
       .call(d3.axisLeft(y));
 
   // append the bar rectangles to the svg element
-  svg.selectAll("rect")
+  svg3.selectAll("rect")
       .data(bins)
       .enter()
       .append("rect")
