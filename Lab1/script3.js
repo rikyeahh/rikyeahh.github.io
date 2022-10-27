@@ -5,7 +5,6 @@ const svg3 = d3.select('#graph3')
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-// data
 // get the data
 d3.csv("../assets/data2.csv").then( function(data) {
   console.log(data[1])
@@ -22,9 +21,8 @@ d3.csv("../assets/data2.csv").then( function(data) {
   const xMax = d3.max(stackedData[stackedData.length - 1], d => d[1]);
   console.log(stackedData[stackedData.length - 1])
   console.log(xMax)
+
   // scales
-
-
   const x = d3.scaleLinear()
       .domain([0, xMax]).nice()
       .range([0, width]);
@@ -37,19 +35,16 @@ d3.csv("../assets/data2.csv").then( function(data) {
       .domain(plants)
       .range(d3.schemeTableau10);
 
-// axes
-
+  // axes
   const xAxis = d3.axisBottom(x).ticks(5, '~s');
   const yAxis = d3.axisLeft(y);
 
   svg3.append('g')
       .attr('transform', `translate(0,${height})`)
       .call(xAxis)
-      .call(g => g.select('.domain').remove());
 
   svg3.append("g")
       .call(yAxis)
-      .call(g => g.select('.domain').remove());
 
 // draw bars
 
