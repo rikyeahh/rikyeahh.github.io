@@ -50,37 +50,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
       .join('g')
       .attr('fill', d => color(d.key));
    
-    /*svg2.append("g")
-        .selectAll("g")
-        // Enter in the stack data = loop key per key = group per group
-        .data(stackeddata)
-        .join("g")
-          .attr("fill", d => color(d.key))
-          .selectAll("rect")
-          // enter a second time = loop subgroup per subgroup to add all rectangles
-          .data(d => d)
-          .join("rect")
-            .attr("x", function(d) { return x(d); })
-            .attr("y", function(d) { return y(d); })
-            .attr("height", d => y(d.data.circoscrizioni))
-            .attr("width",y.bandwidth())
-            */
-        svg2.append("g")
-            .selectAll("g")
-            // Enter in the stack data = loop key per key = group per group
-            .data(stackeddata)
-            .join("g")
-            .attr("fill", d => color(d.key))
-            .selectAll("rect")
-            // enter a second time = loop subgroup per subgroup to add all rectangles
-            .data(d => d)
-            .join("rect")
-                .attr("x", d => x(d[1]))
-                .attr("y", d => y(d.data.circoscrizione))
-                .attr("height",y.bandwidth())
-                .attr("width", d => x(d[1]) - x(d[0]))
-    /*
-    // Show the bars
+    
     svg2.append("g")
         .selectAll("g")
         // Enter in the stack data = loop key per key = group per group
@@ -91,11 +61,11 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         // enter a second time = loop subgroup per subgroup to add all rectangles
         .data(d => d)
         .join("rect")
-            .attr("x", d => y(d[1]))
-            .attr("y", d => x(d.data.circoscrizione))
+            .attr("x", d => x(d[1]))
+            .attr("y", d => y(d.data.circoscrizione))
+            .attr("height",y.bandwidth())
             .attr("width", d => x(d[1]) - x(d[0]))
-            .attr("height", y.bandwidth())
-            */
+    
            
 })
 
