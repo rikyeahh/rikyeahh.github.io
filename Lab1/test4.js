@@ -4,7 +4,7 @@ const margin = { top: 30, right: 30, bottom: 70, left: 200 },
     height = 400 - margin.top - margin.bottom;
 
 // create box for the svg graph with specified margins and dimentions
-const svg = d3.select("#graph1")
+const svg = d3.select("#graph4")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -14,8 +14,13 @@ const svg = d3.select("#graph1")
 
 // get the data
 d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data1.csv").then(function (data) {
+    
 
     data = data.slice(0, 10) // just top 10 tree species
+    console.log(data);
+
+    const labels = data.map(e => e.name)
+    console.log(labels);
 
     // build X axis, linear on quantity
     const x = d3.scaleLinear()

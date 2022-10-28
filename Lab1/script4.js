@@ -4,7 +4,7 @@ const margin = { top: 30, right: 0, bottom: 30, left: 50 };
 d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv").then(function (data) {
     //console.log("INIT DATA", data);
     toPlot = []
-    Object.entries(data[5])
+    Object.entries(data[1])
         .slice(1) // delete header
         .forEach(d => toPlot.push({'species': d[0], 'count': d[1]}))
     //console.log("TO PLOT", toPlot);
