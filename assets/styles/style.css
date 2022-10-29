@@ -17,6 +17,12 @@ p {
     flex-direction: column;
 }
 
-section {
+.home-section {
     margin-left: 2rem;
+}
+
+.grid line {
+    stroke: lightgrey;
+    stroke-opacity: 0.8;
+    shape-rendering: crispEdges;
 }
