@@ -6,7 +6,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     toPlot = []
     Object.entries(data[1])
         .slice(1) // delete header
-        .forEach(d => toPlot.push({'species': d[0], 'count': d[1]}))
+        .forEach(d => toPlot.push({ 'species': d[0], 'count': d[1] }))
     //console.log("TO PLOT", toPlot);
     buildWaffle("graph4", toPlot)
 })
@@ -14,7 +14,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
 
 function buildWaffle(anchor, data) {
 
-    
+
     var total = 0;
     var width,
         height,
@@ -33,7 +33,7 @@ function buildWaffle(anchor, data) {
 
     //remap data
     data.forEach(function (d, i) {
-        d.count =+ d.count;
+        d.count = + d.count;
         d.units = Math.floor(d.count / squareValue);
         theData = theData.concat(
             Array(d.units + 1).join(1).split('').map(function () {
