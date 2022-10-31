@@ -1,6 +1,6 @@
 // set the dimensions and margins of the graph
 const margin = { top: 30, right: 30, bottom: 70, left: 200 }
-    width = 560 - margin.left - margin.right,
+width = 560 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // create box for the svg graph with specified margins and dimentions
@@ -39,9 +39,10 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     svg.append("g")
         .call(d3.axisLeft(y))
 
+    // add tooltip
     const tooltip = d3.select("body")
         .append("div")
-        .attr("class","d3-tooltip")
+        .attr("class", "d3-tooltip")
         .style("position", "absolute")
         .style("z-index", "10")
         .style("visibility", "hidden")
@@ -63,27 +64,31 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .attr("width", d => x(d.count)) // length of horizontal bars
         .attr("height", y.bandwidth()) // automatic height based on total svg height
         .attr("fill", "#69b3a2") // color
-        .on("mouseover", function(d, i) { 
+        // on mouseover: red bar and show tooltip
+        .on("mouseover", function (d, i) {
             tooltip.html(`Mean canopy size : ${Math.round(i.mean_canopy_cover * 100) / 100}`)
                 .style("visibility", "visible");
             d3.select(this).attr("fill", "red");
-         })
-         .on("mousemove", function(){
+        })
+        // move tooltip on move
+        .on("mousemove", function () {
             tooltip
-              .style("top", (event.pageY-10)+"px")
-              .style("left",(event.pageX+10)+"px");
-          })
-         .on("mouseout", function() {
+                .style("top", (event.pageY - 10) + "px")
+                .style("left", (event.pageX + 10) + "px");
+        })
+        // on mouseout: blue bar and hide tooltip
+        .on("mouseout", function () {
             tooltip.html(``).style("visibility", "hidden");
             d3.select(this).attr("fill", "#69b3a2");
-         });
+        });
 
-    svg.append("g")			
+    // add grid
+    svg.append("g")
         .attr("class", "grid")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x)
             .ticks(5)
             .tickSize(-height)
-            .tickFormat("")
+            .tickFormat("") // no further label
         );
 });

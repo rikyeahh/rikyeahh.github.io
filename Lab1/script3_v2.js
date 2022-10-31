@@ -15,7 +15,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
   circoscrizioni.push("TOTAL")
   
   const trees = data.columns.slice(1)
-  console.log("data:", data);
+  //console.log("data:", data);
   
   const tot = [];
   for (let j = 0; j < trees.length; j++) {
@@ -33,10 +33,10 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     });
 
 
-  console.log("Tot: ", tot);
+  /*console.log("Tot: ", tot);
   console.log("Circoscrizioni: ", circoscrizioni)
   console.log("Values: ", values)
-  console.log("Trees: ",trees)
+  console.log("Trees: ",trees)*/
 
   const tooltip3 = d3.select("body")
   .append("div")
@@ -79,7 +79,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     values = values.slice(1); // without 'circoscizione'
     trees_val = zip(trees, values);
 
-    console.log("Trees/Val: ", trees_val);
+    //console.log("Trees/Val: ", trees_val);
     
     const x =  d3.scaleLinear()
     .domain([0, Math.max(...values)]) //temp written by hand
