@@ -22,7 +22,6 @@ p {
 }
 
 .grid line {
-    stroke: lightgrey;
-    stroke-opacity: 0.8;
     shape-rendering: crispEdges;
+    stroke-dasharray: 5.5; 
 }

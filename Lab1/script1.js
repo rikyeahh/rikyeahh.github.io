@@ -1,7 +1,10 @@
 // set the dimensions and margins of the graph
+
+var WIDTH = 750, HEIGHT = 600;
+
 const margin = { top: 30, right: 30, bottom: 70, left: 200 }
-width = 560 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+width = WIDTH - margin.left - margin.right,
+height = HEIGHT - margin.top - margin.bottom;
 
 // create box for the svg graph with specified margins and dimentions
 const svg = d3.select("#graph1")
