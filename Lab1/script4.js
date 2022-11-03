@@ -12,7 +12,6 @@ d3.csv("../assets/data2.csv").then(function(data) {
     const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
     // List of groups = species here = value of the first column called group -> I show them on the Y axis
     const circoscrizioni = data.map(d => d.circoscrizione)
-
     // scales
     const x = d3.scaleLinear()
         .domain([0, 100]).nice()
@@ -57,7 +56,8 @@ d3.csv("../assets/data2.csv").then(function(data) {
         .attr('fill', d => color(d.key));
 
     const tooltip2 = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < plants.length; i++) {
+
         tooltip2[i] = d3.select("body")
             .append("div")
             .attr("class", "d3-tooltip")
@@ -82,11 +82,9 @@ d3.csv("../assets/data2.csv").then(function(data) {
             .attr('height', y.bandwidth())
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
-                if(i!==9) {
                     tooltip2[i].html(`${plants[i]} : ${Math.floor((j[1]-j[0])*10)/10+"%"}`)
                         .style("visibility", "visible");
                     d3.select(this).attr("fill", "red");
-                }
             })
             .on("mousemove", function () {
                 tooltip2[i]
