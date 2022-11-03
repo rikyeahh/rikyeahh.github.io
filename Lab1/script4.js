@@ -49,12 +49,27 @@ d3.csv("../assets/data2.csv").then(function(data) {
     const stackedData = d3.stack()
         .keys(plants)
         (data)
-    
+
     const layers = svg4.append('g')
         .selectAll('g')
         .data(stackedData)
         .join('g')
         .attr('fill', d => color(d.key));
+
+    const tooltip2 = [];
+    for (let i = 0; i < 10; i++) {
+        tooltip2[i] = d3.select("body")
+            .append("div")
+            .attr("class", "d3-tooltip")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+            .style("padding", "15px")
+            .style("background", "rgba(0,0,0,0.6)")
+            .style("border-radius", "5px")
+            .style("color", "#fff")
+            .text("a simple tooltip");
+    }
 
     layers.each(function (_, i) {
 
@@ -65,6 +80,24 @@ d3.csv("../assets/data2.csv").then(function(data) {
             .attr('x', d => x(d[0]))
             .attr('y', d => y(d.data.circoscrizione))
             .attr('height', y.bandwidth())
-            .attr('width', d => (x(d[1]) - x(d[0])));
+            .attr('width', d => (x(d[1]) - x(d[0])))
+            .on("mouseover", function (d, j) {
+                if(i!==9) {
+                    tooltip2[i].html(`${plants[i]} : ${Math.trunc(j[1]-j[0])+"%"}`)
+                        .style("visibility", "visible");
+                    d3.select(this).attr("fill", "red");
+                }
+            })
+            .on("mousemove", function () {
+                tooltip2[i]
+                    .style("top", (event.pageY - 10) + "px")
+                    .style("left", (event.pageX + 10) + "px");
+            })
+            .on("mouseout", function () {
+                tooltip2[i].html(``).style("visibility", "hidden");
+                d3.select(this).attr("fill", function () {
+                    return "" + d3.schemeTableau10[i] + "";
+                })
+            });
     });
 })
