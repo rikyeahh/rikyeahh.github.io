@@ -1,42 +1,24 @@
 // Parse the Data
-d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv").then(function (data) {
+d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data3.csv").then(function (data) {
 
     //data = data.splice(5,data.length-5)
+    other = data.pop()
     lng = data.length - 5;
     for (let j = 0; j < lng; j++) {
         data.pop();
     }
+    data.push(other);
 
-    const circoscrizioni = data
-        .map(function (val) {
-            return val['circoscrizione'];
-        })
-        .slice(0, 5);
-    circoscrizioni.push("TOTAL")
+    const tree_name = data
+        .map(d => d['tree_name']);
 
-    const trees = data.columns.slice(1)
-    //console.log("data:", data);
+    const neighborhood = data.columns.slice(1)
+    
+    
+    console.log("data:", data);
 
-    const tot = [];
-    for (let j = 0; j < trees.length; j++) {
-        tot[j] = data.map(d => parseInt(d[trees[j]])).reduce((partialSum, a) => partialSum + a, 0);
-    }
-
-    data.push({
-        'circoscrizione': "TOTAL",
-        'Celtis australis': tot[0],
-        'Aesculus hippocastanum': tot[1],
-        'Carpinus betulus': tot[2],
-        'Tilia cordata': tot[3],
-        'Platanus x hispanica': tot[4],
-        'Other': tot[5]
-    });
-
-
-    /*console.log("Tot: ", tot);
-    console.log("Circoscrizioni: ", circoscrizioni)
-    console.log("Values: ", values)
-    console.log("Trees: ",trees)*/
+    console.log("tree_name: ", tree_name)
+    console.log("neighborhood: ",neighborhood)
 
     const tooltip3 = d3.select("body")
         .append("div")
@@ -52,16 +34,14 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
 
     // color palette = one color per subgroup
     const zip = (a, b) => a.map((k, i) => [k, b[i]]);
-    const color = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"];
-    //var color2 = d3.scaleLinear().range(["#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
     var color2 = () => "#69b3a2";
     const y = d3.scaleBand()
-        .domain(trees)
+        .domain(neighborhood)
         .range([height, 0])
         .padding(.1);
 
     // Add X axis
-    for (let index = 0; index < circoscrizioni.length; index++) {
+    for (let index = 0; index < tree_name.length; index++) {
         const svg3 = d3.select("#graph3")
             .append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -72,8 +52,9 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         svg3.append("text")
             .attr("transform", "translate(" + (width) + " ," + (-margin.top) + ")")
             .style("text-anchor", "middle")
-            .text(circoscrizioni[index])
-
+            .text(tree_name[index])
+        
+        console.log(tree_name)
 
         var values = [];
         for (let i = 0; i < Object.entries(data[index]).length; i++) {
@@ -81,9 +62,9 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         }
 
         values = values.slice(1); // without 'circoscizione'
-        trees_val = zip(trees, values);
+        neighborhood_val = zip(neighborhood, values);
 
-        //console.log("Trees/Val: ", trees_val);
+        console.log("neighborhood/Val: ", neighborhood_val);
 
         const x = d3.scaleLinear()
             .domain([0, Math.max(...values)]) //temp written by hand
@@ -96,7 +77,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
             .call(d3.axisLeft(y));
 
         svg3.selectAll("myG")
-            .data(trees_val)
+            .data(neighborhood_val)
             .join("rect")
             .attr("x", x)
             .attr("y", d => y(d[0]))

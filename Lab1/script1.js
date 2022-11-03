@@ -4,7 +4,7 @@ var WIDTH = 750, HEIGHT = 600;
 
 const margin = { top: 30, right: 30, bottom: 70, left: 200 }
 width = WIDTH - margin.left - margin.right,
-height = HEIGHT - margin.top - margin.bottom;
+    height = HEIGHT - margin.top - margin.bottom;
 
 // create box for the svg graph with specified margins and dimentions
 const svg = d3.select("#graph1")
@@ -31,16 +31,19 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         // and style its text
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-45)")
-        .style("text-anchor", "end");
+        .style("text-anchor", "end")
+        .style("font-size", "12px");
 
     // build Y axis, adapted on categories
     const y = d3.scaleBand()
         .domain(data.map(d => d.name)) // ticks, category names
         .range([0, height]) // height on page
-        .padding(.1); // separate bars with small padding
+        .padding(.1) // separate bars with small padding
+        
     // put it on the left
     svg.append("g")
         .call(d3.axisLeft(y))
+        .style("font-size", "15px");
 
     // add tooltip
     const tooltip = d3.select("body")
@@ -94,4 +97,12 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
             .tickSize(-height)
             .tickFormat("") // no further label
         );
+
+    // add horizontal axis title
+    svg.append("text")
+        .attr("class", "x label")
+        .attr("text-anchor", "end")
+        .attr("x", (width / 2) + 50)
+        .attr("y", height + 40)
+        .text("Number of trees");
 });

@@ -1,112 +1,70 @@
-const margin = { top: 30, right: 0, bottom: 30, left: 50 };
+const svg4 = d3.select("#graph4")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
 
-//Read the data
-d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv").then(function (data) {
-    //console.log("INIT DATA", data);
-    toPlot = []
-    Object.entries(data[1])
-        .slice(1) // delete header
-        .forEach(d => toPlot.push({ 'species': d[0], 'count': d[1] }))
-    //console.log("TO PLOT", toPlot);
-    buildWaffle("graph4", toPlot)
-})
+// Parse the Data
+d3.csv("../assets/data2.csv").then(function(data) {
 
+    // List of subgroups = header of the csv files = plants
+    const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
+    // List of groups = species here = value of the first column called group -> I show them on the Y axis
+    const circoscrizioni = data.map(d => d.circoscrizione)
 
-function buildWaffle(anchor, data) {
+    // scales
+    const x = d3.scaleLinear()
+        .domain([0, 100]).nice()
+        .range([0, width]);
+    const y = d3.scaleBand()
+        .domain(circoscrizioni)
+        .range([0, height])
+        .padding([0.1])
+    const color = d3.scaleOrdinal()
+        .domain(plants)
+        .range(d3.schemeTableau10);
 
+    // axes
+    const xAxis = d3.axisBottom(x).ticks(5, '~s');
+    const yAxis = d3.axisLeft(y);
 
-    var total = 0;
-    var width,
-        height,
-        widthSquares = 10,
-        heightSquares = 10,
-        squareSize = 25,
-        squareValue = 0,
-        gap = 1,
-        theData = [];
+    svg4.append('g')
+        .attr('transform', `translate(0,${height})`)
+        .call(xAxis)
+    svg4.append("g")
+        .call(yAxis)
 
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
-    total = d3.sum(data, function (d) { return d.count; });
+    // Normalize the data -> sum of each group must be 100!
+    dataNormalized = []
+    data.forEach(function(d){
+        // Compute the total
+        tot = 0
+        for (i in plants){ name=plants[i] ; tot += +d[name]}
+        // Now normalize
+        for (i in plants){ name=plants[i] ; d[name] = d[name] / tot * 100}
+    })
 
-    //value of a square
-    squareValue = total / (widthSquares * heightSquares);
+    // stack the data
+    const stackedData = d3.stack()
+        .keys(plants)
+        (data)
+    
+    const layers = svg4.append('g')
+        .selectAll('g')
+        .data(stackedData)
+        .join('g')
+        .attr('fill', d => color(d.key));
 
-    //remap data
-    data.forEach(function (d, i) {
-        d.count = + d.count;
-        d.units = Math.floor(d.count / squareValue);
-        theData = theData.concat(
-            Array(d.units + 1).join(1).split('').map(function () {
-                return {
-                    squareValue: squareValue,
-                    units: d.units,
-                    count: d.count,
-                    groupIndex: i
-                };
-            })
-        );
+    layers.each(function (_, i) {
+
+        d3.select(this)
+            .selectAll('rect')
+            .data(d => d)
+            .join('rect')
+            .attr('x', d => x(d[0]))
+            .attr('y', d => y(d.data.circoscrizione))
+            .attr('height', y.bandwidth())
+            .attr('width', d => (x(d[1]) - x(d[0])));
     });
-
-    width = (squareSize * widthSquares) + widthSquares * gap + 25;
-    height = (squareSize * heightSquares) + heightSquares * gap + 25;
-
-    var waffle = d3.select("#" + anchor)
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .selectAll("div")
-        .data(theData)
-        .enter()
-        .append("rect")
-        .attr("width", squareSize)
-        .attr("height", squareSize)
-        .attr("fill", function (d) {
-            return color(d.groupIndex);
-        })
-        .attr("x", function (d, i) {
-            //group n squares for column
-            col = Math.floor(i / heightSquares);
-            return (col * squareSize) + (col * gap);
-        })
-        .attr("y", function (d, i) {
-            row = i % heightSquares;
-            return (heightSquares * squareSize) - ((row * squareSize) + (row * gap))
-        })
-        .append("title")
-        .text(function (d, i) {
-            return "Species: " + data[d.groupIndex].species + " | " + d.count + " , " + d.units + "%"
-        });
-
-    //add legend with categorical data
-    var legend = d3.select("#legend")
-        .append("svg")
-        .attr('width', 300)
-        .attr('height', 200)
-        .append('g')
-        .selectAll("div")
-        .data(data)
-        .enter()
-        .append("g")
-        .attr('transform', function (d, i) { return "translate(0," + i * 20 + ")"; });
-    legend.append("rect")
-        .attr("width", 18)
-        .attr("height", 18)
-        .style("fill", function (d, i) { return color(i) });
-    legend.append("text")
-        .attr("x", 25)
-        .attr("y", 13)
-        .text(function (d) { return d.species });
-
-    //add value of a unit square
-    var legend2 = d3.select("#legend")
-        .select('svg')
-        .append('g')
-        .attr('transform', "translate(100,0)");
-
-    legend2.append("text")
-        .attr('y', '14')
-        .attr('font-size', '18px')
-        .text("Total: " + total)
-        .attr("fill", "#444444");
-};
+})
