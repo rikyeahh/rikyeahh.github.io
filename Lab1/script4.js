@@ -8,12 +8,10 @@ const svg4 = d3.select("#graph4")
 // Parse the Data
 d3.csv("../assets/data2.csv").then(function(data) {
 
-    // List of subgroups = header of the csv files = soil condition here
+    // List of subgroups = header of the csv files = plants
     const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
-    //console.log(plants)
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
+    // List of groups = species here = value of the first column called group -> I show them on the Y axis
     const circoscrizioni = data.map(d => d.circoscrizione)
-    //console.log(circoscrizioni)
 
     // scales
     const x = d3.scaleLinear()
@@ -27,36 +25,31 @@ d3.csv("../assets/data2.csv").then(function(data) {
         .domain(plants)
         .range(d3.schemeTableau10);
 
-    //axes
+    // axes
     const xAxis = d3.axisBottom(x).ticks(5, '~s');
     const yAxis = d3.axisLeft(y);
 
     svg4.append('g')
         .attr('transform', `translate(0,${height})`)
         .call(xAxis)
-
     svg4.append("g")
         .call(yAxis)
 
     // Normalize the data -> sum of each group must be 100!
-    //console.log(data)
     dataNormalized = []
     data.forEach(function(d){
         // Compute the total
         tot = 0
         for (i in plants){ name=plants[i] ; tot += +d[name]}
-        console.log(tot)
         // Now normalize
-        for (i in plants){ name=plants[i] ; d[name] = d[name] / tot * 100
-            console.log("data"+d[name])}
+        for (i in plants){ name=plants[i] ; d[name] = d[name] / tot * 100}
     })
 
-    //stack the data? --> stack per subgroup
+    // stack the data
     const stackedData = d3.stack()
         .keys(plants)
         (data)
-
-    //console.log(stackedData)
+    
     const layers = svg4.append('g')
         .selectAll('g')
         .data(stackedData)
