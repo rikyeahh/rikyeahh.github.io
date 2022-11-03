@@ -13,12 +13,11 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .map(d => d['tree_name']);
 
     const neighborhood = data.columns.slice(1)
-    
-    
-    console.log("data:", data);
 
-    console.log("tree_name: ", tree_name)
-    console.log("neighborhood: ",neighborhood)
+
+    //console.log("data:", data);
+    //console.log("tree_name: ", tree_name)
+    //console.log("neighborhood: ",neighborhood)
 
     const tooltip3 = d3.select("body")
         .append("div")
@@ -32,9 +31,10 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .style("color", "#fff")
         .text("a simple tooltip");
 
-    // color palette = one color per subgroup
+
     const zip = (a, b) => a.map((k, i) => [k, b[i]]);
     var color2 = () => "#69b3a2";
+    var color2 = (i) => d3.schemeTableau10[i];
 
 
     const y = d3.scaleBand()
@@ -43,41 +43,47 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .padding(.1);
     // Add X axis
     for (let index = 0; index < tree_name.length; index++) {
+        var sm_margin = index == 0 ? 180 : 0
+        var sm_width = 180;
         const svg3 = d3.select("#graph3")
             .append("svg")
-            .attr("width", width + margin.left + margin.right)
+            .attr("width", sm_width + sm_margin + 10)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr("transform", `translate(${margin.left - 20},${margin.top + 20})`);
+            //.attr("transform", `translate(${margin.left - 20},${margin.top + 20})`);
+            .attr("transform", `translate(${sm_margin},${margin.top + 20})`);
 
+        // title of each small multiple, tree name
         svg3.append("text")
-            .attr("transform", "translate(" + (width) + " ," + (-margin.top) + ")")
+            .attr("transform", "translate(" + (sm_width / 2) + " ," + (-margin.top) + ")")
             .style("text-anchor", "middle")
             .text(tree_name[index])
-        
-        console.log(tree_name)
+
+        //console.log(tree_name)
 
         var values = [];
         for (let i = 0; i < Object.entries(data[index]).length; i++) {
             values[i] = Object.entries(data[index])[i][1];
         }
 
-        values = values.slice(1); // without 'circoscizione'
+        values = values.slice(1); // without 'circoscrizione'
+        //console.log(values);
         const neighborhood_val = zip(neighborhood, values);
+        //console.log("neighborhood/Val: ", neighborhood_val);
 
-        console.log("neighborhood/Val: ", neighborhood_val);
 
-        
         const x = d3.scaleLinear()
             .domain([0, Math.max(...values)]) //temp written by hand
-            .range([0, width]);
-            svg3.append("g")
-                .call(d3.axisTop(x));
+            .range([0, sm_width]);
+        svg3.append("g")
+            .call(d3.axisTop(x));
         //.selectAll("text").remove();    
 
-        if(index>=0){
+        if (index >= 0) {
             svg3.append("g").call(d3.axisLeft(y));
         }
+
+        var plantColor = d3.schemeTableau10[index]
 
         svg3.selectAll("myG")
             .data(neighborhood_val)
@@ -86,12 +92,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
             .attr("y", d => y(d[0]))
             .attr("width", d => x(d[1]))
             .attr("height", y.bandwidth())
-            .attr("id", function (d, i) {
-                return i;
-            })
-            .attr("fill", function (d, i) {
-                return color2(i);
-            })
+            .attr("fill", plantColor)
             .on("mouseover", function (d, i) {
                 tooltip3.html(`Count : ${i[1]}`)
                     .style("visibility", "visible");
@@ -105,8 +106,8 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
             .on("mouseout", function () {
                 tooltip3.html(``).style("visibility", "hidden");
                 d3.select(this).attr("fill", function () {
-                    return "" + color2(this.id) + "";
+                    return "" + d3.schemeTableau10[index] + "";
                 })
-            });
+            })
     }
 })

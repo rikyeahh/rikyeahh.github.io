@@ -10,7 +10,7 @@ var width,
 
 d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv").then(function(data)
 {
-    console.log(data);
+    //console.log(data);
 
   //total
   total = d3.sum(data, function(d) { return d.population; });
