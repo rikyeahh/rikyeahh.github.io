@@ -31,11 +31,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .style("color", "#fff")
         .text("a simple tooltip");
 
-
     const zip = (a, b) => a.map((k, i) => [k, b[i]]);
-    var color2 = () => "#69b3a2";
-    var color2 = (i) => d3.schemeTableau10[i];
-
 
     const y = d3.scaleBand()
         .domain(neighborhood)
@@ -43,15 +39,15 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .padding(.1);
     // Add X axis
     for (let index = 0; index < tree_name.length; index++) {
-        var sm_margin = index == 0 ? 180 : 0
-        var sm_width = 180;
+        var sm_margin = index == 0 ? 180 : 5
+        var sm_width = 175;
         const svg3 = d3.select("#graph3")
             .append("svg")
             .attr("width", sm_width + sm_margin + 10)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             //.attr("transform", `translate(${margin.left - 20},${margin.top + 20})`);
-            .attr("transform", `translate(${sm_margin},${margin.top + 20})`);
+            .attr("transform", `translate(${sm_margin},${margin.top + 50})`);
 
         // title of each small multiple, tree name
         svg3.append("text")
@@ -73,11 +69,10 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
 
 
         const x = d3.scaleLinear()
-            .domain([0, Math.max(...values)]) //temp written by hand
+            .domain([0, Math.max(...values)]).nice()
             .range([0, sm_width]);
         svg3.append("g")
-            .call(d3.axisTop(x));
-        //.selectAll("text").remove();    
+            .call(d3.axisTop(x).ticks(5, '~s')); 
 
         if (index >= 0) {
             svg3.append("g").call(d3.axisLeft(y));

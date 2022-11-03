@@ -39,7 +39,6 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .domain(data.map(d => d.name)) // ticks, category names
         .range([0, height]) // height on page
         .padding(.1) // separate bars with small padding
-        
     // put it on the left
     svg.append("g")
         .call(d3.axisLeft(y))
@@ -69,7 +68,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .attr("y", d => y(d.name))
         .attr("width", d => x(d.count)) // length of horizontal bars
         .attr("height", y.bandwidth()) // automatic height based on total svg height
-        .attr("fill", "#69b3a2") // color
+        .attr("fill", "#4e79a7") // color
         // on mouseover: red bar and show tooltip
         .on("mouseover", function (d, i) {
             tooltip.html(`Mean canopy size : ${Math.round(i.mean_canopy_cover * 100) / 100}`)
@@ -85,7 +84,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         // on mouseout: blue bar and hide tooltip
         .on("mouseout", function () {
             tooltip.html(``).style("visibility", "hidden");
-            d3.select(this).attr("fill", "#69b3a2");
+            d3.select(this).attr("fill", "#4e79a7");
         });
 
     // add grid
@@ -103,6 +102,6 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .attr("class", "x label")
         .attr("text-anchor", "end")
         .attr("x", (width / 2) + 50)
-        .attr("y", height + 40)
+        .attr("y", height + 50)
         .text("Number of trees");
 });
