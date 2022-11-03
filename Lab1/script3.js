@@ -35,10 +35,6 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     // color palette = one color per subgroup
     const zip = (a, b) => a.map((k, i) => [k, b[i]]);
     var color2 = () => "#69b3a2";
-    const y = d3.scaleBand()
-        .domain(neighborhood)
-        .range([height, 0])
-        .padding(.1);
 
     // Add X axis
     for (let index = 0; index < tree_name.length; index++) {
@@ -47,7 +43,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr("transform", `translate(${margin.left - 30},${margin.top + 20})`);
+            .attr("transform", `translate(${margin.left - 20},${margin.top + 20})`);
 
         svg3.append("text")
             .attr("transform", "translate(" + (width) + " ," + (-margin.top) + ")")
@@ -62,7 +58,16 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         }
 
         values = values.slice(1); // without 'circoscizione'
-        neighborhood_val = zip(neighborhood, values);
+        const neighborhood_val = zip(neighborhood, values);
+        neighborhood_val.sort(function (a, b) {
+            return a[1] - b[1];
+        });
+        console.log("sort:", neighborhood_val)
+
+        const y = d3.scaleBand()
+        .domain(neighborhood_val.map(d => d[0]))
+        .range([height, 0])
+        .padding(.1);
 
         console.log("neighborhood/Val: ", neighborhood_val);
 
