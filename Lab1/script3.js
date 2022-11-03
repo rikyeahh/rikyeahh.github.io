@@ -74,8 +74,8 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         const x = d3.scaleLinear()
             .domain([0, Math.max(...values)]) //temp written by hand
             .range([0, width]);
-        svg3.append("g")
-            .call(d3.axisTop(x));
+            svg3.append("g")
+                .call(d3.axisTop(x));
         //.selectAll("text").remove();    
 
         svg3.append("g")

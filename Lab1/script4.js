@@ -1,6 +1,6 @@
 const svg4 = d3.select("#graph4")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
+    .attr("width", 1000 + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
@@ -100,4 +100,17 @@ d3.csv("../assets/data2.csv").then(function(data) {
                 })
             });
     });
+    for (let i = 0; i < plants.length; i++) {
+        svg4.append("circle")
+            .attr("cx", 550)
+            .attr("cy", 100 + i*18)
+            .attr("r", 6)
+            .style("fill", color(i))
+        svg4.append("text")
+            .attr("x", 570)
+            .attr("y", 100 + i * 18)
+            .text(plants[i])
+            .style("font-size", "15px")
+            .attr("alignment-baseline", "middle")
+    }
 })

@@ -54,24 +54,37 @@ d3.csv("../assets/data2.csv").then(function (data) {
     const t = d3.transition()
         .duration(duration)
         .ease(d3.easeLinear);
-    
+
     const tooltip2 = [];
     for (let i = 0; i < plants.length; i++) {
-       tooltip2[i] = d3.select("body")
-        .append("div")
-        .attr("class", "d3-tooltip")
-        .style("position", "absolute")
-        .style("z-index", "10")
-        .style("visibility", "hidden")
-        .style("padding", "15px")
-        .style("background", "rgba(0,0,0,0.6)")
-        .style("border-radius", "5px")
-        .style("color", "#fff")
-        .text("a simple tooltip");
-        
-    }
-    
+        tooltip2[i] = d3.select("body")
+            .append("div")
+            .attr("class", "d3-tooltip")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+            .style("padding", "15px")
+            .style("background", "rgba(0,0,0,0.6)")
+            .style("border-radius", "5px")
+            .style("color", "#fff")
+            .text("a simple tooltip");
 
+    }
+
+    // add legend
+    for (let i = 0; i < plants.length; i++) {
+        svg2.append("circle")
+            .attr("cx", 250)
+            .attr("cy", 100 + i*18)
+            .attr("r", 6)
+            .style("fill", color(i))
+        svg2.append("text")
+            .attr("x", 270)
+            .attr("y", 100 + i * 18)
+            .text(plants[i])
+            .style("font-size", "15px")
+            .attr("alignment-baseline", "middle")
+    }
 
     layers.each(function (_, i) {
 
@@ -85,10 +98,10 @@ d3.csv("../assets/data2.csv").then(function (data) {
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
 
-                tooltip2[i].html(`${plants[i]} : ${j[1]-j[0]}`)
+                tooltip2[i].html(`${plants[i]} : ${j[1] - j[0]}`)
                     .style("visibility", "visible");
                 d3.select(this).attr("fill", "red");
-                
+
 
 
             })

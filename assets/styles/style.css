@@ -21,6 +21,11 @@ p {
     margin-left: 2rem;
 }
 
+.viz-section {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
 .grid line {
     shape-rendering: crispEdges;
     stroke-dasharray: 5.5; 
