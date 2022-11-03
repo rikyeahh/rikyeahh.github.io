@@ -36,6 +36,11 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     const zip = (a, b) => a.map((k, i) => [k, b[i]]);
     var color2 = () => "#69b3a2";
 
+
+    const y = d3.scaleBand()
+        .domain(neighborhood)
+        .range([height, 0])
+        .padding(.1);
     // Add X axis
     for (let index = 0; index < tree_name.length; index++) {
         const svg3 = d3.select("#graph3")
@@ -59,18 +64,10 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
 
         values = values.slice(1); // without 'circoscizione'
         const neighborhood_val = zip(neighborhood, values);
-        neighborhood_val.sort(function (a, b) {
-            return a[1] - b[1];
-        });
-        console.log("sort:", neighborhood_val)
-
-        const y = d3.scaleBand()
-        .domain(neighborhood_val.map(d => d[0]))
-        .range([height, 0])
-        .padding(.1);
 
         console.log("neighborhood/Val: ", neighborhood_val);
 
+        
         const x = d3.scaleLinear()
             .domain([0, Math.max(...values)]) //temp written by hand
             .range([0, width]);
@@ -78,8 +75,9 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
                 .call(d3.axisTop(x));
         //.selectAll("text").remove();    
 
-        svg3.append("g")
-            .call(d3.axisLeft(y));
+        if(index>=0){
+            svg3.append("g").call(d3.axisLeft(y));
+        }
 
         svg3.selectAll("myG")
             .data(neighborhood_val)
