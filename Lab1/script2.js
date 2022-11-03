@@ -85,7 +85,7 @@ d3.csv("../assets/data2.csv").then(function (data) {
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
 
-                tooltip2[i].html(`Count : ${j[1]}`)
+                tooltip2[i].html(`${plants[i]} : ${j[1]-j[0]}`)
                     .style("visibility", "visible");
                 d3.select(this).attr("fill", "red");
                 
