@@ -83,7 +83,7 @@ d3.csv("../assets/data2.csv").then(function(data) {
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
                 if(i!==9) {
-                    tooltip2[i].html(`${plants[i]} : ${Math.trunc(j[1]-j[0])+"%"}`)
+                    tooltip2[i].html(`${plants[i]} : ${Math.floor((j[1]-j[0])*10)/10+"%"}`)
                         .style("visibility", "visible");
                     d3.select(this).attr("fill", "red");
                 }
