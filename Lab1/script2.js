@@ -56,7 +56,7 @@ d3.csv("../assets/data2.csv").then(function (data) {
         .ease(d3.easeLinear);
     
     const tooltip2 = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < plants.length; i++) {
        tooltip2[i] = d3.select("body")
         .append("div")
         .attr("class", "d3-tooltip")
@@ -84,7 +84,7 @@ d3.csv("../assets/data2.csv").then(function (data) {
             .attr('height', y.bandwidth())
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
-                
+
                 tooltip2[i].html(`Count : ${j[1]}`)
                     .style("visibility", "visible");
                 d3.select(this).attr("fill", "red");
