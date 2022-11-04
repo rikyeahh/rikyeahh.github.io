@@ -10,9 +10,10 @@ heightSquares = 5;
 d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv").then(function (data) {
 
     const circoscrizioni = data.map(d => d.circoscrizione);
+    const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
 
     for (let circoscrizione = 0; circoscrizione < circoscrizioni.length; circoscrizione++) {
-
+        
         var values = Object.values(data[circoscrizione]).splice(1);
         //console.log(values);
         var total = values.reduce((a, b) => parseInt(a) + parseInt(b), 0)
@@ -61,9 +62,5 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
             }
 
         }
-
-
-
-        //break;
     }
 });
