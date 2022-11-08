@@ -1,5 +1,3 @@
-
-
 d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data2.csv").then(function (data) {
 
     var WIDTH = 750, HEIGHT = 600;
