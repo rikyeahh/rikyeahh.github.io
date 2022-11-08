@@ -4,7 +4,7 @@
 //Read the data
 d3.csv("../assets/data5.csv").then(function(data) {
   
-  //console.log(data)
+  console.log(data)
   const margin = {top: 10, right: 30, bottom: 30, left: 40},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
@@ -19,8 +19,18 @@ d3.csv("../assets/data5.csv").then(function(data) {
   
 
   const names = data.map(d => d.name)
-  const names_uniq = [...new Set(names)];
-  const names_ordered = names_uniq.sort((a, b) => a.localeCompare(b))
+
+
+  //console.log(names_unique)
+
+  const names_ordered = names.sort((a, b) => a.localeCompare(b))
+  //console.log(names_ordered)
+
+  /*var dictionary_names_value = Array.from(new Set(names_ordered)).map(a =>
+    ({name:a, count: names_ordered.filter(f => f === a).length}));*/
+  
+  //console.log(dictionary_names_value);
+  
 
 
   // Add X axis
@@ -43,30 +53,18 @@ d3.csv("../assets/data5.csv").then(function(data) {
     .domain(names_ordered)
     .range(d3.schemeTableau10);
 
-  // add legend
-  for (let i = 0; i < names_ordered.length; i++) {
-    svg3.append("circle")
-        .attr("cx", 250)
-        .attr("cy", 10 + i*18)
-        .attr("r", 6)
-        .style("fill", color(i))
-    svg3.append("text")
-        .attr("x", 270)
-        .attr("y", 10 + i * 18)
-        .text(names_ordered[i])
-        .style("font-size", "15px")
-        .attr("alignment-baseline", "middle")
-  }
-
 
   // Add dots
   svg3.append('g')
     .selectAll("dot")
     .data(data)
     .join("circle")
+      .attr("class", function (d) { return "dot " + d.name } )
       .attr("cx", function (d) { return x(parseFloat(d.height)); } )
       .attr("cy", function (d) { return y(parseFloat(d.co2_absorption)); } )
-      .attr("r", 2)
+      .attr("r", 5)
       .style("fill", function (d) { return color(d.name) } )
+    .on("mouseover", highlight)
+    .on("mouseleave", doNotHighlight )
 
 })
