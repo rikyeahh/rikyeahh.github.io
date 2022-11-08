@@ -2,76 +2,75 @@
 <html lang="en">
 
 <head>
-	<!-- Meta Data -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="author" content="Capybara">
-	
-	<!-- Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
-	
-	<!-- Title -->
-	<title>Capybara Team</title>
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Capybara">
 
-	<!-- Favicons -->
-	<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicons/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicons/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicons/favicon-16x16.png">
-	<link rel="mask-icon" href="../assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
 
-	<!-- Styles -->
-	<link rel="stylesheet" type="text/css" href="../assets/styles/style.css">
+    <!-- Title -->
+    <title>Capybara Team</title>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="../assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../assets/styles/style.css">
 
 </head>
 
 <body>
-	<h1>Capybara Team</h1>
-	<h2>Riccardo Rorato, Alessandro Arata, Gagandeep Singh, Alessandro Penco, Gabriele Caletti, Alessandro Drago</h2>
-	<p>Description</p>
+    <h1>Capybara Team</h1>
+    <h2>Riccardo Rorato, Alessandro Arata, Gagandeep Singh, Alessandro Penco, Gabriele Caletti, Alessandro Drago</h2>
+    <p>This lab is about visualizing distributions via histograms and scatter/bubble plots.</p>
 
-	<section class="viz-section">
-		<h2>Number of trees per species</h2>
-		<p>This bar chart shows the number of trees for each species present in the municipality of Trento. Among all the 200 species of trees available we display only the ten most aboundant types of trees. Hovering over the bars display additional information about the species: in particular we show the mean canopy cover of the specific tree species.</p>
-		<div id="graph1"></div>
+    <section class="viz-section">
+        <h2>Histogram of tree heights</h2>
+        <p>With this histogram we want to visualize the distribution of tree heights of all species and ages. Since the
+            great variability of tree ages and species, we expected a less uniform distribution, instead we can see a
+            gaussian-like shape (though a little skewed),
+            as if we were visualizing a single kind and age of trees. We have a very high tree, that forces us to have
+            the upper bound of the x asis to be 60!</p>
+        <div id="graph1"></div>
         <p>
             <label># bins</label>
             <input type="number" min="1" max="100" step="30" value="20" id="nBin">
         </p>
-	</section>
-
-	<section class="viz-section">
-		<h2>Stacked bar chart - Tree species per neighborhood</h2>
-		<p>Each bar holds information about tree species for each neighborhood in Trento. Each species in the different neighborhoods is color-coded to the same color. Since comparing the same species across neighborhood can be tricky, hovering to see the exact amount can be very useful.</p>
-		<div id="graph2"></div>
-	</section>
+    </section>
 
     <section class="viz-section">
-		<h2>Bar charts - small multiples</h2>
-		<p>Small multiples of the 5 most popular trees, showing their distribution across neighborhoods. Note the different axes values: the same bar length across different neighborhood might represent different quantities, to preserve visual consistency (especially with the much more populated "other" class).</p>
-		<div id="graph3"></div>
-	</section>
+        <h2>Boxplot of tree heights</h2>
+        <p>A boxplot is the right visualization to show statistical info about the distribution: for example the median,
+            some specified percentiles, and possibly the outliers.</p>
+        <div id="graph2"></div>
+    </section>
 
-	<section class="viz-section">
-		<h2>Normalized stacked bar chart</h2>
-		<p>Exactly like the stacked bar chart above, but here the quantities within each neighborhood are "normalized" to cover the same amount of space. In this way, we can compare the species of more populated neighborhoods (i.e. Centro Storico) to less populated neighborhoods in terms of percentage.</p>
-		<div id="graph4"></div>
-	</section>	
+    <section class="viz-section">
+        <h2>Scatter plot</h2>
+        <p></p>
+        <div id="graph3"></div>
+    </section>
 
-	<section class="viz-section">
-		<h2>Waffle chart</h2>
-		<p>The type of data shown in this graph is exactly the same as the one above: percentages of tree species for each neighborhood. In this visualization, we "quantize" this quantities and show them as little blocks.</p>
-		<div id="graph5"></div>
-	</section>
-	
-	<script src="https://d3js.org/d3.v6.js"></script>
-	<script src="script1.js"></script>
-	<script src="script2.js"></script>
-	<script src="script3.js"></script>
-	<script src="script4.js"></script>
-	<script src="script5.js"></script>
+    <section class="viz-section">
+        <h2>Bubble chart</h2>
+        <p></p>
+        <div id="graph4"></div>
+    </section>
+
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="script1.js"></script>
+    <script src="script2.js"></script>
+    <script src="script3.js"></script>
+    <script src="script4.js"></script>
+    <script src="script5.js"></script>
 </body>
 
 </html>

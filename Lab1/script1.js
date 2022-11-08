@@ -104,12 +104,12 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .attr("x", (width / 2) + 50)
         .attr("y", height + 50)
         .text("Number of trees");
-    
+
     // onload bars animation 
     svg.selectAll("rect")
         .attr("width", 0)
         .transition()
-        .delay(function(d, i){ return i * 50; })
+        .delay(function (d, i) { return i * 50; })
         .duration(1000)
         .attr("width", d => x(d.count))
 });

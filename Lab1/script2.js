@@ -42,19 +42,14 @@ d3.csv("../assets/data2.csv").then(function (data) {
         .call(yAxis)
 
     // draw bars
-
     const layers = svg2.append('g')
         .selectAll('g')
         .data(stackedData)
         .join('g')
         .attr('fill', d => color(d.key));
 
-    // transition for bars
-    const duration = 0;
-    const t = d3.transition()
-        .duration(duration)
-        .ease(d3.easeLinear);
 
+    // tooltip
     const tooltip2 = [];
     for (let i = 0; i < plants.length; i++) {
         tooltip2[i] = d3.select("body")
@@ -68,14 +63,13 @@ d3.csv("../assets/data2.csv").then(function (data) {
             .style("border-radius", "5px")
             .style("color", "#fff")
             .text("a simple tooltip");
-
     }
 
     // add legend
     for (let i = 0; i < plants.length; i++) {
         svg2.append("circle")
             .attr("cx", 250)
-            .attr("cy", 100 + i*18)
+            .attr("cy", 100 + i * 18)
             .attr("r", 6)
             .style("fill", color(i))
         svg2.append("text")
@@ -86,6 +80,7 @@ d3.csv("../assets/data2.csv").then(function (data) {
             .attr("alignment-baseline", "middle")
     }
 
+    // actually build bars, layer by layer
     layers.each(function (_, i) {
 
         d3.select(this)
@@ -97,13 +92,9 @@ d3.csv("../assets/data2.csv").then(function (data) {
             .attr('height', y.bandwidth())
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
-
                 tooltip2[i].html(`${plants[i]} : ${j[1] - j[0]}`)
                     .style("visibility", "visible");
                 d3.select(this).attr("fill", "red");
-
-
-
             })
             .on("mousemove", function () {
                 tooltip2[i]

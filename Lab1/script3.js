@@ -1,7 +1,6 @@
-// Parse the Data
 d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data3.csv").then(function (data) {
 
-    //data = data.splice(5,data.length-5)
+    // reorganize data
     other = data.pop()
     lng = data.length - 5;
     for (let j = 0; j < lng; j++) {
@@ -13,11 +12,6 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .map(d => d['tree_name']);
 
     const neighborhood = data.columns.slice(1)
-
-
-    //console.log("data:", data);
-    //console.log("tree_name: ", tree_name)
-    //console.log("neighborhood: ",neighborhood)
 
     const tooltip3 = d3.select("body")
         .append("div")
@@ -37,16 +31,16 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .domain(neighborhood)
         .range([height, 0])
         .padding(.1);
-    // Add X axis
+
+    // build small multiples, 1 for each tree name
     for (let index = 0; index < tree_name.length; index++) {
-        var sm_margin = index == 0 ? 150 : 0;
+        var sm_margin = index == 0 ? 150 : 0; // to show scale only on the first one
         var sm_width = 175;
         const svg3 = d3.select("#graph3")
             .append("svg")
             .attr("width", sm_width + sm_margin + 10)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            //.attr("transform", `translate(${margin.left - 20},${margin.top + 20})`);
             .attr("transform", `translate(${sm_margin},${margin.top + 50})`);
 
         // title of each small multiple, tree name
@@ -55,24 +49,19 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
             .style("text-anchor", "middle")
             .text(tree_name[index])
 
-        //console.log(tree_name)
-
         var values = [];
         for (let i = 0; i < Object.entries(data[index]).length; i++) {
             values[i] = Object.entries(data[index])[i][1];
         }
 
         values = values.slice(1); // without 'circoscrizione'
-        //console.log(values);
         const neighborhood_val = zip(neighborhood, values);
-        //console.log("neighborhood/Val: ", neighborhood_val);
-
 
         const x = d3.scaleLinear()
             .domain([0, Math.max(...values)]).nice()
             .range([0, sm_width]);
         svg3.append("g")
-            .call(d3.axisTop(x).ticks(5, '~s')); 
+            .call(d3.axisTop(x).ticks(5, '~s'));
 
         if (index >= 0) {
             svg3.append("g").call(d3.axisLeft(y));
