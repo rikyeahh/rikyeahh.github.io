@@ -1,12 +1,11 @@
-const svg4 = d3.select("#graph4")
-    .append("svg")
-    .attr("width", 1000 + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
+d3.csv("../assets/data2.csv").then(function (data) {
 
-// Parse the Data
-d3.csv("../assets/data2.csv").then(function(data) {
+    const svg4 = d3.select("#graph4")
+        .append("svg")
+        .attr("width", 1000 + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // List of subgroups = header of the csv files = plants
     const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
@@ -36,12 +35,18 @@ d3.csv("../assets/data2.csv").then(function(data) {
 
     // Normalize the data -> sum of each group must be 100!
     dataNormalized = []
-    data.forEach(function(d){
+    data.forEach(function (d) {
         // Compute the total
         tot = 0
-        for (i in plants){ name=plants[i] ; tot += +d[name]}
+        for (i in plants) {
+            var name = plants[i];
+            tot += +d[name]
+        }
         // Now normalize
-        for (i in plants){ name=plants[i] ; d[name] = d[name] / tot * 100}
+        for (i in plants) {
+            var name = plants[i];
+            d[name] = d[name] / tot * 100
+        }
     })
 
     // stack the data
@@ -71,6 +76,7 @@ d3.csv("../assets/data2.csv").then(function(data) {
             .text("a simple tooltip");
     }
 
+    // actually build the layers
     layers.each(function (_, i) {
 
         d3.select(this)
@@ -82,9 +88,9 @@ d3.csv("../assets/data2.csv").then(function(data) {
             .attr('height', y.bandwidth())
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
-                    tooltip2[i].html(`${plants[i]} : ${Math.floor((j[1]-j[0])*10)/10+"%"}`)
-                        .style("visibility", "visible");
-                    d3.select(this).attr("fill", "red");
+                tooltip2[i].html(`${plants[i]} : ${Math.floor((j[1] - j[0]) * 10) / 10 + "%"}`)
+                    .style("visibility", "visible");
+                d3.select(this).attr("fill", "red");
             })
             .on("mousemove", function () {
                 tooltip2[i]
@@ -98,10 +104,12 @@ d3.csv("../assets/data2.csv").then(function(data) {
                 })
             });
     });
+
+    // legend
     for (let i = 0; i < plants.length; i++) {
         svg4.append("circle")
             .attr("cx", 550)
-            .attr("cy", 100 + i*18)
+            .attr("cy", 100 + i * 18)
             .attr("r", 6)
             .style("fill", color(i))
         svg4.append("text")
