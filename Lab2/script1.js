@@ -1,3 +1,6 @@
+// get the data
+d3.csv("../assets/data4.csv").then( function(data) {
+
 // set the dimensions and margins of the graph
 const margin = {top: 10, right: 30, bottom: 30, left: 40},
     width = 460 - margin.left - margin.right,
@@ -12,12 +15,9 @@ const svg = d3.select("#graph1")
     .attr("transform",
           `translate(${margin.left},${margin.top})`);
 
-// get the data
-d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data4.csv").then( function(data) {
-
   // X axis: scale and draw:
   const x = d3.scaleLinear()
-      .domain([0, 1000])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+      .domain([0, Math.max(...data.map(e => e.tree_height))])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
       .range([0, width]);
   svg.append("g")
       .attr("transform", `translate(0,${height})`)
@@ -41,7 +41,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     const bins = histogram(data);
 
     // Y axis: update now that we know the domain
-    y.domain([0, d3.max(bins, function(d) { return d.height; })]);   // d3.hist has to be called before the Y axis obviously
+    y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
     yAxis
         .transition()
         .duration(1000)
@@ -54,11 +54,14 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     // Manage the existing bars and eventually the new ones:
     u
         .join("rect") // Add a new rect for each new elements
-        .transition() // and apply changes to all of them
-        .duration(1000)
+        //.transition() // and apply changes to all of them
+        //.duration(1000)
           .attr("x", 1)
           .attr("transform", function(d) { return `translate(${x(d.x0)}, ${y(d.length)})`})
-          .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
+          .attr("width", function(d) { 
+            var diff = x(d.x1) - x(d.x0) -1
+            return diff <= 0 ? 0 : diff;
+          })
           .attr("height", function(d) { return height - y(d.length); })
           .style("fill", "#69b3a2")
 
