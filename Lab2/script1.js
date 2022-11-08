@@ -13,7 +13,7 @@ const svg = d3.select("#graph1")
           `translate(${margin.left},${margin.top})`);
 
 // get the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv").then( function(data) {
+d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data4.csv").then( function(data) {
 
   // X axis: scale and draw:
   const x = d3.scaleLinear()
@@ -41,7 +41,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     const bins = histogram(data);
 
     // Y axis: update now that we know the domain
-    y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+    y.domain([0, d3.max(bins, function(d) { return d.height; })]);   // d3.hist has to be called before the Y axis obviously
     yAxis
         .transition()
         .duration(1000)
