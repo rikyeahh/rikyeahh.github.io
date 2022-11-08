@@ -39,7 +39,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .padding(.1);
     // Add X axis
     for (let index = 0; index < tree_name.length; index++) {
-        var sm_margin = index == 0 ? 200 : 0;
+        var sm_margin = index == 0 ? 175 : 0;
         var sm_width = 175;
         const svg3 = d3.select("#graph3")
             .append("svg")
