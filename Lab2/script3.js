@@ -4,7 +4,7 @@
 //Read the data
 d3.csv("../assets/data5.csv").then(function(data) {
   
-  //console.log(data)
+  console.log(data)
   const margin = {top: 10, right: 30, bottom: 30, left: 40},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
@@ -19,18 +19,10 @@ d3.csv("../assets/data5.csv").then(function(data) {
   
 
   const names = data.map(d => d.name)
-
-
   //console.log(names_unique)
 
   const names_ordered = names.sort((a, b) => a.localeCompare(b))
   //console.log(names_ordered)
-
-  /*var dictionary_names_value = Array.from(new Set(names_ordered)).map(a =>
-    ({name:a, count: names_ordered.filter(f => f === a).length}));*/
-  
-  //console.log(dictionary_names_value);
-  
 
 
   // Add X axis
@@ -52,6 +44,34 @@ d3.csv("../assets/data5.csv").then(function(data) {
   const color = d3.scaleOrdinal()
     .domain(names_ordered)
     .range(d3.schemeTableau10);
+  
+   // Highlight the specie that is hovered
+   const highlight = function(event,d){
+
+    selected_specie = d.name
+
+    d3.selectAll(".dot")
+      .transition()
+      .duration(200)
+      .style("fill", "lightgrey")
+      .attr("r", 0.2)
+
+    d3.selectAll("." + selected_specie)
+      .transition()
+      .duration(200)
+      .style("fill", color(selected_specie))
+      .attr("r", 5)
+  }
+
+   // Highlight the specie that is hovered
+   const doNotHighlight = function(event,d){
+    d3.selectAll(".dot")
+      .transition()
+      .duration(200)
+      .style("fill", d => color(d.name))
+      .attr("r", 5 )
+  }
+
 
 
   // Add dots
@@ -59,9 +79,12 @@ d3.csv("../assets/data5.csv").then(function(data) {
     .selectAll("dot")
     .data(data)
     .join("circle")
+      .attr("class", function (d) { return "dot " + d.name } )
       .attr("cx", function (d) { return x(parseFloat(d.height)); } )
       .attr("cy", function (d) { return y(parseFloat(d.co2_absorption)); } )
-      .attr("r", 2)
+      .attr("r", 5)
       .style("fill", function (d) { return color(d.name) } )
+    .on("mouseover", highlight)
+    .on("mouseleave", doNotHighlight )
 
 })
