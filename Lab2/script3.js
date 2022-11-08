@@ -1,3 +1,5 @@
+//Scatter plot
+
 var svg3 = d3.select("#graph3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
