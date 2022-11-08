@@ -19,18 +19,8 @@ d3.csv("../assets/data5.csv").then(function(data) {
   
 
   const names = data.map(d => d.name)
-
-
-  //console.log(names_unique)
-
-  const names_ordered = names.sort((a, b) => a.localeCompare(b))
-  //console.log(names_ordered)
-
-  /*var dictionary_names_value = Array.from(new Set(names_ordered)).map(a =>
-    ({name:a, count: names_ordered.filter(f => f === a).length}));*/
-  
-  //console.log(dictionary_names_value);
-  
+  const names_uniq = [...new Set(names)];
+  const names_ordered = names_uniq.sort((a, b) => a.localeCompare(b))
 
 
   // Add X axis
@@ -52,6 +42,21 @@ d3.csv("../assets/data5.csv").then(function(data) {
   const color = d3.scaleOrdinal()
     .domain(names_ordered)
     .range(d3.schemeTableau10);
+
+  // add legend
+  for (let i = 0; i < names_ordered.length; i++) {
+    svg3.append("circle")
+        .attr("cx", 250)
+        .attr("cy", 10 + i*18)
+        .attr("r", 6)
+        .style("fill", color(i))
+    svg3.append("text")
+        .attr("x", 270)
+        .attr("y", 10 + i * 18)
+        .text(names_ordered[i])
+        .style("font-size", "15px")
+        .attr("alignment-baseline", "middle")
+  }
 
 
   // Add dots
