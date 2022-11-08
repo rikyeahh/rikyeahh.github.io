@@ -11,8 +11,8 @@ d3.csv("../assets/data5.csv").then(function(data) {
 
   const svg3 = d3.select("#graph3")
     .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("width", 1000 + margin.left + margin.right)
+      .attr("height", 2500 + margin.top + margin.bottom)
     .append("g")
       .attr("transform",
             `translate(${margin.left}, ${margin.top})`);
@@ -76,13 +76,13 @@ d3.csv("../assets/data5.csv").then(function(data) {
   // add legend
   for (let i = 0; i < names_ordered.length; i++) {
     svg3.append("circle")
-        .attr("cx", 250)
-        .attr("cy", 10 + i*18)
+        .attr("cx", 550)
+        .attr("cy", 100 + i*18)
         .attr("r", 6)
         .style("fill", color(i))
     svg3.append("text")
-        .attr("x", 270)
-        .attr("y", 10 + i * 18)
+        .attr("x", 570)
+        .attr("y", 100 + i * 18)
         .text(names_ordered[i])
         .style("font-size", "15px")
         .attr("alignment-baseline", "middle")
