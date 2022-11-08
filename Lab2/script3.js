@@ -54,13 +54,13 @@ d3.csv("../assets/data5.csv").then(function(data) {
       .transition()
       .duration(200)
       .style("fill", "lightgrey")
-      .attr("r", 0.2)
+      .attr("r", 2)
 
     d3.selectAll("." + selected_specie)
       .transition()
       .duration(200)
       .style("fill", color(selected_specie))
-      .attr("r", 5)
+      .attr("r", 7)
   }
 
    // Highlight the specie that is hovered
