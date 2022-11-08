@@ -19,10 +19,18 @@ d3.csv("../assets/data5.csv").then(function(data) {
   
 
   const names = data.map(d => d.name)
+
+
   //console.log(names_unique)
 
   const names_ordered = names.sort((a, b) => a.localeCompare(b))
   //console.log(names_ordered)
+
+  /*var dictionary_names_value = Array.from(new Set(names_ordered)).map(a =>
+    ({name:a, count: names_ordered.filter(f => f === a).length}));*/
+  
+  //console.log(dictionary_names_value);
+  
 
 
   // Add X axis
@@ -54,13 +62,13 @@ d3.csv("../assets/data5.csv").then(function(data) {
       .transition()
       .duration(200)
       .style("fill", "lightgrey")
-      .attr("r", 2)
+      .attr("r", 0.2)
 
     d3.selectAll("." + selected_specie)
       .transition()
       .duration(200)
       .style("fill", color(selected_specie))
-      .attr("r", 7)
+      .attr("r", 5)
   }
 
    // Highlight the specie that is hovered
