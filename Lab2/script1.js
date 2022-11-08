@@ -33,7 +33,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
 
     // set the parameters for the histogram
     const histogram = d3.histogram()
-        .value(function(d) { return d.price; })   // I need to give the vector of value
+        .value(function(d) { return d.tree_height; })   // I need to give the vector of value
         .domain(x.domain())  // then the domain of the graphic
         .thresholds(x.ticks(nBin)); // then the numbers of bins
 
