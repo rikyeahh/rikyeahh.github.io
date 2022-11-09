@@ -6,8 +6,8 @@ d3.csv("../assets/data5.csv").then(function(data) {
   
   console.log(data)
   const margin = {top: 10, right: 30, bottom: 30, left: 40},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = 1000 - margin.left - margin.right,
+    height = 1000 - margin.top - margin.bottom;
 
   const svg3 = d3.select("#graph3")
     .append("svg")
@@ -73,21 +73,41 @@ d3.csv("../assets/data5.csv").then(function(data) {
   }
 
 
-  // add legend
-  for (let i = 0; i < names_ordered.length; i++) {
-    svg3.append("circle")
-        .attr("cx", 550)
-        .attr("cy", 100 + i*18)
-        .attr("r", 6)
-        .style("fill", color(i))
-    svg3.append("text")
-        .attr("x", 570)
-        .attr("y", 100 + i * 18)
-        .text(names_ordered[i])
-        .style("font-size", "15px")
-        .attr("alignment-baseline", "middle")
-}
+   // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
+  // Its opacity is set to 0: we don't see it by default.
+  const tooltip = d3.select("#my_dataviz")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "1px")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
 
+  
+  // A function that change this tooltip when the user hover a point.
+  // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
+  const mouseover = function(event, d) {
+    tooltip
+      .style("opacity", 1)
+  }
+
+  const mousemove = function(event, d) {
+    tooltip
+      .html(`The exact value of<br>the Ground Living area is: ${d.name}`)
+      .style("left", (event.x)/2 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+      .style("top", (event.y)/2 + "px")
+  }
+
+  // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+  const mouseleave = function(event,d) {
+    tooltip
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+  }
+ 
   // Add dots
   svg3.append('g')
     .selectAll("dot")
@@ -96,7 +116,7 @@ d3.csv("../assets/data5.csv").then(function(data) {
       .attr("class", function (d) { return "dot " + d.name } )
       .attr("cx", function (d) { return x(parseFloat(d.height)); } )
       .attr("cy", function (d) { return y(parseFloat(d.co2_absorption)); } )
-      .attr("r", 5)
+      .attr("r", 7)
       .style("fill", function (d) { return color(d.name) } )
     .on("mouseover", highlight)
     .on("mouseleave", doNotHighlight )
