@@ -20,9 +20,16 @@ d3.csv("../assets/data5.csv").then(function(data) {
 
   const names = data.map(d => d.name)
   const names_uniq = [...new Set(names)];
-  const names_ordered = names_uniq.sort((a, b) => a.localeCompare(b))
-
-  
+  const names_ordered = names_uniq.sort((a, b) => a.localeCompare(b));
+/*
+  function trees(name){
+    if (names_ordered.includes(name)){
+      return name
+    }
+  }
+  data2 = data.map(d => d.filter(trees))
+  console.log(data2)
+*/
 
 
   // Add X axis
@@ -46,7 +53,7 @@ d3.csv("../assets/data5.csv").then(function(data) {
     .range(d3.schemeTableau10);
   
    // Highlight the specie that is hovered
-   const highlight = function(event,d){
+   const highlight = function(event, d){
 
     selected_specie = d.name
 
@@ -54,58 +61,22 @@ d3.csv("../assets/data5.csv").then(function(data) {
       .transition()
       .duration(200)
       .style("fill", "lightgrey")
-      .attr("r", 0.2)
+      .attr("r", 5)
 
-    d3.selectAll("." + selected_specie)
+    d3.selectAll(".dot." + selected_specie.replace(/ /g, "."))
       .transition()
       .duration(200)
       .style("fill", color(selected_specie))
-      .attr("r", 5)
+      .attr("r", 10)
   }
 
    // Highlight the specie that is hovered
-   const doNotHighlight = function(event,d){
+   const doNotHighlight = function(){
     d3.selectAll(".dot")
       .transition()
       .duration(200)
       .style("fill", d => color(d.name))
-      .attr("r", 5 )
-  }
-
-
-   // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
-  // Its opacity is set to 0: we don't see it by default.
-  const tooltip = d3.select("#my_dataviz")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "1px")
-    .style("border-radius", "5px")
-    .style("padding", "10px")
-
-  
-  // A function that change this tooltip when the user hover a point.
-  // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
-  const mouseover = function(event, d) {
-    tooltip
-      .style("opacity", 1)
-  }
-
-  const mousemove = function(event, d) {
-    tooltip
-      .html(`The exact value of<br>the Ground Living area is: ${d.name}`)
-      .style("left", (event.x)/2 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-      .style("top", (event.y)/2 + "px")
-  }
-
-  // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
-  const mouseleave = function(event,d) {
-    tooltip
-      .transition()
-      .duration(200)
-      .style("opacity", 0)
+      .attr("r", 8 )
   }
  
   // Add dots
@@ -119,6 +90,5 @@ d3.csv("../assets/data5.csv").then(function(data) {
       .attr("r", 7)
       .style("fill", function (d) { return color(d.name) } )
     .on("mouseover", highlight)
-    .on("mouseleave", doNotHighlight )
-
+    .on("mouseleave", doNotHighlight)
 })
