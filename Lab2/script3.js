@@ -93,10 +93,11 @@ d3.csv("../assets/data5.csv").then(function(data) {
       .style("top", (event.y)/2 + "px")
   }
   const moveTooltip3 = function(event, d) {
-    tooltip
+    tooltip3
       .style("left", (event.x)/2 + "px")
       .style("top", (event.y)/2+30 + "px")
   }
+  
   const hideTooltip3 = function(event, d) {
     
   //#################################################################
@@ -108,7 +109,7 @@ d3.csv("../assets/data5.csv").then(function(data) {
       .attr("r", 8 )
   //#################################################################
    
-    tooltip
+    tooltip3
       .transition()
       .duration(200)
       .style("opacity", 0)
