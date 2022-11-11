@@ -1,14 +1,12 @@
 //Bubble plot
 
-
-
 //Read the data
 d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data5.csv").then( function(data) {
-// d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/4_ThreeNum.csv").then( function(data) {
+
 // set the dimensions and margins of the graph
-  const margin = {top: 10, right: 20, bottom: 30, left: 50},
-  width = 1000 - margin.left - margin.right,
-  height = 1000- margin.top - margin.bottom;
+  const margin = {top: 10, right: 20, bottom: 70, left: 50},
+  width = 750 - margin.left - margin.right,
+  height = 750 - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
   const svg5 = d3.select("#graph5")
@@ -18,24 +16,43 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
   // Add X axis
+  const heights = data.map(d => d.height)
   const x = d3.scaleLinear()
-    .domain([0, 40])
-    .range([ 0, width ]);
+    .domain([0, Math.max(...heights)]).nice()
+    .range([ 0, width]);
   svg5.append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x));
+  svg5.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + 50)
+    .text("Height (m)");
 
   // Add Y axis
+  const co2_absorptions = data.map(d => d.co2_absorption)
   const y = d3.scaleLinear()
-    .domain([0, 60])
-    .range([ height, 0]);
+    .domain([0, Math.max(...co2_absorptions)]).nice()
+    .range([height, 0]);
   svg5.append("g")
     .call(d3.axisLeft(y));
 
+  svg5.append("text")
+  .attr("class", "y label")
+  .attr("text-anchor", "end")
+  .attr("y", 6)
+  .attr("dy", ".75em")
+  .attr("transform", "rotate(-90)")
+  .text("CO2 absorptions (Kg/YY)");
+
   // Add a scale for bubble size
+  const canopy_covers = data.map(d => d.canopy_cover)
   const z = d3.scaleLinear()
-    .domain([0, 1000])
+    .domain([0, Math.max(...canopy_covers)]).nice()
     .range([ 3, 35]);
+
+  //console.log(Math.max(...canopy_covers))
   // Add a scale for bubble color
   const names = data.map(d => d.name)
   const names_uniq = [...new Set(names)];
@@ -77,7 +94,6 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
       .style("opacity", 0)
   }
 
-  //console.log(data.map(d=>d.))
   // Add dots
   svg5.append('g')
     .selectAll("dot")
@@ -92,4 +108,65 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     .on("mouseover", showTooltip )
     .on("mousemove", moveTooltip )
     .on("mouseleave", hideTooltip )
+
+
+
+  // append the svg object to the body of the page
+  var svg52 = d3.select("#graph5")
+  .append("svg")
+    .attr("width", 300)
+    .attr("height", 150)
+    .attr("transform", `translate(600,-600)`)
+  // The scale you use for bubble size
+  var size = d3.scaleSqrt()
+    .domain([0, Math.max(...canopy_covers)]).nice()
+    .range([ 0, 50]);
+
+  // Add legend: circles
+  var valuesToShow = [Math.max(...canopy_covers)/8, Math.max(...canopy_covers)/2, Math.max(...canopy_covers)]
+  var xCircle = 230
+  var xLabel = 380
+  var yCircle = 330
+  svg52
+    .selectAll("legend")
+    .data(valuesToShow)
+    .enter()
+    .append("circle")
+      .attr("cx", xCircle)
+      .attr("cy", function(d){ return yCircle - size(d) } )
+      .attr("r", function(d){ return size(d) })
+      .style("fill", "none")
+      .attr("stroke", "black")
+      .attr("transform", `translate(-150,-200)`)
+
+
+  // Add legend: segments
+  svg52
+    .selectAll("legend")
+    .data(valuesToShow)
+    .enter()
+    .append("line")
+      .attr('x1', function(d){ return xCircle + size(d) } )
+      .attr('x2', xLabel)
+      .attr('y1', function(d){ return yCircle - size(d) } )
+      .attr('y2', function(d){ return yCircle - size(d) } )
+      .attr('stroke', 'black')
+      .style('stroke-dasharray', ('2,2'))
+      .attr("transform", `translate(-150,-200)`)
+
+
+  // Add legend: labels
+  svg52
+    .selectAll("legend")
+    .data(valuesToShow)
+    .enter()
+    .append("text")
+      .attr('x', xLabel)
+      .attr('y', function(d){ return yCircle - size(d) } )
+      .text( d => d + " (m^2)")
+      .style("font-size", 10)
+      .attr('alignment-baseline', 'middle')
+      .attr("transform", `translate(-150,-200)`)
+
 })
+
