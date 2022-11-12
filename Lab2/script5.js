@@ -116,7 +116,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
   .append("svg")
     .attr("width", 300)
     .attr("height", 150)
-    .attr("transform", `translate(600,-600)`)
+    .attr("transform", `translate(550,-500)`)
   // The scale you use for bubble size
   var size = d3.scaleSqrt()
     .domain([0, Math.max(...canopy_covers)]).nice()
@@ -168,5 +168,20 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
       .attr('alignment-baseline', 'middle')
       .attr("transform", `translate(-150,-200)`)
 
+
+      // legend
+    for (let i = 0; i < names_ordered.length; i++) {
+      svg5.append("circle")
+          .attr("cx", 550)
+          .attr("cy", 100 + i * 18)
+          .attr("r", 6)
+          .style("fill", myColor(i))
+      svg5.append("text")
+          .attr("x", 570)
+          .attr("y", 100 + i * 18)
+          .text(names_ordered[i])
+          .style("font-size", "15px")
+          .attr("alignment-baseline", "middle")
+  }
 })
 
