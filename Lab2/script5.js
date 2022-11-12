@@ -69,7 +69,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
       .style("background-color", "black")
       .style("border-radius", "5px")
       .style("padding", "10px")
-      .style("color", "white")
+      //.style("color", "white")
 
   // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
   const showTooltip = function(event, d) {
@@ -78,7 +78,11 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
       .duration(200)
     tooltip
       .style("opacity", 1)
-      .html("Tree: " + d.name)
+      .style("color", myColor(d.name))
+      .html("Tree: " + d.name + 
+            "<br>Canopy cover (m^2): " + d.canopy_cover +
+            "<br>Height(m): " + d.height + 
+            "<br>CO2 absorption (Kg/YY): " + d.co2_absorption)
       .style("left", (event.x) + "px")
       .style("top", (event.y)+30 + "px")
   }
