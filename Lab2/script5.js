@@ -114,23 +114,15 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     .on("mouseleave", hideTooltip )
 
 
-
-  // append the svg object to the body of the page
-  //var svg52 = d3.select("#graph5")
-  //.append("svg")
-  //  .attr("width", 300)
-  //  .attr("height", 150)
-  //  .attr("transform", `translate(550,-500)`)
-  // The scale you use for bubble size
   var size = d3.scaleSqrt()
     .domain([0, Math.max(...canopy_covers)]).nice()
-    .range([ 0, 50]);
+    .range([ 3, 35]);
 
   // Add legend: circles
   var valuesToShow = [Math.max(...canopy_covers)/8, Math.max(...canopy_covers)/2, Math.max(...canopy_covers)]
   var xCircle = 550
   var xLabel = 700
-  var yCircle = 450
+  var yCircle = 90
   svg5
     .selectAll("#graph5")
     .data(valuesToShow)
