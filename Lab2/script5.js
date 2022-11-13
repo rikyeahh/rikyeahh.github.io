@@ -5,8 +5,8 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
 
 // set the dimensions and margins of the graph
   const margin = {top: 10, right: 20, bottom: 70, left: 50},
-  width = 750 - margin.left - margin.right,
-  height = 750 - margin.top - margin.bottom;
+  width = 800 - margin.left - margin.right,
+  height = 800 - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
   const svg5 = d3.select("#graph5")
@@ -116,11 +116,11 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
 
 
   // append the svg object to the body of the page
-  var svg52 = d3.select("#graph5")
-  .append("svg")
-    .attr("width", 300)
-    .attr("height", 150)
-    .attr("transform", `translate(550,-500)`)
+  //var svg52 = d3.select("#graph5")
+  //.append("svg")
+  //  .attr("width", 300)
+  //  .attr("height", 150)
+  //  .attr("transform", `translate(550,-500)`)
   // The scale you use for bubble size
   var size = d3.scaleSqrt()
     .domain([0, Math.max(...canopy_covers)]).nice()
@@ -128,11 +128,11 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
 
   // Add legend: circles
   var valuesToShow = [Math.max(...canopy_covers)/8, Math.max(...canopy_covers)/2, Math.max(...canopy_covers)]
-  var xCircle = 230
-  var xLabel = 380
-  var yCircle = 330
-  svg52
-    .selectAll("legend")
+  var xCircle = 550
+  var xLabel = 700
+  var yCircle = 450
+  svg5
+    .selectAll("#graph5")
     .data(valuesToShow)
     .enter()
     .append("circle")
@@ -141,36 +141,36 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
       .attr("r", function(d){ return size(d) })
       .style("fill", "none")
       .attr("stroke", "black")
-      .attr("transform", `translate(-150,-200)`)
+      //.attr("transform", `translate(-150,-200)`)
 
 
   // Add legend: segments
-  svg52
-    .selectAll("legend")
+  svg5
+    .selectAll("#graph5")
     .data(valuesToShow)
     .enter()
     .append("line")
       .attr('x1', function(d){ return xCircle + size(d) } )
-      .attr('x2', xLabel)
+      .attr('x2', xLabel - 50)
       .attr('y1', function(d){ return yCircle - size(d) } )
       .attr('y2', function(d){ return yCircle - size(d) } )
       .attr('stroke', 'black')
       .style('stroke-dasharray', ('2,2'))
-      .attr("transform", `translate(-150,-200)`)
+      //.attr("transform", `translate(-150,-200)`)
 
 
   // Add legend: labels
-  svg52
-    .selectAll("legend")
+  svg5
+    .selectAll("#graph5")
     .data(valuesToShow)
     .enter()
     .append("text")
-      .attr('x', xLabel)
+      .attr('x', xLabel - 50)
       .attr('y', function(d){ return yCircle - size(d) } )
       .text( d => d + " (m^2)")
       .style("font-size", 10)
-      .attr('alignment-baseline', 'middle')
-      .attr("transform", `translate(-150,-200)`)
+      .attr('alignment-baseline', 'center')
+      //.attr("transform", `translate(-150,-200)`)
 
 
       // legend
