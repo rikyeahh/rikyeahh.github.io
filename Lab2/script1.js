@@ -1,3 +1,5 @@
+// Histogram
+
 d3.csv("../assets/data4.csv").then(function (data) {
 
     // set the dimensions and margins of the graph
@@ -64,10 +66,8 @@ d3.csv("../assets/data4.csv").then(function (data) {
             .style("fill", "#69b3a2")
     }
 
-
     // Initialize with 20 bins
     update(20)
-
 
     // Listen to the button -> update if user change it
     d3.select("#nBin").on("input", function () {

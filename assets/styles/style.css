@@ -31,3 +31,11 @@ p {
     shape-rendering: crispEdges;
     stroke-dasharray: 5.5; 
 }
+
+.bubbles {
+    stroke-width:1px;
+    stroke: white;
+  }
+  .bubbles:hover {
+    stroke: black;
+  }
