@@ -1,0 +1,112 @@
+[
+    {
+        "key": "Cupressus",
+        "value": {
+            "q1": 8.6,
+            "median": 8.6,
+            "q3": 8.6,
+            "interQuantileRange": 0,
+            "min": 8.6,
+            "max": 8.6
+        }
+    },
+    {
+        "key": "Sophora japonica",
+        "value": {
+            "q1": 5,
+            "median": 6,
+            "q3": 10,
+            "interQuantileRange": 5,
+            "min": 17.5,
+            "max": 0
+        }
+    },
+    {
+        "key": "Tilia cordata",
+        "value": {
+            "q1": 4,
+            "median": 5,
+            "q3": 7,
+            "interQuantileRange": 3,
+            "min": 11.5,
+            "max": 0
+        }
+    },
+    {
+        "key": "Acer campestre",
+        "value": {
+            "q1": 4,
+            "median": 5,
+            "q3": 6,
+            "interQuantileRange": 2,
+            "min": 9,
+            "max": 1
+        }
+    },
+    {
+        "key": "Carpinus betulus",
+        "value": {
+            "q1": 4,
+            "median": 5.25,
+            "q3": 8,
+            "interQuantileRange": 4,
+            "min": 14,
+            "max": 0
+        }
+    },
+    {
+        "key": "Celtis australis",
+        "value": {
+            "q1": 5,
+            "median": 8,
+            "q3": 10,
+            "interQuantileRange": 5,
+            "min": 17.5,
+            "max": 0
+        }
+    },
+    {
+        "key": "Prunus cerasifera",
+        "value": {
+            "q1": 4,
+            "median": 4.5,
+            "q3": 6,
+            "interQuantileRange": 2,
+            "min": 9,
+            "max": 1
+        }
+    },
+    {
+        "key": "Platanus x hispanica",
+        "value": {
+            "q1": 6,
+            "median": 10,
+            "q3": 20,
+            "interQuantileRange": 14,
+            "min": 40,
+            "max": 0
+        }
+    },
+    {
+        "key": "Tilia x europaea",
+        "value": {
+            "q1": 5,
+            "median": 7,
+            "q3": 12,
+            "interQuantileRange": 7,
+            "min": 22.5,
+            "max": 0
+        }
+    },
+    {
+        "key": "Aesculus hippocastanum",
+        "value": {
+            "q1": 6,
+            "median": 8.4,
+            "q3": 11,
+            "interQuantileRange": 5,
+            "min": 18.5,
+            "max": 0
+        }
+    }
+]

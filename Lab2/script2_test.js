@@ -12,41 +12,19 @@ var svg = d3.select("#graph2")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data5.csv", function (data) {
-    console.log(data)
+d3.json("../../assets/data6.json").then(function (data) {
+    //console.log(data)
     //max and min values for the height
     const xMin = 0
     const xMax = 40
 
-    // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
-    const sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-        .key(function (d) {
-            return d.name;
-        })
-        .rollup(function (d) {
-            q1 = d3.quantile(d.map(function (g) {
-                return parseFloat(g.height);
-            }).sort(d3.ascending), .25)
-            median = d3.quantile(d.map(function (g) {
-                return parseFloat(g.height);
-            }).sort(d3.ascending), .5)
-            q3 = d3.quantile(d.map(function (g) {
-                return parseFloat(g.height);
-            }).sort(d3.ascending), .75)
-            interQuantileRange = q3 - q1
-            min = q1 - 1.5 * interQuantileRange
-            max = q3 + 1.5 * interQuantileRange
+    var sumstat = data
 
-            newMax = Math.max(min, xMin);
-            newMin = Math.min(max, xMax);
-            return ({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: newMin, max: newMax})
-        })
-        .entries(data)
 
     // Show the Y scale
     const y = d3.scaleBand()
         .range([height, 0])
-        .domain(data.map(d => d.name))
+        .domain(data.map(d => d.key))
         //.domain(["Tilia x europaea", "Tilia cordata", "Platanus x hispanica", "Celtis australis", "Carpinus betulus", "Aesculus hippocastanum"])
         .padding(.1);
 
@@ -54,6 +32,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .attr("transform", "translate(-50," + (-15) + ")")
         .call(d3.axisLeft(y).tickSize(0))
         .select(".domain").remove()
+    
 
     // Show the X scale
     const x = d3.scaleLinear()
@@ -71,6 +50,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .attr("x", width)
         .attr("y", height + margin.top + 30)
         .text("Height (m)");
+        
 
     // Show the main vertical line
     svg
@@ -84,7 +64,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .attr("y2", function(d){return(y(d.key) + y.bandwidth()/2)})
         .attr("stroke", "black")
         .style("width", 40)
-
+    //return
     // rectangle for the main box
     svg
         .selectAll("boxes")
@@ -98,6 +78,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .attr("stroke", "black")
         .style("fill", "#69b3a2")
         .style("opacity", 0.3)
+        
 
     // Show the median
     svg
@@ -106,13 +87,14 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .enter()
         .append("line")
         .attr("y1", function(d){return(y(d.key))})
-        .attr("y2", function(d){return(y(d.key) + y.bandwidth()/2)})
+        .attr("y2", function(d){return(y(d.key) + y.bandwidth())})
         .attr("x1", function(d){return(x(d.value.median))})
         .attr("x2", function(d){return(x(d.value.median))})
         .attr("stroke", "black")
         .style("width", 80)
 
     // Add individual points with jitter
+    return
     const jitterWidth = 20
     svg
         .selectAll("indPoints")

@@ -8,7 +8,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     width = 300,//460 - margin.left - margin.right,
     height = 300;//400 - margin.top - margin.bottom;
 
-    console.log(data);
+    //console.log(data);
     const names = data.map(d => d.name);
     const names_uniq = [...new Set(names)];
     const name_counts = [];
