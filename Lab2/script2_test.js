@@ -15,8 +15,8 @@ var svg = d3.select("#graph2")
 d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data5.csv", function (data) {
     console.log(data)
     //max and min values for the height
-    const maxX = 40
-    const minX = 0
+    const xMin = 0
+    const xMax = 40
 
     // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
     const sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
@@ -37,8 +37,8 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
             min = q1 - 1.5 * interQuantileRange
             max = q3 + 1.5 * interQuantileRange
 
-            newMax = Math.max(min, minX);
-            newMin = Math.min(max, maxX);
+            newMax = Math.max(min, xMin);
+            newMin = Math.min(max, xMax);
             return ({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: newMin, max: newMax})
         })
         .entries(data)
@@ -47,6 +47,7 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
     const y = d3.scaleBand()
         .range([height, 0])
         .domain(data.map(d => d.name))
+        //.domain(["Tilia x europaea", "Tilia cordata", "Platanus x hispanica", "Celtis australis", "Carpinus betulus", "Aesculus hippocastanum"])
         .padding(.1);
 
     svg.append("g")
@@ -56,14 +57,13 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
 
     // Show the X scale
     const x = d3.scaleLinear()
-        .domain([0, maxX])
+        .domain([0, xMax])
         .range([0, width]).nice();
 
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x).ticks(5))
         .select(".domain").remove()
-
 
     // Add X axis label:
     svg.append("text")
