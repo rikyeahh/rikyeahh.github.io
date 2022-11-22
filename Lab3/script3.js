@@ -2,14 +2,12 @@
 
 // Data and color scale
 
-let data1 = new Map()
+let data3 = new Map()
 // Load external data and boot
 Promise.all([
-    //d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
     d3.json("../assets/circoscrizioni.json"),
-    //d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function (d) {
     d3.csv("../assets/data7.csv", function (d) {
-        data1.set(d.code, d.pop)
+        data3.set(d.code, d.pop)
         if(d.name == 'Zambia'){
             console.log(d)
         }
@@ -19,9 +17,15 @@ Promise.all([
     //loadData = loadData[0]
     console.log("loadData", loadData);
     
-    const svg3 = d3.select("#svg1"),
-        width = + svg.attr("width"),
-        height = + svg.attr("height");
+    const margin = { top: 10, right: 30, bottom: 10, left: 50 },
+    width = 700 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
+
+    const svg3 = d3.select("#graph3")
+        .append("svg")
+        .attr("width", 700 + margin.left + margin.right)
+        .attr("height", 700 + margin.top + margin.bottom)
+        .append("g");
 
     // Map and projection
     const projection = d3.geoMercator()
@@ -32,10 +36,10 @@ Promise.all([
         .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
         .range(d3.schemeBlues[7]);
     let topo = loadData[0]
-    console.log("loadData[0]", topo.features);
+    //console.log("loadData[0]", topo.features);
 
     // Draw the map
-    svg.append("g")
+    svg3.append("g")
         .selectAll("path")
         .data(topo.features)
         .join("path")
@@ -45,7 +49,7 @@ Promise.all([
         )
         // set the color of each country
         .attr("fill", function (d) {
-            d.total = data1.get(d.properties.nome) || 0;
+            d.total = data3.get(d.properties.nome) || 0;
             return colorScale(d.total);
         })
 })

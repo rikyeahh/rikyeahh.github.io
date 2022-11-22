@@ -17,7 +17,7 @@ Promise.all([
 ]).then(function (loadData) {
     //console.log("data", data1);
     //loadData = loadData[0]
-    console.log("loadData", loadData);
+    //console.log("loadData", loadData);
     
     const svg = d3.select("#svg1"),
         width = + svg.attr("width"),
@@ -32,7 +32,7 @@ Promise.all([
         .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
         .range(d3.schemeBlues[7]);
     let topo = loadData[0]
-    console.log("loadData[0]", topo.features);
+    //console.log("loadData[0]", topo.features);
 
     // Draw the map
     svg.append("g")
