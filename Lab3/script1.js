@@ -10,25 +10,43 @@ Promise.all([
         console.log(d.name);
         data.set(d.name, +d.pop)
     })
-]).then(function (loadData) {
-    //console.log("data", data1);
-    //loadData = loadData[0]
-    console.log("loadData", loadData);
-    
-    const svg = d3.select("#svg1"),
-        width = + svg.attr("width"),
-        height = + svg.attr("height");
+])
+    .then(function (loadData) {
 
-    // Map and projection
-    const projection = d3.geoMercator()
-        .scale(40)
-        .center([0, 20])
-        .translate([width / 2, height / 2]);
-    const colorScale = d3.scaleThreshold()
-        .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
-        .range(d3.schemeBlues[7]);
-    let topo = loadData[0]
-    console.log("loadData[0]", topo.features);
+        // Set the dimensions and margins of the graph
+        const margin_1 = { top: 50, right: 20, bottom: 70, left: 20 },
+            width_1 = 1024 - margin_1.left - margin_1.right,
+            height_1 = 768 - margin_1.top - margin_1.bottom;
+
+        // Append the svg_1 object to the page
+        const svg_1 = d3.select("#graph1")
+            .append("svg")
+            //.attr("width", width_1 + margin_1.left + margin_1.right)
+            //.attr("height", height_1 + margin_1.top + margin_1.bottom)
+            .attr("viewBox", '0 0 ' + (width_1 + margin_1.left + margin_1.right) +
+                ' ' + (height_1 + margin_1.top + margin_1.bottom))
+            .append("g")
+            .attr("transform", `translate(${margin_1.left}, ${margin_1.top})`);
+
+        // Map and projection
+        var projection = d3.geoIdentity().reflectY(true)
+
+        const colorScale = d3.scaleThreshold()
+            .domain([10, 100, 300, 500, 1000, 2000, 3000])
+            .range(d3.schemeGreens[8]);
+
+        const tooltip_1 = d3.select("#graph1")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("font-size", "14px")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+            .style("opacity", 0);
+        let topo = loadData[0]
+        projection.fitSize([width_1, height_1], topo)
 
         // Draw the map
         svg_1.append("g")
