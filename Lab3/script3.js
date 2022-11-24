@@ -3,11 +3,14 @@
 // Data and color scale
 
 const data3 = new Map();
+const data3nTrees = new Map();
+
 // Load external data and boot
 Promise.all([
     d3.json("../assets/circoscrizioni.json"),
     d3.csv("../assets/data8.csv", function (d) {
-        data3.set(d.circoscrizioni, +d.oxygen_production)
+        data3.set(d.circoscrizioni, +d.oxygen_production);
+        data3nTrees.set(d.circoscrizioni, +d.pop);
     })
 ]).then(function (loadData) {
     
@@ -31,7 +34,6 @@ Promise.all([
   
     let topo = loadData[0]
     projection.fitSize([width_1, height_1], topo);
-    console.log(data3)
 
     // Draw the map
     svg3.append("g")
@@ -81,6 +83,7 @@ Promise.all([
             // and show tooltip
             tooltip.html(`${d.properties.nome}<br>
                 Oxygen production: ${Math.round(data3.get(d.properties.nome)*100)/100}<br>
+                Number of trees: ${data3nTrees.get(d.properties.nome)}<br>
                 Area: ${d.properties.area} km^2`)
                 .style("visibility", "visible");
         })

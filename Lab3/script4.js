@@ -53,7 +53,6 @@ Promise.all([
 
     // draw trees as points
     d3.csv("../assets/data9.csv").then(function (locationData) {
-        console.log(locationData);
         svg.append('g')
             .selectAll("dot")
             .data(locationData)
@@ -62,7 +61,6 @@ Promise.all([
                 // compute x on svg from latitude
                 var c = [d.latitude, d.longitude];
                 var x = projection(c)[0]
-                console.log("x", x);
                 return remapX(d.longitude)
             })
             .attr("cy", function (d) {

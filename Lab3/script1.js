@@ -76,8 +76,8 @@ Promise.all([
                 .style("stroke-width", "2px")
             // and show tooltip
             tooltip.html(`${d.properties.nome}<br>
-                Tree abundance: ${data1.get(d.properties.nome)}<br>
-                Area: ${d.properties.area} km^2`)
+                Number of trees: ${data1.get(d.properties.nome)}<br>
+                Area: ${d.properties.area} m^2`)
                 .style("visibility", "visible");
         })
         .on("mousemove", function () {

@@ -10,6 +10,7 @@ const svg2 = d3.select('#graph2')
 d3.csv("../assets/data2.csv").then(function (data) {
 
     const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
+    console.log(plants);
     const circoscrizioni = data.map(d => d.circoscrizione);
 
     const stackedData = d3.stack()

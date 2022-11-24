@@ -1,13 +1,14 @@
 // Choropleth Map - Density values
 
 const data2 = new Map();
+const data2nTrees = new Map();
 
 // load both geometric and aggregated data
 Promise.all([
     d3.json("../assets/circoscrizioni.json"),
     d3.csv("../assets/data8.csv", function (d) {
-        //console.log(d)
-        data2.set(d.circoscrizioni, +d.tree_density)
+        data2.set(d.circoscrizioni, +d.tree_density);
+        data2nTrees.set(d.circoscrizioni, +d.pop);
     })
 ]).then(function (loadData) {
 
@@ -76,7 +77,9 @@ Promise.all([
                 .style("stroke-width", "2px")
             // and show tooltip
             tooltip.html(`${d.properties.nome}<br>
-                Tree density: ${data2.get(d.properties.nome)}`)
+                Tree density: ${data2.get(d.properties.nome)}<br>
+                Number of trees: ${data2nTrees.get(d.properties.nome)}<br>
+                Area: ${d.properties.area}<br>`)
                 .style("visibility", "visible");
         })
         .on("mousemove", function () {
