@@ -61,6 +61,9 @@ Promise.all([
         .style("color", "#fff")
         .text("a simple tooltip");
 
+
+        Legend(d3.scaleThreshold([500, 2000, 4000, 10000, 250000, 40000, 55000], d3.schemeBlues[7]), "#graph3")
+
     svg3.join("g")
         .selectAll("path")
         .on("mouseover", function (event, d) {

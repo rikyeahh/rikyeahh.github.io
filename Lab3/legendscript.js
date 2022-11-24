@@ -8,9 +8,9 @@ function Legend(color, id, {
   width = 320, 
   height = 44 + tickSize,
   marginTop = 18,
-  marginRight = 0,
+  marginRight = 20,
   marginBottom = 16 + tickSize,
-  marginLeft = 0,
+  marginLeft = 20,
   ticks = width / 64,
   tickFormat,
   tickValues
