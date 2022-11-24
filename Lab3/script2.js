@@ -1,4 +1,4 @@
-// Choropleth Map - Absolute tree count
+// Choropleth Map - Density values
 
 const data2 = new Map();
 
