@@ -27,6 +27,9 @@ Promise.all([
         .domain([39, 100, 300, 500, 1000, 2000, 3024]) // from min count to max, with
         .range(d3.schemeGreens[8]);
 
+
+    
+    Legend(d3.scaleThreshold([39, 100, 300, 500, 1000, 2000, 3024], d3.schemeGreens[8]), "#graph1")
     let topo = loadData[0]
     projection.fitSize([width_1, height_1], topo);
 
