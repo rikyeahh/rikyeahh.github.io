@@ -3,7 +3,8 @@
     height: auto;
 }
 
-h1, h2 {
+h1,
+h2 {
     font-family: 'Roboto Slab', serif;
 }
 
@@ -29,13 +30,14 @@ p {
 
 .grid line {
     shape-rendering: crispEdges;
-    stroke-dasharray: 5.5; 
+    stroke-dasharray: 5.5;
 }
 
 .bubbles {
-    stroke-width:1px;
+    stroke-width: 1px;
     stroke: white;
-  }
-  .bubbles:hover {
+}
+
+.bubbles:hover {
     stroke: black;
-  }
+}

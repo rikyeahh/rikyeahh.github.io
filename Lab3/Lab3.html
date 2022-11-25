@@ -34,33 +34,41 @@
 
     <section class="viz-section">
         <h2>Choropleth Map - Absolute tree count</h2>
-        <p></p>
+        <p>This map is shows the different neighborhood of Trento, separating them as polygons. The color inside the polygon encodes the number of trees present in that region.
+            We chose to discretize the colorbar into a number of colors equal to the number of regions. On hover, a tooltip shows more info (name of neighborhood, number of trees, area).
+            The central parts look to have more trees, probably because the data collection was more intensive there.</p>
         <div id="graph1"></div>
     </section>
 
     <section class="viz-section">
         <h2>Choropleth Map - Density values</h2>
-        <p>
+        <p>Exactly like the map above, but showing the total canopy cover divided the region area. The results look largely the same: with a more similar number of trees, we could have seen
+            differences if one neighborhood had many large trees compared to others.
         </p>
         <div id="graph2"></div>
     </section>
 
     <section class="viz-section">
         <h2>Choropleth Map - Oxygen values</h2>
-        <p></p>
+        <p>Here the color encodes the total oxygen production by neighborhood: here the values look more even: maybe the less-populated regions have trees with a bigger oxygen production.
+        </p>
         <div id="graph3"></div>
     </section>
 
     <section class="viz-section">
         <h2>Dot density Map - 1 color</h2>
         <p>
+            Each tree is represented by a dot on the geographical location on the map. We can see geometric organizations (probably parks where trees are neatly organized).
+            Each dot has a 0.7 opacity, but since most trees' dots overlap with others (since they are close), the color looks as bright as full opacity.
         </p>
         <div id="graph4"></div>
     </section>
     
     <section class="viz-section">
       <h2>Dot density Map - Many colors</h2>
-      <p></p>
+      <p>
+        As above, but each dot is bigger, full opacity and encodes the tree type. It looks like Gardolo has a zone with very neatly organized trees, all in the top-9 chart.
+      </p>
       <div id="graph5"></div>
     </section>
 
