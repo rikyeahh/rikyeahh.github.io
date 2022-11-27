@@ -92,7 +92,6 @@ Promise.all([
                 .style("stroke-width", "1")
                 .style("fill-opacity", "1")
             tooltip.html(``).style("visibility", "hidden");
-
         });
 
 })
