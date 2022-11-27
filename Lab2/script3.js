@@ -40,14 +40,18 @@ d3.csv("../assets/data5.csv").then(function (data) {
 
     //TOOLTIP
     // -1- Create a tooltip div that is hidden by default:
-    const tooltip3 = d3.select("#graph3")
+    // add tooltip
+    const tooltip = d3.select("body")
         .append("div")
-        .style("opacity", 0)
-        .attr("class", "tooltip")
-        .style("background-color", "black")
+        .attr("class", "d3-tooltip")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden")
+        .style("padding", "15px")
+        .style("background", "rgba(0,0,0,0.6)")
         .style("border-radius", "5px")
-        .style("padding", "10px")
-        .style("color", "white")
+        .style("color", "#fff")
+        .text("a simple tooltip");
 
     // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
     const showTooltip3 = function (event, d) {
@@ -66,17 +70,12 @@ d3.csv("../assets/data5.csv").then(function (data) {
             .style("fill", color(selected_specie))
             .attr("r", 7)
 
-        tooltip3.transition()
-            .duration(200)
-        tooltip3.style("opacity", 1)
-            .html("Tree: " + d.name)
-            .style("left", (event.x) / 2 + "px")
-            .style("top", (event.y) / 2 + "px")
+        tooltip.html(`Specie: ${d.name}`)
+            .style("visibility", "visible");
     }
     const moveTooltip3 = function (event, d) {
-        tooltip3
-            .style("left", (event.x) / 2 + "px")
-            .style("top", (event.y) / 2 + 30 + "px")
+        tooltip.style("top", (event.pageY - 10) + "px")
+            .style("left", (event.pageX + 10) + "px");
     }
 
     const hideTooltip3 = function (event, d) {
@@ -87,10 +86,7 @@ d3.csv("../assets/data5.csv").then(function (data) {
             .style("fill", d => color(d.name))
             .attr("r", 8)
 
-        tooltip3
-            .transition()
-            .duration(200)
-            .style("opacity", 0)
+            tooltip.html(``).style("visibility", "hidden");
     }
 
 
@@ -107,7 +103,7 @@ d3.csv("../assets/data5.csv").then(function (data) {
         .on("mouseover", showTooltip3)
         .on("mousemove", moveTooltip3)
         .on("mouseleave", hideTooltip3)
-    
+
     // add axes labels
     svg3.append("text")
         .attr("text-anchor", "end")

@@ -59,39 +59,33 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .range(d3.schemeTableau10);
 
     // -1- Create a tooltip div that is hidden by default:
-    const tooltip = d3.select("#graph5")
+    const tooltip = d3.select("body")
         .append("div")
-        .style("opacity", 0)
-        .attr("class", "tooltip")
-        .style("background-color", "black")
+        .attr("class", "d3-tooltip")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden")
+        .style("padding", "15px")
+        .style("background", "rgba(0,0,0,0.6)")
         .style("border-radius", "5px")
-        .style("padding", "10px")
+        .style("color", "#fff")
+        .text("a simple tooltip");
 
     // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
     const showTooltip = function (event, d) {
-        tooltip
-            .transition()
-            .duration(200)
-        tooltip
-            .style("opacity", 1)
-            .style("color", myColor(d.name))
-            .html("Tree: " + d.name +
-                "<br>Canopy cover (m^2): " + d.canopy_cover +
-                "<br>Height(m): " + d.height +
-                "<br>CO2 absorption (Kg/YY): " + d.co2_absorption)
-            .style("left", (event.x) + "px")
-            .style("top", (event.y) + 30 + "px")
+
+        tooltip.html("Tree: " + d.name +
+            "<br>Canopy cover (m^2): " + d.canopy_cover +
+            "<br>Height (m): " + d.height +
+            "<br>CO2 absorption (Kg/YY): " + d.co2_absorption)
+            .style("visibility", "visible");
     }
     const moveTooltip = function (event, d) {
-        tooltip
-            .style("left", (event.x) / 2 + "px")
-            .style("top", (event.y) / 2 + 30 + "px")
+        tooltip.style("top", (event.pageY - 10) + "px")
+            .style("left", (event.pageX + 10) + "px");
     }
     const hideTooltip = function (event, d) {
-        tooltip
-            .transition()
-            .duration(200)
-            .style("opacity", 0)
+        tooltip.html(``).style("visibility", "hidden");
     }
 
     // Add dots
