@@ -68,7 +68,7 @@ d3.csv("../assets/data10.csv").then(function (data) {
         })
     
     // legend
-    const years = [1993, 1997, 2001, 2005, 2009, 2013, 1027, 2021]
+    const years = [1993, 1997, 2001, 2005, 2009, 2013, 2017, 2021]
     for (let i = 0; i < years.length * 2; i+=2) {
         svg.append("circle")
             .attr("cx", 530)
