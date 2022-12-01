@@ -13,9 +13,8 @@ d3.csv("../assets/data10.csv").then(function (data) {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
-    console.log(data);
     // group the data: I want to draw one line per group
-    const sumstat = d3.group(data, d => d.name); // nest function allows to group the calculation per level of a factor
+    const sumstat = d3.group(data, d => d.year); // nest function allows to group the calculation per level of a factor
 
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     // Add X axis --> it is a date format
@@ -28,7 +27,7 @@ d3.csv("../assets/data10.csv").then(function (data) {
 
     // Add Y axis
     const y = d3.scaleLinear()
-        .domain([d3.min(data, function (d) { return +d.n; }), d3.max(data, function (d) { return +d.n; })])
+        .domain([d3.min(data, function (d) { return +d.temp; }), d3.max(data, function (d) { return +d.temp; })])
         .range([height, 0]);
     svg.append("g")
         .call(d3.axisLeft(y).scale(y).tickFormat((d,i) => d + "°C"));
@@ -58,12 +57,12 @@ d3.csv("../assets/data10.csv").then(function (data) {
         .data(sumstat)
         .join("path")
         .attr("fill", "none")
-        .attr("stroke", function (d) { console.log(d[0]); return colors[d[0]] })
+        .attr("stroke", function (d) { return colors[d[0]] })
         .attr("stroke-width", 1.5)
         .attr("d", function (d) {
             return d3.line()
-                .x(function (d) { return x(d.year); })
-                .y(function (d) { return y(+d.n); })
+                .x(function (d) { return x(d.month); })
+                .y(function (d) { return y(+d.temp); })
                 (d[1])
         })
     
