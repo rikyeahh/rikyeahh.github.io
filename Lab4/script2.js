@@ -64,7 +64,6 @@ var RadarChart = {
         //Text indicating at what % each level is
         var legendLabels = []
         for (let i = 0; i < cfg.maxTemp; i += (cfg.maxTemp - cfg.minTemp) / cfg.levels) {
-            console.log("i", i);
             legendLabels.push(i);
         }
         for (var j = 0; j < cfg.levels; j++) {
@@ -206,7 +205,6 @@ var mycfg = {
 d3.csv("../assets/data10.csv").then(data => {
 
     data = data.filter(line => line.year.slice(-3) == "avg")
-    console.log(data);
     mycfg.minTemp = Math.min(...data.map(line => line.temp))
     mycfg.maxTemp = Math.max(...data.map(line => line.temp))
     const sumstat = d3.group(data, d => d.year);

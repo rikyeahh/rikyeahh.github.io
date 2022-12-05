@@ -1,6 +1,9 @@
 // linechart
 
 d3.csv("../assets/data10.csv").then(function (data) {
+
+    data = data.filter(line => line.year.slice(-3) != "avg")
+
     // set the dimensions and margins of the graph
     const margin = { top: 10, right: 70, bottom: 30, left: 60 },
         width = 600 - margin.left - margin.right,
@@ -35,20 +38,35 @@ d3.csv("../assets/data10.csv").then(function (data) {
     // color palette
     const colors = {
         '1993_min': '#cf0202',
+        '1993_avg': '#d63838',
         '1993_max': '#fc7979',
+
         '1997_min': '#cfa602',
+        '1997_avg': '#ebc634',
         '1997_max': '#fae078',
+
         '2001_min': '#0bb502',
+        '2001_avg': '#42d93b',
         '2001_max': '#80fc79',
+
         '2005_min': '#039687',
+        '2005_avg': '#27d9c7',
         '2005_max': '#77f7ea',
+
         '2009_min': '#032096',
+        '2009_avg': '#1e42d6',
         '2009_max': '#6380f2',
+
         '2013_min': '#4a02b0',
+        '2013_avg': '#6e21db',
         '2013_max': '#955ffa',
+
         '2017_min': '#b00293',
+        '2017_avg': '#c722ab',
         '2017_max': '#fc5be2',
+
         '2021_min': '#333233',
+        '2021_avg': '#7a7a7a',
         '2021_max': '#a6a4a5'
     }
 
@@ -68,22 +86,42 @@ d3.csv("../assets/data10.csv").then(function (data) {
     
     // legend
     const years = [1993, 1997, 2001, 2005, 2009, 2013, 2017, 2021]
-    for (let i = 0; i < years.length * 2; i+=2) {
+    for (let i = 0; i < years.length * 3; i += 3) {
         svg.append("circle")
-            .attr("cx", 530)
-            .attr("cy", 0 + i * 9)
+            .attr("cx", 533)
+            .attr("cy", 0 + i * 8)
             .attr("r", 6)
             .style("fill", Object.entries(colors)[i][1])
         svg.append("circle")
-            .attr("cx", 520)
-            .attr("cy", 0 + i * 9)
+            .attr("cx", 523)
+            .attr("cy", 0 + i * 8)
             .attr("r", 6)
             .style("fill", Object.entries(colors)[i + 1][1])
+        svg.append("circle")
+            .attr("cx", 513)
+            .attr("cy", 0 + i * 8)
+            .attr("r", 6)
+            .style("fill", Object.entries(colors)[i + 2][1])
         svg.append("text")
-            .attr("x", 480)
-            .attr("y", 0 + i * 9)
-            .text(years[i / 2])
+            .attr("x", 475)
+            .attr("y", 2 + i * 8)
+            .text(years[i / 3])
             .style("font-size", "15px")
             .attr("alignment-baseline", "middle")
     }
+
+    // scatter part
+    d3.csv("../assets/data10.csv").then(data => {
+
+        data = data.filter(line => line.year.slice(-3) == "avg")
+
+        svg.selectAll("indPoints")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) { return x(d.month) })
+            .attr("cy", function (d) { return y(d.temp)})
+            .attr("r", 2)
+            .style("fill", d => colors[d.year])
+    });
 })
