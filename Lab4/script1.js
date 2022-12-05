@@ -26,14 +26,14 @@ d3.csv("../assets/data10.csv").then(function (data) {
         .range([0, width]);
     svg.append("g")
         .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x).ticks(12).tickFormat((d,i) => months[i]));
+        .call(d3.axisBottom(x).ticks(12).tickFormat((d, i) => months[i]));
 
     // Add Y axis
     const y = d3.scaleLinear()
         .domain([d3.min(data, function (d) { return +d.temp; }), d3.max(data, function (d) { return +d.temp; })])
         .range([height, 0]);
     svg.append("g")
-        .call(d3.axisLeft(y).scale(y).tickFormat((d,i) => d + "°C"));
+        .call(d3.axisLeft(y).scale(y).tickFormat((d, i) => d + "°C"));
 
     // color palette
     const colors = {
@@ -83,7 +83,7 @@ d3.csv("../assets/data10.csv").then(function (data) {
                 .y(function (d) { return y(+d.temp); })
                 (d[1])
         })
-    
+
     // legend
     const years = [1993, 1997, 2001, 2005, 2009, 2013, 2017, 2021]
     for (let i = 0; i < years.length * 3; i += 3) {
@@ -113,14 +113,14 @@ d3.csv("../assets/data10.csv").then(function (data) {
     // scatter part
     d3.csv("../assets/data10.csv").then(data => {
 
-        data = data.filter(line => line.year.slice(-3) == "avg")
-
+        data = data.filter(line => line.year.slice(-3) == "avg");
+        
         svg.selectAll("indPoints")
             .data(data)
             .enter()
             .append("circle")
             .attr("cx", function (d) { return x(d.month) })
-            .attr("cy", function (d) { return y(d.temp)})
+            .attr("cy", function (d) { return y(d.temp) })
             .attr("r", 2)
             .style("fill", d => colors[d.year])
     });

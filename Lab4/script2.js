@@ -200,8 +200,6 @@ var mycfg = {
     ExtraWidthX: 100
 }
 
-//Call function to draw the Radar chart
-//Will expect that data is in %'s
 d3.csv("../assets/data10.csv").then(data => {
 
     data = data.filter(line => line.year.slice(-3) == "avg")
