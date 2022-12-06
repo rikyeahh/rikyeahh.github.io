@@ -186,6 +186,20 @@ var RadarChart = {
 
             series++;
         });
+        const years = [1993, 1997, 2001, 2005, 2009, 2013, 2017, 2021]
+        for (let i = 0; i < years.length; i++) {
+            g.append("circle")
+                .attr("cx", 510)
+                .attr("cy", 0 + i * 14)
+                .attr("r", 6)
+                .style("fill", cfg.color(i));
+            g.append("text")
+                .attr("x", 520)
+                .attr("y", 2 + i * 14)
+                .text(years[i])
+                .style("font-size", "15px")
+                .attr("alignment-baseline", "middle")
+        }
     }
 };
 

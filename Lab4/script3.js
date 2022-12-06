@@ -65,7 +65,7 @@ d3.csv("../assets/data10.csv").then(data => {
         .datum(function (d) { return (d.density) })
         .attr("fill", "#ffffff")
         .attr("fill-opacity","0")
-        .attr("stroke", "#dd3333")
+        .attr("stroke", "#c91e24")
         .attr("stroke-width", 2)
         .attr("d", d3.line()
             .curve(d3.curveBasis)
@@ -90,7 +90,7 @@ d3.csv("../assets/data10.csv").then(data => {
         .datum(function (d) { return (d.density) })
         .attr("fill", "#ffffff")
         .attr("fill-opacity","0")
-        .attr("stroke", "#3333ee")
+        .attr("stroke", "#1f19c2")
         .attr("stroke-width", 2)
         .attr("d", d3.line()
             .curve(d3.curveBasis)
@@ -99,6 +99,10 @@ d3.csv("../assets/data10.csv").then(data => {
         )
 
 })
+
+function drawLine() {
+    
+}
 
 // This is what I need to compute kernel density estimation
 function kernelDensityEstimator(kernel, X) {
