@@ -74,19 +74,32 @@ d3.csv("../assets/data10.csv").then(function (data) {
     const yearsMaxMin = [1993, 1993, 1997, 1997, 2001, 2001, 2005, 2005, 2009, 2009, 2013, 2013, 2017, 2017, 2021, 2021]
     var currentYear = 0;
     svg.selectAll(".line")
-    .data(sumstat)
-    .join("path")
-    .attr("fill", "none")
-    .attr("stroke", function (d) { return colors[d[0]] })
-    .attr("stroke-width", 1.5)
-    .attr("class", d => "lowOpacityOnHover year" + yearsMaxMin[currentYear++])
-    .attr("d", function (d) {
-        return d3.line()
-        .x(function (d) { return x(d.month); })
-        .y(function (d) { return y(+d.temp); })
-        (d[1])
-    })
-    
+        .data(sumstat)
+        .join("path")
+        .attr("fill", "none")
+        .attr("stroke", function (d) { return colors[d[0]] })
+        .attr("stroke-width", 1.5)
+        .attr("class", d => "lowOpacityOnHover year" + yearsMaxMin[currentYear++])
+        .attr("d", function (d) {
+            return d3.line()
+                .x(function (d) { return x(d.month); })
+                .y(function (d) { return y(+d.temp); })
+                (d[1])
+        })
+
+    function onMouseOverLegend(event) {
+        var yearClass = event.target.classList[1];
+        d3.selectAll(".lowOpacityOnHover")
+            .style("opacity", "0.1")
+        d3.selectAll("." + yearClass)
+            .style("opacity", "1")
+    }
+
+    function onMouseOutLegend(event) {
+        d3.selectAll(".lowOpacityOnHover")
+            .style("opacity", "1")
+    }
+
     const years = [1993, 1997, 2001, 2005, 2009, 2013, 2017, 2021]
     // legend
     for (let i = 0; i < years.length * 3; i += 3) {
@@ -137,23 +150,6 @@ d3.csv("../assets/data10.csv").then(function (data) {
             .attr("cy", function (d) { return y(d.temp) })
             .attr("r", 2)
             .style("fill", d => colors[d.year])
-            .attr("class", d => "lowOpacityOnHover year" + d.year.slice(0,4))
+            .attr("class", d => "lowOpacityOnHover year" + d.year.slice(0, 4))
     });
 })
-
-function onMouseOverLegend(event) {
-    var yearClass = event.target.classList[1];
-    //console.log("target", event.target);
-    //console.log("classList", event.target.classList);
-    //console.log(event.target.classList[0]);
-    d3.selectAll(".lowOpacityOnHover")
-        .style("opacity", "0.1")
-    d3.selectAll("." + yearClass)
-        .style("opacity", "1")
-    //console.log("." + yearClass);
-}
-
-function onMouseOutLegend(event) {
-    d3.selectAll(".lowOpacityOnHover")
-        .style("opacity", "1")
-}

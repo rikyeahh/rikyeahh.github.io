@@ -122,11 +122,9 @@ function preprocessData(dataMax) {
     const sumstat = d3.group(dataMax, d => d.month);
     var arrayData = [[],[],[],[],[],[],[],[],[],[],[],[]];
     dataMax.forEach(element => {
-        //console.log(element);
         arrayData[parseInt(element.month) - 1].push(element.temp)
     });
     arrayData = arrayData[0].map((_, colIndex) => arrayData.map(row => row[colIndex]));
-    console.log("arrayData", arrayData);
     finalData = []
     for (let i = 0; i < arrayData.length; i++) {
         obj = {}
