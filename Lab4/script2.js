@@ -20,6 +20,19 @@ var RadarChart = {
             color: d3.scaleOrdinal(d3.schemeCategory10)
         };
 
+        function onMouseOverLegend(event) {
+            var yearClass = event.target.classList[1];
+            d3.selectAll(".lowOpacityOnHover")
+                .style("opacity", "0.1")
+            d3.selectAll("." + yearClass)
+                .style("opacity", "1")
+        }
+
+        function onMouseOutLegend(event) {
+            d3.selectAll(".lowOpacityOnHover")
+                .style("opacity", "1")
+        }
+
         if ('undefined' !== typeof options) {
             for (var i in options) {
                 if ('undefined' !== typeof options[i]) {
@@ -27,7 +40,7 @@ var RadarChart = {
                 }
             }
         }
-        cfg.maxTemp = Math.max(cfg.maxTemp, d3.max(d, function (i) { return d3.max(i.map(function (o) { return o.temp; })) }));
+        //cfg.maxTemp = Math.max(cfg.maxTemp, d3.max(d, function (i) { return d3.max(i.map(function (o) { return o.temp; })) }));
         var allYear = (d[0].map(function (i, j) { return i.month }));
         var total = allYear.length;
         var radius = cfg.factor * Math.min(cfg.w / 2, cfg.h / 2);
@@ -61,7 +74,7 @@ var RadarChart = {
                 .attr("transform", "translate(" + (cfg.w / 2 - levelFactor) + ", " + (cfg.h / 2 - levelFactor) + ")");
         }
 
-        //Text indicating at what % each level is
+        // Text indicating the level
         var legendLabels = []
         for (let i = 0; i < cfg.maxTemp; i += (cfg.maxTemp - cfg.minTemp) / cfg.levels) {
             legendLabels.push(i);
@@ -100,6 +113,8 @@ var RadarChart = {
             .style("stroke-width", "1px");
 
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const years = [1993, 1997, 2001, 2005, 2009, 2013, 2017, 2021];
+
         year.append("text")
             .attr("class", "legend")
             .text(function (d) { return months[d - 1] })
@@ -109,9 +124,9 @@ var RadarChart = {
             .attr("dy", "1.5em")
             .attr("transform", function (d, i) { return "translate(0, -10)" })
             .attr("x", function (d, i) { return cfg.w / 2 * (1 - cfg.factorLegend * Math.sin(i * cfg.radians / total)) - 60 * Math.sin(i * cfg.radians / total); })
-            .attr("y", function (d, i) { return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total); });
+            .attr("y", function (d, i) { return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total); })
 
-
+        var i = 0;
         d.forEach(function (y, x) {
             dataTemps = [];
             g.selectAll(".nodes")
@@ -126,9 +141,9 @@ var RadarChart = {
                 .data([dataTemps])
                 .enter()
                 .append("polygon")
-                .attr("class", "radar-chart-serie" + series)
                 .style("stroke-width", "1px")
                 .style("stroke", cfg.color(series))
+                .attr("class", "lowOpacityOnHover year" + years[i++])
                 .attr("points", function (d) {
                     var str = "";
                     for (var pti = 0; pti < d.length; pti++) {
@@ -138,29 +153,16 @@ var RadarChart = {
                 })
                 .style("fill", function (j, i) { return cfg.color(series) })
                 .style("fill-opacity", cfg.opacityArea)
-                .on('mouseover', function (d) {
-                    z = "polygon." + d3.select(this).attr("class");
-                    g.selectAll("polygon")
-                        .transition(200)
-                        .style("fill-opacity", 0.1);
-                    g.selectAll(z)
-                        .transition(200)
-                    //.style("fill-opacity", .7);
-                })
-                .on('mouseout', function () {
-                    g.selectAll("polygon")
-                        .transition(200)
-                        .style("fill-opacity", cfg.opacityArea);
-                });
             series++;
         });
         series = 0;
 
+        // plot vertical legend
+        var i = 0;
         d.forEach(function (y, x) {
             g.selectAll(".nodes")
                 .data(y).enter()
-                .append("svg:circle")
-                .attr("class", "radar-chart-serie" + series)
+                .append("circle")
                 .attr('r', cfg.radius)
                 .attr("alt", function (j) { return Math.max(j.temp, 0) })
                 .attr("cx", function (j, i) {
@@ -173,19 +175,35 @@ var RadarChart = {
                 .attr("cy", function (j, i) {
                     return cfg.h / 2 * (1 - (Math.max(j.temp, 0) / cfg.maxTemp) * cfg.factor * Math.cos(i * cfg.radians / total));
                 })
+                .attr("class", "lowOpacityOnHover year" + years[i++])
+                .on("mouseover", onMouseOverLegend)
+                .on("mouseout", onMouseOutLegend)
                 .attr("data-id", function (j) { return j.month })
                 .style("fill", cfg.color(series)).style("fill-opacity", .9)
-                .on('mouseover', function (d) {
-                    return;
-                })
-                .on('mouseout', function () {
-                    return;
-                })
-                .append("svg:title")
-                .text(function (j) { return Math.max(j.temp, 0) });
+                .append("title")
+                .text(function (j) { return Math.max(j.temp, 0) })
 
             series++;
         });
+        for (let i = 0; i < years.length; i++) {
+            g.append("circle")
+                .attr("cx", 510)
+                .attr("cy", 0 + i * 14)
+                .attr("r", 6)
+                .style("fill", cfg.color(i))
+                .attr("class", "lowOpacityOnHover year" + years[i])
+                .on("mouseover", onMouseOverLegend)
+                .on("mouseout", onMouseOutLegend);
+            g.append("text")
+                .attr("x", 520)
+                .attr("y", 2 + i * 14)
+                .text(years[i])
+                .style("font-size", "15px")
+                .attr("class", "lowOpacityOnHover year" + years[i])
+                .attr("alignment-baseline", "middle")
+                .on("mouseover", onMouseOverLegend)
+                .on("mouseout", onMouseOutLegend);
+        }
     }
 };
 

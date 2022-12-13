@@ -71,12 +71,15 @@ d3.csv("../assets/data10.csv").then(function (data) {
     }
 
     // Draw the line
+    const yearsMaxMin = [1993, 1993, 1997, 1997, 2001, 2001, 2005, 2005, 2009, 2009, 2013, 2013, 2017, 2017, 2021, 2021]
+    var currentYear = 0;
     svg.selectAll(".line")
         .data(sumstat)
         .join("path")
         .attr("fill", "none")
         .attr("stroke", function (d) { return colors[d[0]] })
         .attr("stroke-width", 1.5)
+        .attr("class", d => "lowOpacityOnHover year" + yearsMaxMin[currentYear++])
         .attr("d", function (d) {
             return d3.line()
                 .x(function (d) { return x(d.month); })
@@ -84,37 +87,61 @@ d3.csv("../assets/data10.csv").then(function (data) {
                 (d[1])
         })
 
-    // legend
+    function onMouseOverLegend(event) {
+        var yearClass = event.target.classList[1];
+        d3.selectAll(".lowOpacityOnHover")
+            .style("opacity", "0.1")
+        d3.selectAll("." + yearClass)
+            .style("opacity", "1")
+    }
+
+    function onMouseOutLegend(event) {
+        d3.selectAll(".lowOpacityOnHover")
+            .style("opacity", "1")
+    }
+
     const years = [1993, 1997, 2001, 2005, 2009, 2013, 2017, 2021]
+    // legend
     for (let i = 0; i < years.length * 3; i += 3) {
         svg.append("circle")
             .attr("cx", 533)
             .attr("cy", 0 + i * 8)
             .attr("r", 6)
             .style("fill", Object.entries(colors)[i][1])
+            .attr("class", "lowOpacityOnHover year" + years[i / 3])
+            .on("mouseover", onMouseOverLegend)
+            .on("mouseout", onMouseOutLegend);
         svg.append("circle")
             .attr("cx", 523)
             .attr("cy", 0 + i * 8)
             .attr("r", 6)
             .style("fill", Object.entries(colors)[i + 1][1])
+            .attr("class", "lowOpacityOnHover year" + years[i / 3])
+            .on("mouseover", onMouseOverLegend)
+            .on("mouseout", onMouseOutLegend);
         svg.append("circle")
             .attr("cx", 513)
             .attr("cy", 0 + i * 8)
             .attr("r", 6)
             .style("fill", Object.entries(colors)[i + 2][1])
+            .attr("class", "lowOpacityOnHover year" + years[i / 3])
+            .on("mouseover", onMouseOverLegend)
+            .on("mouseout", onMouseOutLegend);
         svg.append("text")
             .attr("x", 475)
             .attr("y", 2 + i * 8)
             .text(years[i / 3])
             .style("font-size", "15px")
             .attr("alignment-baseline", "middle")
+            .attr("class", "lowOpacityOnHover year" + years[i / 3])
+            .on("mouseover", onMouseOverLegend)
+            .on("mouseout", onMouseOutLegend);
     }
 
     // scatter part
+    var j = 0;
     d3.csv("../assets/data10.csv").then(data => {
-
         data = data.filter(line => line.year.slice(-3) == "avg");
-        
         svg.selectAll("indPoints")
             .data(data)
             .enter()
@@ -123,5 +150,6 @@ d3.csv("../assets/data10.csv").then(function (data) {
             .attr("cy", function (d) { return y(d.temp) })
             .attr("r", 2)
             .style("fill", d => colors[d.year])
+            .attr("class", d => "lowOpacityOnHover year" + d.year.slice(0, 4))
     });
 })

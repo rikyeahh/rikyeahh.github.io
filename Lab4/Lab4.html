@@ -35,7 +35,10 @@
     <section class="viz-section">
         <h2>Linechart</h2>
         <p>
-            In this graph we used two shades of the same color to represent the maximum/minimum temperature evolution over a given year.
+            In this graph we used two shades of the same color to represent the maximum/minimum temperature evolution
+            over a given year.
+            The average is instead plotted via scatter plot.
+            On hover on the legend labels, we can see just one isolated year.
         </p>
         <div id="graph1"></div>
     </section>
@@ -43,10 +46,13 @@
     <section class="viz-section">
         <h2>Radarchart</h2>
         <p>
-            The radarchart (often called spiderchart given the shape) can emphatize the "cyclicity" of the domain, so it is 
-            perfect to show the evolution of the temperatures over the months, each of those representing a vertices. In this case,
-            Polygons with a lager area will correspond to hotter years than the other ones. Of course, the bottom part of the plot will
-            "weigh" more since the summer period is located there.
+            The radarchart (often called spiderchart given the shape) can emphatize the "cyclicity" of the domain, so it
+            is
+            perfect to show the evolution of the temperatures over the months, each of those representing a vertices. In
+            this case,
+            Polygons with a lager area will correspond to hotter years than the other ones. Of course, the bottom part
+            of the plot will
+            "weigh" more since the summer period is located there. The mouseover action here also works on vertices.
         </p>
         <div id="graph2"></div>
     </section>
@@ -54,10 +60,32 @@
     <section class="viz-section">
         <h2>Ridgeline</h2>
         <p>
-            A Ridgeline graph shows multiple distributions with a comparable domain. The continuous "wavy" shape is usually obtained via kernel-density
-            estimation from a discrete set of observations. In this case, we visualize the minimum and maximum temperature for each month with different colors.
+            A Ridgeline graph shows multiple distributions with a comparable domain. The continuous "wavy" shape is
+            usually obtained via kernel-density
+            estimation from a discrete set of observations. In this case, we visualize the minimum and maximum
+            temperature for each month with different colors.
+            One can choose to plot different years aggregated by chosing multiple years with the checkboxes
         </p>
-        <div id="graph3"></div>
+    <form>
+            <input type="checkbox" id="1993_checkbox" name="year_chosen1993" value="1993">
+            <label for="1993_checkbox">1993</label><br>
+            <input type="checkbox" id="1997_checkbox" name="year_chosen1997" value="1997">
+            <label for="1997_checkbox">1997</label><br>
+            <input type="checkbox" id="2001_checkbox" name="year_chosen2001" value="2001">
+            <label for="2001_checkbox">2001</label><br>
+            <input type="checkbox" id="2005_checkbox" name="year_chosen2005" value="2005">
+            <label for="2005_checkbox">2005</label><br>
+            <input type="checkbox" id="2009_checkbox" name="year_chosen2009" value="2009">
+            <label for="2009_checkbox">2009</label><br>
+            <input type="checkbox" id="2013_checkbox" name="year_chosen2013" value="2013">
+            <label for="2013_checkbox">2013</label><br>
+            <input type="checkbox" id="2017_checkbox" name="year_chosen2017" value="2017">
+            <label for="2017_checkbox">2017</label><br>
+            <input type="checkbox" id="2021_checkbox" name="year_chosen2021" value="2021">
+            <label for="2021_checkbox">2021</label><br>
+            <button type="submit">Submit</button>
+    </form>
+        <div id="graph3">Select the years to plot and press Submit</div>
     </section>
 
     <script src="https://d3js.org/d3.v6.js"></script>
