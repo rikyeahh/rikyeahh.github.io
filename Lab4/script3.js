@@ -1,7 +1,7 @@
 // ridgeline
 
 function redrawRidgeline(years) {
-    d3.csv("../assets/data10.csv").then(data => {
+    d3.csv("../assets/data11.csv").then(data => {
 
         // take data only of the specified years
         data = data.filter(line => years.includes(line.year.slice(0, 4)))
@@ -56,7 +56,7 @@ function redrawRidgeline(years) {
             .call(d3.axisLeft(yName));
     
         // Compute kernel density estimation for each month (dataMax):
-        var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40)) // increase this 40 for more accurate density.
+        var kde = kernelDensityEstimator(kernelEpanechnikov(1), x.ticks(40)) // increase this 40 for more accurate density.
         var allDensity = []
         for (i = 0; i < n; i++) {
             key = categories[i]
@@ -81,7 +81,7 @@ function redrawRidgeline(years) {
             )
     
         // Compute kernel density estimation for each month (dataMin):
-        kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40)) // increase this 40 for more accurate density.
+        kde = kernelDensityEstimator(kernelEpanechnikov(1), x.ticks(40)) // increase this 40 for more accurate density.
         allDensity = []
         for (i = 0; i < n; i++) {
             key = categories[i]
@@ -119,7 +119,7 @@ function kernelDensityEstimator(kernel, X) {
 }
 function kernelEpanechnikov(k) {
     return function (v) {
-        return Math.abs(v /= k) <= 1 ? 0.25 * (1 - v * v) / k : 0;
+        return Math.abs(v /= k) <= 1 ? 0.18 * (1 - v * v) / k : 0;
     };
 }
 
