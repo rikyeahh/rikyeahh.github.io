@@ -2,7 +2,7 @@
     "nodes": [
         {
             "node": 0,
-            "name": "Gross Carbon Sequestration (kg/yr)"
+            "name": "Carbon Storage (kg)"
         },
         {
             "node": 1,
@@ -25,35 +25,130 @@
             "name": "Platanus x hispanica"
         },
         {
-            "node": 0,
-            "name": "Gross Carbon Sequestration (kg/yr)"
+            "node": 6,
+            "name": "Tilia x europaea"
+        },
+        {
+            "node": 7,
+            "name": "Acer campestre"
+        },
+        {
+            "node": 8,
+            "name": "Cupressus"
+        },
+        {
+            "node": 9,
+            "name": "Sophora japonica"
+        },
+        {
+            "node": 10,
+            "name": "Prunus cerasifera"
+        },
+        {
+            "node": 11,
+            "name": "Total Annual Benefits (eur/yr)"
         }
     ],
     "links": [
         {
             "source": 0,
             "target": 1,
-            "value": 1274
+            "value": 70736.49999999971
         },
         {
             "source": 0,
             "target": 2,
-            "value": 6046
+            "value": 438610.90000000026
         },
         {
             "source": 0,
             "target": 3,
-            "value": 1624
+            "value": 62980.10000000019
         },
         {
             "source": 0,
             "target": 4,
-            "value": 1440
+            "value": 65967.60000000002
         },
         {
             "source": 0,
             "target": 5,
-            "value": 4949
+            "value": 1083313.399999999
+        },
+        {
+            "source": 0,
+            "target": 6,
+            "value": 406394.2000000006
+        },
+        {
+            "source": 0,
+            "target": 7,
+            "value": 36849.80000000008
+        },
+        {
+            "source": 0,
+            "target": 8,
+            "value": 198211.00000000006
+        },
+        {
+            "source": 0,
+            "target": 9,
+            "value": 80562.6000000001
+        },
+        {
+            "source": 0,
+            "target": 10,
+            "value": 55874.70000000001
+        },
+        {
+            "source": 1,
+            "target": 11,
+            "value": 1706.430000000006
+        },
+        {
+            "source": 2,
+            "target": 11,
+            "value": 2113.89
+        },
+        {
+            "source": 3,
+            "target": 11,
+            "value": 512.0299999999988
+        },
+        {
+            "source": 4,
+            "target": 11,
+            "value": 602.89
+        },
+        {
+            "source": 5,
+            "target": 11,
+            "value": 2845.6299999999997
+        },
+        {
+            "source": 6,
+            "target": 11,
+            "value": 1697.5200000000004
+        },
+        {
+            "source": 7,
+            "target": 11,
+            "value": 254.7199999999998
+        },
+        {
+            "source": 8,
+            "target": 11,
+            "value": 800.0699999999986
+        },
+        {
+            "source": 9,
+            "target": 11,
+            "value": 565.9699999999999
+        },
+        {
+            "source": 10,
+            "target": 11,
+            "value": 314.9599999999995
         }
     ]
 }
