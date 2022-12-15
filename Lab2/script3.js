@@ -33,6 +33,21 @@ d3.csv("../assets/data5.csv").then(function (data) {
     svg3.append("g")
         .call(d3.axisLeft(y));
 
+    // add axes labels
+    svg3.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height - 10)
+        .text("Tree height (m)");
+
+    svg3.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("CO2 absorption (kg/year)");
+
     // Color scale: give me a specie name, I return a color
     const color = d3.scaleOrdinal()
         .domain(names_ordered)
@@ -89,7 +104,6 @@ d3.csv("../assets/data5.csv").then(function (data) {
             tooltip.html(``).style("visibility", "hidden");
     }
 
-
     // Add dots
     svg3.append('g')
         .selectAll("dot")
@@ -103,16 +117,4 @@ d3.csv("../assets/data5.csv").then(function (data) {
         .on("mouseover", showTooltip3)
         .on("mousemove", moveTooltip3)
         .on("mouseleave", hideTooltip3)
-
-    // add axes labels
-    svg3.append("text")
-        .attr("text-anchor", "end")
-        .attr("x", width)
-        .attr("y", height - 10)
-        .text("Tree height (m)");
-
-    svg3.append("text")
-        .attr("x", 10)
-        .attr("y", 50)
-        .text("CO2 absorption (kg/year)");
 })
