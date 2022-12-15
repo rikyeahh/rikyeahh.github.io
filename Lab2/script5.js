@@ -103,7 +103,6 @@ d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/asset
         .on("mousemove", moveTooltip)
         .on("mouseleave", hideTooltip)
 
-
     var size = d3.scaleSqrt()
         .domain([0, Math.max(...canopy_covers)]).nice()
         .range([3, 35]);

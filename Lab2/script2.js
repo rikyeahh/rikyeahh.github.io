@@ -25,7 +25,8 @@ d3.json("../../assets/data6.json").then(function (sumstat) {
         .padding(.1);
 
     svg.append("g")
-        .attr("transform", "translate(-50," + (0) + ")")
+        .style("font", "14px times")
+        .attr("transform", "translate(-30," + (0) + ")")
         .call(d3.axisLeft(y).tickSize(0))
         .select(".domain").remove()
 
@@ -45,7 +46,6 @@ d3.json("../../assets/data6.json").then(function (sumstat) {
         .attr("y", height + margin.top + 30)
         .text("Height (m)");
 
-
     // Show the main vertical line
     svg.selectAll("vertLines")
         .data(sumstat)
@@ -57,6 +57,7 @@ d3.json("../../assets/data6.json").then(function (sumstat) {
         .attr("y2", function (d) { return (y(d.key) + y.bandwidth() / 2) })
         .attr("stroke", "black")
         .style("width", 40)
+
     // rectangle for the main box
     svg.selectAll("boxes")
         .data(sumstat)
@@ -69,7 +70,6 @@ d3.json("../../assets/data6.json").then(function (sumstat) {
         .attr("stroke", "black")
         .style("fill", "#69b3a2")
         .style("opacity", 0.3)
-
 
     // Show the median
     svg.selectAll("medianLines")
@@ -94,6 +94,7 @@ d3.json("../../assets/data6.json").then(function (sumstat) {
         .attr("x2", function (d) { return (x(d.value.max)) })
         .attr("stroke", "black")
         .style("width", 80)
+
     svg.selectAll("detailLines")
         .data(sumstat)
         .enter()

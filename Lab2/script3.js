@@ -117,4 +117,19 @@ d3.csv("../assets/data5.csv").then(function (data) {
         .on("mouseover", showTooltip3)
         .on("mousemove", moveTooltip3)
         .on("mouseleave", hideTooltip3)
+    
+    // legend
+    for (let i = 0; i < names_ordered.length; i++) {
+        svg3.append("circle")
+            .attr("cx", 550)
+            .attr("cy", 100 + i * 18)
+            .attr("r", 6)
+            .style("fill", color(i))
+        svg3.append("text")
+            .attr("x", 570)
+            .attr("y", 100 + i * 18)
+            .text(names_ordered[i])
+            .style("font-size", "15px")
+            .attr("alignment-baseline", "middle")
+    }
 })
