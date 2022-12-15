@@ -4,14 +4,14 @@
 //export 
 function Legend(color, id, {
   title,
-  tickSize = 6,
-  width = 320, 
-  height = 44 + tickSize,
-  marginTop = 18,
-  marginRight = 20,
+  tickSize = 1,
+  width = 200,
+  height = 30 + tickSize,
+  marginTop = 11,
+  marginRight = 30,
   marginBottom = 16 + tickSize,
-  marginLeft = 20,
-  ticks = width / 64,
+  marginLeft = 30,
+  ticks = width / 6,
   tickFormat,
   tickValues
 } = {}) {
@@ -41,8 +41,6 @@ const svg5 = d3.select(id)
                 ' ' + (height + marginTop + marginBottom))
             .append("g")
             .attr("transform", `translate(${marginLeft}, ${marginTop})`);
-
-//const prova = d3.select("graph5").append(svg5)
 
 let tickAdjust = g => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height);
 let x;
@@ -153,7 +151,8 @@ svg5.append("g")
   .attr("text-anchor", "start")
   .attr("font-weight", "bold")
   .attr("class", "title")
-  .text(title));
+  .text(title))
+  .style("font", "5px times");
 
   return svg5.node();
 
