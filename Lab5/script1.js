@@ -24,7 +24,6 @@ var sankey = d3.sankey()
 //d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_sankey.json", function (error, graph) {
 d3.json("../assets/data12.json", function (error, graph) {
 
-    console.log(graph);
 
     // Constructs a new Sankey generator with the default settings.
     sankey
@@ -41,7 +40,10 @@ d3.json("../assets/data12.json", function (error, graph) {
         .attr("class", "link")
         .attr("d", sankey.link())
         .style("stroke-width", function (d) { return Math.max(1, d.dy); })
-        .sort(function (a, b) { return b.dy - a.dy; });
+        //.sort(function (a, b) { return b.dy - a.dy; })
+        .on("mouseover", onMouseOverLinks)
+        .on("mousemove", onMouseMoveLinks)
+        .on("mouseout", onMouseOutLinks);
 
     // add in the nodes
     var node = svg.append("g")
@@ -56,19 +58,14 @@ d3.json("../assets/data12.json", function (error, graph) {
             .on("drag", dragmove));
 
     // add the rectangles for the nodes
-    node
-        .append("rect")
+    node.append("rect")
         .attr("height", function (d) { return d.dy; })
         .attr("width", sankey.nodeWidth())
         .style("fill", function (d) { return d.color = color(d.name.replace(/ .*/, "")); })
         .style("stroke", function (d) { return d3.rgb(d.color).darker(2); })
-        // Add hover text
-        .append("title")
-        .text(function (d) { return d.name + "\n" + "There is " + d.value + " stuff in this node"; });
 
     // add in the title for the nodes
-    node
-        .append("text")
+    node.append("text")
         .attr("x", -6)
         .attr("y", function (d) { return d.dy / 2; })
         .attr("dy", ".35em")
@@ -77,7 +74,7 @@ d3.json("../assets/data12.json", function (error, graph) {
         .text(function (d) { return d.name; })
         .filter(function (d) { return d.x < width / 2; })
         .attr("x", 6 + sankey.nodeWidth())
-        .attr("text-anchor", "start");
+        .attr("text-anchor", "start")
 
     // the function for moving the nodes
     function dragmove(d) {
@@ -90,6 +87,33 @@ d3.json("../assets/data12.json", function (error, graph) {
                 ) + ")");
         sankey.relayout();
         link.attr("d", sankey.link());
+    }
+
+    const tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "d3-tooltip")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden")
+        .style("padding", "15px")
+        .style("background", "rgba(0,0,0,0.6)")
+        .style("border-radius", "5px")
+        .style("color", "#fff")
+        .text("a simple tooltip");
+
+    function onMouseOverLinks(event, d) {
+        var link = graph.links[d]
+        tooltip.html(`${link.value}`)
+            .style("visibility", "visible");
+    }
+
+    function onMouseMoveLinks() {
+        tooltip.style("top", (event.pageY - 10) + "px")
+        .style("left", (event.pageX + 10) + "px");
+    }
+
+    function onMouseOutLinks(event, d) {
+        tooltip.html(``).style("visibility", "hidden");
     }
 
 });
