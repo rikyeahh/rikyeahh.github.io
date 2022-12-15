@@ -2,7 +2,7 @@
     "nodes": [
         {
             "node": 0,
-            "name": "Carbon Storage (kg)"
+            "name": "Carbon Storage [10² kg]"
         },
         {
             "node": 1,
@@ -46,74 +46,74 @@
         },
         {
             "node": 11,
-            "name": "Total Annual Benefits (eur/yr)"
+            "name": "Total Annual Benefits [eur/yr]"
         }
     ],
     "links": [
         {
             "source": 0,
             "target": 1,
-            "value": 70736.49999999971
+            "value": 707
         },
         {
             "source": 0,
             "target": 2,
-            "value": 438610.90000000026
+            "value": 4386
         },
         {
             "source": 0,
             "target": 3,
-            "value": 62980.10000000019
+            "value": 629
         },
         {
             "source": 0,
             "target": 4,
-            "value": 65967.60000000002
+            "value": 659
         },
         {
             "source": 0,
             "target": 5,
-            "value": 1083313.399999999
+            "value": 10833
         },
         {
             "source": 0,
             "target": 6,
-            "value": 406394.2000000006
+            "value": 4063
         },
         {
             "source": 0,
             "target": 7,
-            "value": 36849.80000000008
+            "value": 368
         },
         {
             "source": 0,
             "target": 8,
-            "value": 198211.00000000006
+            "value": 1982
         },
         {
             "source": 0,
             "target": 9,
-            "value": 80562.6000000001
+            "value": 805
         },
         {
             "source": 0,
             "target": 10,
-            "value": 55874.70000000001
+            "value": 558
         },
         {
             "source": 1,
             "target": 11,
-            "value": 1706.430000000006
+            "value": 1706
         },
         {
             "source": 2,
             "target": 11,
-            "value": 2113.89
+            "value": 2113
         },
         {
             "source": 3,
             "target": 11,
-            "value": 512.0299999999988
+            "value": 512
         },
         {
             "source": 4,
@@ -123,32 +123,32 @@
         {
             "source": 5,
             "target": 11,
-            "value": 2845.6299999999997
+            "value": 2845
         },
         {
             "source": 6,
             "target": 11,
-            "value": 1697.5200000000004
+            "value": 1697
         },
         {
             "source": 7,
             "target": 11,
-            "value": 254.7199999999998
+            "value": 254
         },
         {
             "source": 8,
             "target": 11,
-            "value": 800.0699999999986
+            "value": 800
         },
         {
             "source": 9,
             "target": 11,
-            "value": 565.9699999999999
+            "value": 565
         },
         {
             "source": 10,
             "target": 11,
-            "value": 314.9599999999995
+            "value": 314
         }
     ]
 }
