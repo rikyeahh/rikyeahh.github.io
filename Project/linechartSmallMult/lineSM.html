@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Capybara">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
+
+    <!-- Title -->
+    <title>Capybara Team</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../styleProject.css">
+
+</head>
+
+<body>
+    <h1>Capybara Team</h1>
+    <h2>Riccardo Rorato, Alessandro Arata, Gagandeep Singh, Alessandro Penco, Gabriele Caletti, Alessandro Drago</h2>
+    <p>This lab is about visualizing geospatial data via maps with regions that encode values such as tree densities.
+    </p>
+
+    <section class="viz-section">
+        <h2>Choropleth Map - Absolute tree count</h2>
+        <p>This map is shows the different neighborhood of Trento, separating them as polygons. The color inside the
+            polygon encodes the number of trees present in that region.
+            We chose to discretize the colorbar into a number of colors equal to the number of regions. On hover, a
+            tooltip shows more info (name of neighborhood, number of trees, area).
+            The central parts look to have more trees, probably because the data collection was more intensive there.
+        </p>
+        <button onclick="update('metano')">Methane</button>
+        <button onclick="update('nitro')">Nitro</button>
+        <div id="lineSM"></div>
+    </section>
+
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="lineSM.js"></script>
+</body>
+
+</html>

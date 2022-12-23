@@ -8,8 +8,12 @@ h2 {
     font-family: 'Roboto Slab', serif;
 }
 
-p {
+p, body {
     font-family: 'Fira Sans', sans-serif;
+}
+
+p {
+   width: 30%;
 }
 
 .titleAndPhoto {
@@ -41,6 +45,16 @@ p {
 .bubbles:hover {
     stroke: black;
 }
+
+.sankeyLink {
+    fill: none;
+    stroke-opacity: .2;
+}
+
+.sankeyLink:hover {
+    stroke-opacity: .5;
+}
+
 
 .link {
     fill: none;

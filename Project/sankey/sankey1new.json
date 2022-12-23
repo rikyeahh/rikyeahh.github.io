@@ -1,0 +1,257 @@
+{
+    "nodes": [
+        {
+            "node": 0,
+            "name": "Germany"
+        },
+        {
+            "node": 1,
+            "name": "France"
+        },
+        {
+            "node": 2,
+            "name": "Italy"
+        },
+        {
+            "node": 3,
+            "name": "Poland"
+        },
+        {
+            "node": 4,
+            "name": "Spain"
+        },
+        {
+            "node": 5,
+            "name": "Netherlands"
+        },
+        {
+            "node": 6,
+            "name": "Others"
+        },
+        {
+            "node": 7,
+            "name": "EU"
+        },
+        {
+            "node": 8,
+            "name": "Energy supply ⚡"
+        },
+        {
+            "node": 9,
+            "name": "Households"
+        },
+        {
+            "node": 10,
+            "name": "Manifacturing"
+        },
+        {
+            "node": 11,
+            "name": "Agriculture"
+        },
+        {
+            "node": 12,
+            "name": "Transportation and storage"
+        },
+        {
+            "node": 13,
+            "name": "Services"
+        },
+        {
+            "node": 14,
+            "name": "Water related"
+        },
+        {
+            "node": 15,
+            "name": "Mining"
+        },
+        {
+            "node": 16,
+            "name": "Construction"
+        },
+        {
+            "node": 17,
+            "name": "Methane (CH₄)"
+        },
+        {
+            "node": 18,
+            "name": "Nitrous oxide (N₂O)"
+        }
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 7,
+            "value": "263748"
+        },
+        {
+            "source": 1,
+            "target": 7,
+            "value": "127502"
+        },
+        {
+            "source": 2,
+            "target": 7,
+            "value": "124498"
+        },
+        {
+            "source": 3,
+            "target": 7,
+            "value": "107938"
+        },
+        {
+            "source": 4,
+            "target": 7,
+            "value": "83284"
+        },
+        {
+            "source": 5,
+            "target": 7,
+            "value": "57694"
+        },
+        {
+            "source": 6,
+            "target": 7,
+            "value": "300477"
+        },
+        {
+            "source": 7,
+            "target": 8,
+            "value": "265197"
+        },
+        {
+            "source": 7,
+            "target": 9,
+            "value": "255389"
+        },
+        {
+            "source": 7,
+            "target": 10,
+            "value": "192110"
+        },
+        {
+            "source": 7,
+            "target": 11,
+            "value": "118665"
+        },
+        {
+            "source": 7,
+            "target": 12,
+            "value": "106622"
+        },
+        {
+            "source": 7,
+            "target": 13,
+            "value": "61735"
+        },
+        {
+            "source": 7,
+            "target": 14,
+            "value": "38383"
+        },
+        {
+            "source": 7,
+            "target": 15,
+            "value": "14384"
+        },
+        {
+            "source": 7,
+            "target": 16,
+            "value": "12656"
+        },
+        {
+            "source": 8,
+            "target": 17,
+            "value": "4110"
+        },
+        {
+            "source": 9,
+            "target": 17,
+            "value": "4110"
+        },
+        {
+            "source": 10,
+            "target": 17,
+            "value": "4110"
+        },
+        {
+            "source": 11,
+            "target": 17,
+            "value": "116840"
+        },
+        {
+            "source": 12,
+            "target": 17,
+            "value": "4110"
+        },
+        {
+            "source": 13,
+            "target": 17,
+            "value": "4110"
+        },
+        {
+            "source": 14,
+            "target": 17,
+            "value": "4110"
+        },
+        {
+            "source": 15,
+            "target": 17,
+            "value": "4110"
+        },
+        {
+            "source": 16,
+            "target": 17,
+            "value": "4110"
+        },
+        
+
+
+        {
+            "source": 8,
+            "target": 18,
+            "value": "4046"
+        },
+        {
+            "source": 9,
+            "target": 18,
+            "value": "4046"
+        },
+        {
+            "source": 10,
+            "target": 18,
+            "value": "4046"
+        },
+        {
+            "source": 11,
+            "target": 18,
+            "value": "36500"
+        },
+        {
+            "source": 12,
+            "target": 18,
+            "value": "4046"
+        },
+        {
+            "source": 13,
+            "target": 18,
+            "value": "4046"
+        },
+        {
+            "source": 14,
+            "target": 18,
+            "value": "4046"
+        },
+        {
+            "source": 15,
+            "target": 18,
+            "value": "4046"
+        },
+        {
+            "source": 16,
+            "target": 18,
+            "value": "4046"
+        }
+        
+        
+    ]
+}

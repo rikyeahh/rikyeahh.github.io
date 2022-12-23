@@ -1,0 +1,183 @@
+{
+    "nodes": [
+        {
+            "node": 0,
+            "name": "France"
+        },
+        {
+            "node": 1,
+            "name": "Germany"
+        },
+        {
+            "node": 2,
+            "name": "Italy"
+        },
+        {
+            "node": 3,
+            "name": "Netherlands"
+        },
+        {
+            "node": 4,
+            "name": "Poland"
+        },
+        {
+            "node": 5,
+            "name": "Spain"
+        },
+        {
+            "node": 6,
+            "name": "Others"
+        },
+        {
+            "node": 7,
+            "name": "EU"
+        },
+        {
+            "node": 8,
+            "name": "Agriculture 🌾🌿"
+        },
+        {
+            "node": 9,
+            "name": "Mining ⛏"
+        },
+        {
+            "node": 10,
+            "name": "Manufacturing 🏭"
+        },
+        {
+            "node": 11,
+            "name": "Energy supply ⚡"
+        },
+        {
+            "node": 12,
+            "name": "Waterworks 💧"
+        },
+        {
+            "node": 13,
+            "name": "Construction 🧱"
+        },
+        {
+            "node": 14,
+            "name": "Services 🏪"
+        },
+        {
+            "node": 15,
+            "name": "Transportation, storage 🚚"
+        },
+        {
+            "node": 16,
+            "name": "Households 🏠"
+        },
+        {
+            "node": 17,
+            "name": "Greenhouse gases"
+        },
+        {
+            "node": 18,
+            "name": "Methane"
+        },
+        {
+            "node": 19,
+            "name": "Nitrous oxide"  
+        }
+        
+
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 7,
+            "value": "127503"
+        },
+        {
+            "source": 1,
+            "target": 7,
+            "value": "263748"
+        },
+        {
+            "source": 2,
+            "target": 7,
+            "value": "124498"
+        },
+        {
+            "source": 3,
+            "target": 7,
+            "value": "57694"
+        },
+        {
+            "source": 4,
+            "target": 7,
+            "value": "107938"
+        },
+        {
+            "source": 5,
+            "target": 7,
+            "value": "83284"
+        },
+        {
+            "source": 6,
+            "target": 7,
+            "value": "300477"
+        },
+        {
+            "source": 7,
+            "target": 8,
+            "value": "118665"
+        },
+        {
+            "source": 7,
+            "target": 9,
+            "value": "14384"
+        },
+        {
+            "source": 7,
+            "target": 10,
+            "value": "192110"
+        },
+        {
+            "source": 7,
+            "target": 11,
+            "value": "265197"
+        },
+        {
+            "source": 7,
+            "target": 12,
+            "value": "38383"
+        },
+        {
+            "source": 7,
+            "target": 13,
+            "value": "12656"
+        },
+        {
+            "source": 7,
+            "target": 14,
+            "value": "61735"
+        },
+        {
+            "source": 7,
+            "target": 15,
+            "value": "106622"
+        },
+        {
+            "source": 7,
+            "target": 16,
+            "value": "255389"
+        },
+        {
+            "source": 8,
+            "target": 17,
+            "value": "60000"
+        },
+        {
+            "source": 8,
+            "target": 18,
+            "value": "60000"
+        },
+        {
+            "source": 8,
+            "target": 19,
+            "value": "60000"
+        }
+    ]
+}
