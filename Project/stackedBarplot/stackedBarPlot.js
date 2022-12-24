@@ -1,13 +1,15 @@
+d3.csv("./emissionsByFood.csv").then(function (data) {
 
-const svg2 = d3.select('#graph2')
-    .append('svg')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
-    .append('g')
-    .attr('transform', `translate(${margin.left},${margin.top})`);
+    const margin = { top: 20, right: 30, bottom: 40, left: 90 }
+    const width = 700 - margin.left - margin.right
+    const height = 500 - margin.top - margin.bottom;
 
-// get the data
-d3.csv("../assets/data2.csv").then(function (data) {
+    const svg2 = d3.select('#stackedBarPlot')
+        .append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
 
     const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
     const circoscrizioni = data.map(d => d.circoscrizione);
@@ -71,7 +73,7 @@ d3.csv("../assets/data2.csv").then(function (data) {
             .attr("cx", 250)
             .attr("cy", 100 + i * 18)
             .attr("r", 6)
-            .style("fill", color(i))
+            .style("fill", d3.schemeTableau10[i])
         svg2.append("text")
             .attr("x", 270)
             .attr("y", 100 + i * 18)
@@ -106,7 +108,29 @@ d3.csv("../assets/data2.csv").then(function (data) {
                 d3.select(this).attr("fill", function () {
                     return "" + d3.schemeTableau10[i] + "";
                 })
-            });
+            })
+
+        // text for total
+        svg2.append('g')
+            .selectAll('text')
+            .data(data)
+            .enter()
+            .append('text')
+            .attr("x", d => x(d["Methane"]) + x(d["Other Greenhouse gases"]) + 5)
+            .attr("y", d => y(d.circoscrizione) + 1)
+            .text(d => Math.round(parseFloat(d.Methane)) + Math.round(parseFloat(d["Other Greenhouse gases"])) + " Kg")
+            .attr("transform", `translate(-2, 13)`)
+
+        // text for methane
+        svg2.append('g')
+            .selectAll('text')
+            .data(data)
+            .enter()
+            .append('text')
+            .attr("x", d => x(d["Other Greenhouse gases"]) + 5)
+            .attr("y", d => y(d.circoscrizione) + 1)
+            .text(d => {console.log(d["Methane"]); return d["Methane"] <= 4 ? '' : d["Other Greenhouse gases"] + " Kg"}) // to avoid text overlap
+            .attr("transform", `translate(-3, 13)`)
     });
 
 })

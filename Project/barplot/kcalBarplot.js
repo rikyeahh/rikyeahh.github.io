@@ -17,7 +17,7 @@ function buildFoodBarplot(filename) {
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr("transform", `translate(${margin.left}, ${margin.top - 10})`);
+            .attr("transform", `translate(${margin.left + 30}, ${margin.top - 10})`);
 
 
         var color = d => {
@@ -34,12 +34,13 @@ function buildFoodBarplot(filename) {
         // Add X axis
         const x = d3.scaleLinear()
             .domain([0, Math.max(...data.map(d => d.LandUse))])
-            .range([0, width]).nice()
+            .range([0, width - 30]).nice()
         svg.append("g")
             .attr("transform", `translate(0, ${height})`)
             .call(d3.axisBottom(x))
             .selectAll("text")
-            .style("text-anchor", "begin");
+            .style("text-anchor", "begin")
+
 
         // Y axis
         const y = d3.scaleBand()
@@ -48,6 +49,8 @@ function buildFoodBarplot(filename) {
             .padding(.1);
         svg.append("g")
             .call(d3.axisLeft(y))
+            .style("font-size", "13px")
+
 
         //Bars
         svg.selectAll("myRect")
@@ -59,10 +62,21 @@ function buildFoodBarplot(filename) {
             .attr("height", y.bandwidth())
             .attr("fill", d => color(d.Type))
 
+        svg.append('g')
+            .selectAll('text')
+            .data(data)
+            .enter()
+            .append('text')
+            .attr("x", d => x(d.LandUse) + 5)
+            .attr("y", d => y(d.Entity) + 1)
+            .text(d => Math.round(parseFloat(d.LandUse)) + " m²")
+            .attr("transform", `translate(0, 13)`)
+
+
         // color legend
         for (let i = 0; i < foodCategories.length; i++) {
             const element = foodCategories[i];
-            console.log(element);
+            //console.log(element);
             svg.append("text")
                 .attr("x", 400)
                 .attr("y", 300 + 16 * i)
@@ -76,7 +90,7 @@ function buildFoodBarplot(filename) {
 
         const label = filename == 'landUsePer1000Kcal.csv' ? '1000 Kcal' :
             filename == 'landUsePer100gProteins.csv' ? '100 g' :
-            filename == 'landUsePer1Kg.csv' ? '1 Kg' : "ERROR"
+                filename == 'landUsePer1Kg.csv' ? '1 Kg' : "ERROR"
         // x axis label
         svg.append("text")
             .attr("x", 150)

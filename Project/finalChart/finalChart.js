@@ -1,13 +1,15 @@
+d3.csv("./emissionsByFood.csv").then(function (data) {
 
-const svg2 = d3.select('#graph2')
-    .append('svg')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
-    .append('g')
-    .attr('transform', `translate(${margin.left},${margin.top})`);
+    const margin = { top: 20, right: 30, bottom: 40, left: 90 }
+    const width = 700 - margin.left - margin.right
+    const height = 500 - margin.top - margin.bottom;
 
-// get the data
-d3.csv("../assets/data2.csv").then(function (data) {
+    const svg2 = d3.select('#finalChart')
+        .append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
 
     const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
     const circoscrizioni = data.map(d => d.circoscrizione);
@@ -28,7 +30,7 @@ d3.csv("../assets/data2.csv").then(function (data) {
         .padding(0.1);
     const color = d3.scaleOrdinal()
         .domain(plants)
-        .range(d3.schemeTableau10);
+        .range(["#b38074", "#5a7a5b"]);
 
     // axes
     const xAxis = d3.axisBottom(x).ticks(5, '~s');
@@ -66,15 +68,16 @@ d3.csv("../assets/data2.csv").then(function (data) {
     }
 
     // add legend
+    const legendX = 360
     for (let i = 0; i < plants.length; i++) {
         svg2.append("circle")
-            .attr("cx", 250)
-            .attr("cy", 100 + i * 18)
+            .attr("cx", legendX)
+            .attr("cy", 200 + i * 18)
             .attr("r", 6)
             .style("fill", color(i))
         svg2.append("text")
-            .attr("x", 270)
-            .attr("y", 100 + i * 18)
+            .attr("x", legendX + 10)
+            .attr("y", 200 + i * 18)
             .text(plants[i])
             .style("font-size", "15px")
             .attr("alignment-baseline", "middle")
@@ -92,7 +95,7 @@ d3.csv("../assets/data2.csv").then(function (data) {
             .attr('height', y.bandwidth())
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
-                tooltip2[i].html(`${plants[i]} : ${j[1] - j[0]}`)
+                tooltip2[i].html(`${plants[i]}: ${Math.round((j[1] - j[0]) * 100) / 100}`)
                     .style("visibility", "visible");
                 d3.select(this).attr("fill", "red");
             })
@@ -104,9 +107,55 @@ d3.csv("../assets/data2.csv").then(function (data) {
             .on("mouseout", function () {
                 tooltip2[i].html(``).style("visibility", "hidden");
                 d3.select(this).attr("fill", function () {
-                    return "" + d3.schemeTableau10[i] + "";
+                    return "" + color(i) + "";
                 })
-            });
+            })
+
+        // text for total
+        svg2.append('g')
+            .selectAll('text')
+            .data(data)
+            .enter()
+            .append('text')
+            .attr("x", d => x(d["Pasture"]) + x(d["Cropland"]) + 5)
+            .attr("y", d => y(d.circoscrizione) + y.bandwidth() / 2 + 3)
+            .text(d => (parseFloat(d.Pasture) + (parseFloat(d["Cropland"])) + " billion ha"))
+
+        // text for cropland
+        svg2.append('g')
+            .selectAll('text')
+            .data(data)
+            .enter()
+            .append('text')
+            .attr("x", d => 20)
+            .attr("y", d => y(d.circoscrizione) + y.bandwidth() / 2 + 3)
+            .text(d => d["Cropland"] + " billion ha") // to avoid text overlap
+            .attr("fill", "white")
+
+        // text for pasture
+        svg2.append('g')
+            .selectAll('text')
+            .data(data)
+            .enter()
+            .append('text')
+            .attr("x", d => x(d["Cropland"]) + x(d["Pasture"]) / 2 - 50)
+            .attr("y", d => y(d.circoscrizione) + y.bandwidth() / 2 + 3)
+            .text(d => d["Pasture"] == '0' ? '' : d["Pasture"] + " billion ha") // to avoid text overlap
+            .attr("fill", "white")
     });
+
+    svg2.append("text")
+        .attr("x", x(data[0]["Cropland"]) / 2 - 50)
+        .attr("y", 0)
+        .text("CROPLAND")
+        .attr("fill", color(0))
+        .style("font-weight", "bold")
+
+    svg2.append("text")
+        .attr("x", x(data[0]["Cropland"]) + x(data[0]["Pasture"]) / 2 - 50)
+        .attr("y", 0)
+        .text("PASTURE")
+        .attr("fill", color(1))
+        .style("font-weight", "bold")
 
 })
