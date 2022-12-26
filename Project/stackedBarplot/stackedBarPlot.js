@@ -142,13 +142,10 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
             .append('text')
             .attr("x", d => x(d["Other Greenhouse gases"]) / 2)
             .attr("y", d => y(d.circoscrizione) + 1)
-            .text(d => d["Methane"] <= 3 ? '' : d["Other Greenhouse gases"] + " kg") // to avoid text overlap
+            .text(d => d["Other Greenhouse gases"] < 10 ? '' : d["Other Greenhouse gases"] + " kg") // to avoid text overlap
             .attr("transform", `translate(-20, 12)`)
             .attr("fill", "white")
             .style("font-size", "12px")
-
-        // TODO: fare come con grafico delle diete: testo di metano/altro bianco o nero al
-        // centro della linea e il totale oltre la fine della linee
     });
 
 })

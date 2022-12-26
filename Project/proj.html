@@ -27,15 +27,65 @@
 </head>
 
 <body>
-    <div class="textAndgraph">
-        <p>
-            Lorema
-        </p>
-        <div id="finalChart">
+    <h1>COW - how bovines impact on GHG emissions</h1>
+    <!-- SEZIONE 1 - intro e picture sole e GHG -->
+    <h2>The problem of greenhouse gases</h2>
+    <p>blabla spiegare perche i gas serra sono cattivi TODO</p>
+    <img src="ghg_earth.png" alt="Sun with greenhouse effect">
+    <!-- SEZIONE 2 - Sankey-->
+    <h2>The not-so-green agricolture</h2>
+    <p>
+        Agricolture (which includes farming) may sound like a green activity, with little to no emissions since it is so
+        intertwined with the nature. Actually, it is the 4th sector in terms of total GHG emissions, and by far the first
+        when considering Methane (TODO add formula) and Nitrous Oxide (TODO formula). These two gases, despite not having
+        the infamous reputation of CO2, can be much more longeve and heat-retaining in the atmosphere.
+    </p>
+    <!-- SEZIONE 3 - Stacked barplot-->
+    <h2>What product to impute to?</h2>
+    <p>
+        Agricolture can be a big sector to analyze as a whole: in order to understand what can be done, let's analyze
+        the estimated quantity of GHG emitted by type of product.
 
-        </div>
-        
-    </div>
+        Bovines and ruminants in general have in general the biggest GHG emissions by far!
+    </p>
+    <!-- SEZIONE 4 - Spiegazione ruminanti-->
+    <h2>Why is that?</h2>
+    <p>
+        Ruminants have a very very "inefficent" digestive apparatus, in terms of converting food in energy.
+        This means:
+        - Larger fields dedicated to pasture for extensive farms, or dedicated to forage in intensive farms.
+        - A lot of methane as a product of digestion, TODO da rutti e cacca
+    </p>
+    <!-- SEZIONE 5 - Barplot & Draggable bubble-->
+    <h1>CO2W - the bovines impact</h1>
+    <p>
+        But wait! I can hear you say: beef is very proteic and caloric, so just one cow can feed many people!
+        While that is (partially) true, the ratio between final product and land used or GHG emitted is still
+        much worse when compared to other animals.
+    </p>
+    <!-- SEZIONE 6 - Barplot & Draggable bubble-->
+    <h2>Who is doing better?</h2>
+    <p>
+        Actually, no one. Even with small differences, the percentage of NH4 and N2O from agricolture is
+        very high in all EU countries.
+    </p>
+    <!-- SEZIONE 7 - Line/area chart small multiple-->
+    <h2>And it is not getting better</h2>
+    <p>
+        Taking a look a this percentage of some of the most emitting countries thoughout the years, we can see that
+        it is not decreasing.
+    </p>
+    <!-- SEZIONE 8 - Final chart-->
+    <h2>What can we do?</h2>
+    <p>
+        How can we change this problematic situation? The best thing we can do individually is to change our diet
+        and consume less meat. This will certainly be more healthy, and (hopefully) bring the market towards a
+        terraing allocation recalibration. But there is no need to go full vegan! As we have seen above, there are
+        many animal-based beef alternatives with just a fraction of impact on nature. Considering a global diet without
+        chicken, fish, diary (and more) we can see a "diminishing return" effect: we completely alter our diet
+        (unlikely to happen) without such a big benefit in terms of emissions.
+    </p>
+
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="finalChart/finalChart.js"></script>
 </body>

@@ -123,7 +123,6 @@ function drawBubbles(scaleCriterion, country) {
                 .attr("y", height - 80)
                 .text(animals[i])
         }
-        // TODO add circular legend
         // Add legend: circles
         var valuesToShow = [10]
         var textToShow = ["1%"]
