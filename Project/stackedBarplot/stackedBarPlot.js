@@ -4,7 +4,7 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
     const width = 700 - margin.left - margin.right
     const height = 500 - margin.top - margin.bottom;
 
-    const svg2 = d3.select('#stackedBarPlot')
+    const svg = d3.select('#stackedBarPlot')
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
@@ -36,15 +36,15 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
     const xAxis = d3.axisBottom(x).ticks(5, '~s');
     const yAxis = d3.axisLeft(y);
 
-    svg2.append('g')
+    svg.append('g')
         .attr('transform', `translate(0,${height})`)
         .call(xAxis)
 
-    svg2.append("g")
+    svg.append("g")
         .call(yAxis)
 
     // draw bars
-    const layers = svg2.append('g')
+    const layers = svg.append('g')
         .selectAll('g')
         .data(stackedData)
         .join('g')
@@ -69,12 +69,12 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
 
     // add legend
     for (let i = 0; i < plants.length; i++) {
-        svg2.append("circle")
+        svg.append("circle")
             .attr("cx", 250)
             .attr("cy", 100 + i * 18)
             .attr("r", 6)
             .style("fill", d3.schemeTableau10[i])
-        svg2.append("text")
+        svg.append("text")
             .attr("x", 270)
             .attr("y", 100 + i * 18)
             .text(plants[i])
@@ -111,7 +111,7 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
             })
 
         // text for total
-        svg2.append('g')
+        svg.append('g')
             .selectAll('text')
             .data(data)
             .enter()
@@ -122,15 +122,33 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
             .attr("transform", `translate(-2, 13)`)
 
         // text for methane
-        svg2.append('g')
+        svg.append('g')
             .selectAll('text')
             .data(data)
             .enter()
             .append('text')
-            .attr("x", d => x(d["Other Greenhouse gases"]) + 5)
+            .attr("x", d => x(d["Methane"]) / 2 + x(d["Other Greenhouse gases"]))
             .attr("y", d => y(d.circoscrizione) + 1)
-            .text(d => {console.log(d["Methane"]); return d["Methane"] <= 4 ? '' : d["Other Greenhouse gases"] + " Kg"}) // to avoid text overlap
-            .attr("transform", `translate(-3, 13)`)
+            .text(d => { console.log(d["Methane"]); return d["Methane"] <= 4 ? '' : d["Methane"] + " kg" }) // to avoid text overlap
+            .attr("transform", `translate(-13, 12)`)
+            .attr("fill", "white")
+            .style("font-size", "12px")
+
+        // text for other GHG
+        svg.append('g')
+            .selectAll('text')
+            .data(data)
+            .enter()
+            .append('text')
+            .attr("x", d => x(d["Other Greenhouse gases"]) / 2)
+            .attr("y", d => y(d.circoscrizione) + 1)
+            .text(d => d["Methane"] <= 3 ? '' : d["Other Greenhouse gases"] + " kg") // to avoid text overlap
+            .attr("transform", `translate(-20, 12)`)
+            .attr("fill", "white")
+            .style("font-size", "12px")
+
+        // TODO: fare come con grafico delle diete: testo di metano/altro bianco o nero al
+        // centro della linea e il totale oltre la fine della linee
     });
 
 })

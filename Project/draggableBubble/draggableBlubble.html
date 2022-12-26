@@ -37,8 +37,22 @@
         <p>
             BLABLA
         </p>
-        <div id="graph2"></div>
+        <div id="animalBubbles"></div>
     </section>
+    Country:
+    <select name="" id="selectCountry">
+        <option value="Spain">Spain</option>
+        <option value="France">France</option>
+        <option value="Italy">Italy</option>
+        <option value="Netherlands">Netherlands</option>
+        <option value="Poland">Poland</option>
+        <option value="Others">Others</option>
+    </select>
+    Scale by:
+    <button onclick="drawBubbles('GHGPer1000Kcal',document.getElementById('selectCountry').value)">GHG emissions for 1000kcal</button>
+    <button onclick="drawBubbles('LandPerKcal',document.getElementById('selectCountry').value)">Land for 1000kcal</button>
+    <button onclick="drawBubbles('scaleByWeight',document.getElementById('selectCountry').value)">Animal weight</button>
+    <button onclick="drawBubbles('fixedSize',document.getElementById('selectCountry').value)">Fixed size</button>
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="draggableBubble.js"></script>
 </body>

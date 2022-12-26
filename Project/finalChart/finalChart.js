@@ -1,7 +1,7 @@
-d3.csv("./emissionsByFood.csv").then(function (data) {
+d3.csv("finalChart/finalChart.csv").then(function (data) {
 
     const margin = { top: 20, right: 30, bottom: 40, left: 90 }
-    const width = 700 - margin.left - margin.right
+    const width = 600 - margin.left - margin.right
     const height = 500 - margin.top - margin.bottom;
 
     const svg2 = d3.select('#finalChart')

@@ -34,7 +34,7 @@ function buildFoodBarplot(filename) {
         // Add X axis
         const x = d3.scaleLinear()
             .domain([0, Math.max(...data.map(d => d.LandUse))])
-            .range([0, width - 30]).nice()
+            .range([0, width - 160]).nice()
         svg.append("g")
             .attr("transform", `translate(0, ${height})`)
             .call(d3.axisBottom(x))
@@ -89,15 +89,15 @@ function buildFoodBarplot(filename) {
         }
 
         const label = filename == 'landUsePer1000Kcal.csv' ? '1000 Kcal' :
-            filename == 'landUsePer100gProteins.csv' ? '100 g' :
-                filename == 'landUsePer1Kg.csv' ? '1 Kg' : "ERROR"
+            filename == 'landUsePer100gProteins.csv' ? '100 g of proteins' :
+                filename == 'landUsePer1Kg.csv' ? '1 Kg of product' : "ERROR"
         // x axis label
         svg.append("text")
             .attr("x", 150)
             .attr("y", 480)
-            .text("m² of land required to produce " + label + " of food")
+            .text("m² of land required to produce " + label)
 
-        // TODO add value affianco alla barra
+        // TODO add vertical grid
     })
 }
 

@@ -13,7 +13,7 @@ p, body {
 }
 
 p {
-   width: 30%;
+   width: 100px;
 }
 
 .titleAndPhoto {
@@ -65,3 +65,12 @@ p {
 .link:hover {
     stroke-opacity: .5;
 }
+
+.textAndGraph {
+    display: flex;
+}
+
+.textAndGraph:first-child {
+    flex: 1;
+    border: 2px solid yellow;
+}  
