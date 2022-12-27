@@ -88,9 +88,9 @@ function buildFoodBarplot(filename) {
                 .style("fill", color(element))
         }
 
-        const label = filename == 'landUsePer1000Kcal.csv' ? '1000 Kcal' :
-            filename == 'landUsePer100gProteins.csv' ? '100 g of proteins' :
-                filename == 'landUsePer1Kg.csv' ? '1 Kg of product' : "ERROR"
+        const label = filename == '/Project/barplot/landUsePer1000Kcal.csv' ? '1000 Kcal' :
+            filename == '/Project/barplot/landUsePer100gProteins.csv' ? '100 g of proteins' :
+            filename == '/Project/barplot/landUsePer1Kg.csv' ? '1 Kg of product' : "ERROR"
         // x axis label
         svg.append("text")
             .attr("x", x(Math.max(...data.map(d => d.LandUse)) / 2) - 120)
@@ -102,4 +102,4 @@ function buildFoodBarplot(filename) {
     })
 }
 
-buildFoodBarplot("landUsePer1000Kcal.csv")
+buildFoodBarplot("/Project/barplot/landUsePer1000Kcal.csv")

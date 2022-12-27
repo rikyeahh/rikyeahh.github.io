@@ -94,10 +94,10 @@ function redrawMaps(params) {
     var mapYear = this.value;
     document.getElementById("map1").innerHTML = "";
     document.getElementById("map2").innerHTML = "";
-    drawMap("#map1", "CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), mapYear, "N20")
-    drawMap("#map2", "CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), mapYear, "CH4")
+    drawMap("#map1", "/Project/map/CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), mapYear, "N20")
+    drawMap("#map2", "/Project/map/CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), mapYear, "CH4")
 }
 
 slider.oninput = redrawMaps
-drawMap("#map1", "CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), 2021, "N20")
-drawMap("#map2", "CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), 2021, "CH4")
+drawMap("#map1", "/Project/map/CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), 2021, "N20")
+drawMap("#map2", "/Project/map/CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), 2021, "CH4")

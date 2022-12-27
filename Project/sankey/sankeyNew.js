@@ -1,7 +1,7 @@
-d3.json("sankey1new.json", function (error, graph) {
+d3.json("/Project/sankey/sankey1new.json", function (error, graph) {
 
     var margin = { top: 10, right: 0, bottom: 10, left: 10 },
-        width = document.documentElement.clientWidth / 2 + 100 - margin.left - margin.right,
+        width = document.documentElement.clientWidth / 2 - margin.left - margin.right - 50,
         height = 700 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
@@ -75,7 +75,7 @@ d3.json("sankey1new.json", function (error, graph) {
         .attr("text-anchor", "start");
 
     
-    const pinkTextX = 750
+    const pinkTextX = 750 - 250
     svg.append("text")
         .attr("x", pinkTextX)
         .attr("y", 350)

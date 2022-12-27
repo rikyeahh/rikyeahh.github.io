@@ -1,6 +1,6 @@
 function update(chemical) {
     document.getElementById("lineSM").innerHTML = '';
-    d3.csv(`${chemical}_tot.csv`).then(function (data) {
+    d3.csv(`/Project/linechartSmallMult/${chemical}_tot.csv`).then(function (data) {
 
         const margin = { top: 30, right: 10, bottom: 30, left: 50 }
         const width = document.documentElement.clientWidth / 5 - 20 - margin.left - margin.right;
@@ -70,7 +70,7 @@ function update(chemical) {
             .text(function (d) { return (d[0]) })
             .style("fill", "blue")
 
-        d3.csv(`${chemical}_agri.csv`).then(function (data) {
+        d3.csv(`/Project/linechartSmallMult/${chemical}_agri.csv`).then(function (data) {
             const sumstat = d3.group(data, d => d.name) // nest function allows to group the calculation per level of a factor
             svg.append("path")
                 .data(sumstat)
