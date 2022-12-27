@@ -1,7 +1,7 @@
-d3.csv("finalChart/finalChart.csv").then(function (data) {
+d3.csv("finalChart.csv").then(function (data) {
 
-    const margin = { top: 20, right: 30, bottom: 40, left: 90 }
-    const width = 600 - margin.left - margin.right
+    const margin = { top: 20, right: 0, bottom: 60, left: 200 }
+    const width = 700 - margin.left - margin.right
     const height = 500 - margin.top - margin.bottom;
 
     const svg2 = d3.select('#finalChart')
@@ -39,9 +39,12 @@ d3.csv("finalChart/finalChart.csv").then(function (data) {
     svg2.append('g')
         .attr('transform', `translate(0,${height})`)
         .call(xAxis)
+        .style("font-size", "20px")
 
     svg2.append("g")
         .call(yAxis)
+        .style("font-size", "15px")
+
 
     // draw bars
     const layers = svg2.append('g')
@@ -72,12 +75,12 @@ d3.csv("finalChart/finalChart.csv").then(function (data) {
     for (let i = 0; i < plants.length; i++) {
         svg2.append("circle")
             .attr("cx", legendX)
-            .attr("cy", 200 + i * 18)
+            .attr("cy", 205 + i * 18)
             .attr("r", 6)
             .style("fill", color(i))
         svg2.append("text")
             .attr("x", legendX + 10)
-            .attr("y", 200 + i * 18)
+            .attr("y", 205 + i * 18)
             .text(plants[i])
             .style("font-size", "15px")
             .attr("alignment-baseline", "middle")
@@ -157,5 +160,9 @@ d3.csv("finalChart/finalChart.csv").then(function (data) {
         .text("PASTURE")
         .attr("fill", color(1))
         .style("font-weight", "bold")
-
+    
+    svg2.append("text")
+        .attr("x", 100)
+        .attr("y", 460)
+        .text("Billion hectares needed by type of diet")
 })

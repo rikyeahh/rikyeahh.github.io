@@ -40,7 +40,7 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
                 .style("opacity", 1)
                 .style("stroke", "black")
             var percValue = Math.round(data.get(d.properties.name))
-            percValue = (percValue != 0) && percValue ? percValue + "%" : "Missing data"
+            percValue = (percValue != 0) && percValue ? percValue + "% of emissions<br>come from agricolture" : "Missing data"
             tooltip.html(d.properties.name + ": " + percValue)
                 .style("visibility", "visible");
         }
@@ -86,15 +86,13 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
             .attr("fill", colormap(60))
             .style("font-size", "35px")
             .style("font-weight", "bold")
-            // TODO style this text
     })
+    // TODO aggiungere leggenda colorbar per entrambe le mappe
+    // TODO rendere lo slider un menu a tendina
 }
-
-// TODO add legend and NH4 text
 
 var slider = document.getElementById("myRange");
 function redrawMaps(params) {
-    // TODO: cambiare slider in menu a tendina
     var mapYear = this.value;
     document.getElementById("map1").innerHTML = "";
     document.getElementById("map2").innerHTML = "";

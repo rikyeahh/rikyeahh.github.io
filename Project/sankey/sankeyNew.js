@@ -1,7 +1,7 @@
 d3.json("sankey1new.json", function (error, graph) {
 
     var margin = { top: 10, right: 0, bottom: 10, left: 10 },
-        width = document.documentElement.clientWidth / 2 - margin.left - margin.right,
+        width = document.documentElement.clientWidth / 2 + 100 - margin.left - margin.right,
         height = 700 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
@@ -75,8 +75,9 @@ d3.json("sankey1new.json", function (error, graph) {
         .attr("text-anchor", "start");
 
     
+    const pinkTextX = 750
     svg.append("text")
-        .attr("x", 870)
+        .attr("x", pinkTextX)
         .attr("y", 350)
         .text("Agricolture makes up for")
         .style("font-weight", "bold")
@@ -84,7 +85,7 @@ d3.json("sankey1new.json", function (error, graph) {
         .attr("fill", "#ffaaaa")
 
     svg.append("text")
-        .attr("x", 870)
+        .attr("x", pinkTextX)
         .attr("y", 416)
         .text("78.8% of all CH₄")
         .style("font-weight", "bold")
@@ -92,7 +93,7 @@ d3.json("sankey1new.json", function (error, graph) {
         .attr("fill", "#ffaaaa")
 
     svg.append("text")
-        .attr("x", 870)
+        .attr("x", pinkTextX)
         .attr("y", 483)
         .text("53.2% of all N₂O")
         .style("font-weight", "bold")

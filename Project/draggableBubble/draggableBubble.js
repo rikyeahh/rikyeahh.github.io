@@ -156,6 +156,8 @@ function drawBubbles(scaleCriterion, country) {
         }
 
     })
+    // TODO fare in modo che pulsante selezionato sia luminoso
+    // TODO hover sulle bolle fa vedere il loro valore?
 }
 
 drawBubbles("GHGPer1000Kcal", "Spain")

@@ -93,11 +93,12 @@ function buildFoodBarplot(filename) {
                 filename == 'landUsePer1Kg.csv' ? '1 Kg of product' : "ERROR"
         // x axis label
         svg.append("text")
-            .attr("x", 150)
+            .attr("x", x(Math.max(...data.map(d => d.LandUse)) / 2) - 120)
             .attr("y", 480)
             .text("m² of land required to produce " + label)
 
-        // TODO add vertical grid
+        // TODO add vertical grid?
+        // TODO aggiungere il fatto che bottone scelto sia illuminato e gli altri meno
     })
 }
 

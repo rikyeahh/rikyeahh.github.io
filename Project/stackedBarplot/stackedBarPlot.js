@@ -94,7 +94,7 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
             .attr('height', y.bandwidth())
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
-                tooltip2[i].html(`${plants[i]} : ${j[1] - j[0]}`)
+                tooltip2[i].html(`${plants[i]} : ${j[1] - j[0]} kg`)
                     .style("visibility", "visible");
                 d3.select(this).attr("fill", "red");
             })
@@ -147,5 +147,10 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
             .attr("fill", "white")
             .style("font-size", "12px")
     });
+    // x axis label
+    svg.append("text")
+    .attr("x", 100)
+    .attr("y", height + 30)
+    .text("Emissions per kilogram of food product")
 
 })

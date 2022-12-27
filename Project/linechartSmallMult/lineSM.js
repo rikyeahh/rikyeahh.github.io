@@ -50,11 +50,6 @@ function update(chemical) {
         svg.append("g")
             .call(yAxis);
 
-        // color palette
-        const color = d3.scaleOrdinal()
-            //.domain(allKeys)
-            .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'])
-
         // Draw the line
         svg.append("path")
             .attr("fill", "black")
@@ -91,7 +86,39 @@ function update(chemical) {
                         (d[1])
                 })
         })
+
+        const legendLocationX = 90
+        const legendLocationY = -12
+        svg.append("rect")
+            .attr("x", legendLocationX)
+            .attr("y", legendLocationY)
+            .attr("width", 10)
+            .attr("height", 10)
+            .attr("fill", "black")
+        svg.append("rect")
+            .attr("x", legendLocationX)
+            .attr("y", legendLocationY + 20)
+            .attr("width", 10)
+            .attr("height", 10)
+            .attr("fill", "red")
+        svg.append("text")
+            .attr("x", legendLocationX + 12)
+            .attr("y", legendLocationY + 10)
+            .text("Total emissions")
+            .style("font-size", "12px")
+        svg.append("text")
+            .attr("x", legendLocationX + 12)
+            .attr("y", legendLocationY + 20 + 10)
+            .text("From agricolture")
+            .style("font-size", "12px")
+
+
+
+
     })
+    // TODO aggiungere hover carino magari
+    // TODO aggiungere il fatto che pulsante selezionato sia illuminato e l altro no
+    // TODO aggiungere label all asse Y
 }
 
 update("nitro")
