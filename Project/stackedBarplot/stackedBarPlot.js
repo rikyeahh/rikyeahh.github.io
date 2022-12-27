@@ -42,6 +42,7 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
 
     svg.append("g")
         .call(yAxis)
+        .style("font-size", "13px")
 
     // draw bars
     const layers = svg.append('g')
@@ -149,8 +150,8 @@ d3.csv("./emissionsByFood.csv").then(function (data) {
     });
     // x axis label
     svg.append("text")
-    .attr("x", 100)
-    .attr("y", height + 30)
-    .text("Emissions per kilogram of food product")
+        .attr("x", 100)
+        .attr("y", height + 30)
+        .text("Emissions per kg of food product")
 
 })

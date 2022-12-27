@@ -28,14 +28,7 @@ function Legend(color, id, {
         return canvas;
     }
 
-    // const svg5 = d3.select("graph5").append("svg")
-    // .attr("width", width)
-    // .attr("height", height)
-    // .attr("viewBox", [0, 0, width, height])
-    // .style("overflow", "visible")
-    // .style("display", "block");
-
-    const svg5 = d3.select(id)
+    const svg = d3.select(id)
         .append("svg")
         .attr("viewBox", '0 0 ' + (width + marginLeft + marginRight) +
             ' ' + (height + marginTop + marginBottom))
@@ -45,13 +38,12 @@ function Legend(color, id, {
     let tickAdjust = g => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height);
     let x;
 
-    // Continuous
     if (color.interpolate) {
         const n = Math.min(color.domain().length, color.range().length);
 
         x = color.copy().rangeRound(d3.quantize(d3.interpolate(marginLeft, width - marginRight), n));
 
-        svg5.append("image")
+        svg.append("image")
             .attr("x", marginLeft)
             .attr("y", marginTop)
             .attr("width", width - marginLeft - marginRight)
@@ -66,7 +58,7 @@ function Legend(color, id, {
             .interpolator(d3.interpolateRound(marginLeft, width - marginRight)),
             { range() { return [marginLeft, width - marginRight]; } });
 
-        svg5.append("image")
+        svg.append("image")
             .attr("x", marginLeft)
             .attr("y", marginTop)
             .attr("width", width - marginLeft - marginRight)
@@ -102,7 +94,7 @@ function Legend(color, id, {
             .domain([-1, color.range().length - 1])
             .rangeRound([marginLeft, width - marginRight]);
 
-        svg5.append("g")
+        svg.append("g")
             .selectAll("rect")
             .data(color.range())
             .join("rect")
@@ -122,7 +114,7 @@ function Legend(color, id, {
             .domain(color.domain())
             .rangeRound([marginLeft, width - marginRight]);
 
-        svg5.append("g")
+        svg.append("g")
             .selectAll("rect")
             .data(color.domain())
             .join("rect")
@@ -135,7 +127,7 @@ function Legend(color, id, {
         tickAdjust = () => { };
     }
 
-    svg5.append("g")
+    svg.append("g")
         .attr("transform", `translate(0,${height - marginBottom})`)
         .call(d3.axisBottom(x)
             .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
@@ -154,7 +146,7 @@ function Legend(color, id, {
             .text(title))
         .style("font", "5px times");
 
-    return svg5.node();
+    return svg.node();
 
 }
 

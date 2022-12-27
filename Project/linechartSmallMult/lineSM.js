@@ -1,4 +1,3 @@
-
 function update(chemical) {
     document.getElementById("lineSM").innerHTML = '';
     d3.csv(`${chemical}_tot.csv`).then(function (data) {
@@ -112,11 +111,9 @@ function update(chemical) {
             .text("From agricolture")
             .style("font-size", "12px")
 
-
-
-
     })
     // TODO aggiungere hover carino magari
+    // TODO rendere piu chiara legenda: rosso = agricoltura DI METANO/NO2
     // TODO aggiungere il fatto che pulsante selezionato sia illuminato e l altro no
     // TODO aggiungere label all asse Y
 }

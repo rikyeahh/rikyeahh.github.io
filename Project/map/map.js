@@ -1,5 +1,3 @@
-
-
 var drawMap = (id, data_url, colormap, mapYear, chemical) => {
     const data = new Map();
     Promise.all([

@@ -125,14 +125,14 @@ function drawBubbles(scaleCriterion, country) {
         }
         // Add legend: circles
         var valuesToShow = [10]
-        var textToShow = ["1%"]
+        var textToShow = ["1% of total animals"]
         if (scaleCriterion == 'scaleByWeight') {
             valuesToShow = [Math.max(200 / 50, 1), Math.max(500 / 50, 1), Math.max(1000 / 50, 1)] // fix this
             textToShow = ["200 kg", "500 kg", "1000 kg"]
         }
         if (scaleCriterion == 'LandPerKcal') {
             valuesToShow = [Math.max(5 / 5, 1), Math.max(50 / 5, 1), Math.max(100 / 5, 1)] // fix this
-            textToShow = ["5 m^2", "50 m^2", "100 m^2"]
+            textToShow = ["5 m²", "50 m²", "100 m²"]
         }
         if (scaleCriterion == 'GHGPer1000Kcal') {
             valuesToShow = [Math.max(5 / 5, 1), Math.max(50 / 5, 1), Math.max(100 / 5, 1)] // fix this
@@ -157,7 +157,7 @@ function drawBubbles(scaleCriterion, country) {
 
     })
     // TODO fare in modo che pulsante selezionato sia luminoso
-    // TODO hover sulle bolle fa vedere il loro valore?
+    // TODO capire bug allineamento bolle sopra testo
 }
 
 drawBubbles("GHGPer1000Kcal", "Spain")

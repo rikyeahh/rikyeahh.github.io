@@ -165,4 +165,7 @@ d3.csv("finalChart.csv").then(function (data) {
         .attr("x", 100)
         .attr("y", 460)
         .text("Billion hectares needed by type of diet")
+    
+    // TODO fix larghezza
+    // TODO evitare scritta bianca e nera nelle ultime 3 barre
 })
