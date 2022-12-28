@@ -72,7 +72,6 @@
     <div class="text-and-viz">
         <div>
             <h2>Why is that?</h2>
-            <p>
                 Ruminants have a very very "inefficent" digestive apparatus, in terms of converting food in energy.
                 This means:
                 - Larger fields dedicated to pasture for extensive farms, or dedicated to forage in intensive farms.
@@ -117,8 +116,8 @@
                 Actually, no one. Even with small differences, the percentage of NH4 and N2O from agricolture is
                 very high in all EU countries.
             </p>
+            <select id="selectYear"></select>
         </div>
-        <input type="range" min="2012" max="2021" value="2021" class="slider" id="myRange">
         <div>
             <span id="map1"></span>
             <span id="map2"></span>
@@ -156,7 +155,9 @@
     </div>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3.v6.js"></script>
+    <script>
+        d3version4 = d3;
+    </script>
     <script src="https://unpkg.com/d3-sankey@0"></script>
     <script src="https://unpkg.com/d3-array@1"></script>
     <script src="https://unpkg.com/d3-collection@1"></script>
@@ -164,6 +165,7 @@
     <script src="https://unpkg.com/d3-shape@1"></script>
     <script src="https://unpkg.com/d3-sankey@0"></script>
     <script src="sankey/sankeyNew.js"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
     <script src="barplot/kcalBarplot.js"></script>
     <script src="draggableBubble/draggableBubble.js"></script>
     <script src="map/legendscript.js"></script>

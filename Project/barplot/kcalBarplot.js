@@ -104,8 +104,12 @@ function buildFoodBarplot(filename) {
             .attr("y", 480)
             .text("m² of land required to produce " + label)
 
-        // TODO add vertical grid?
-        // TODO aggiungere il fatto che bottone scelto sia illuminato e gli altri meno
+        svg.selectAll("rect")
+            .attr("width", 0)
+            .transition()
+            .delay(function (d, i) { return i * 30; })
+            .duration(1000)
+            .attr("width", d => x(d.LandUse))
     })
 }
 

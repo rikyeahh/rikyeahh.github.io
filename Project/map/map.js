@@ -86,18 +86,23 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
             .style("font-weight", "bold")
     })
     // TODO aggiungere leggenda colorbar per entrambe le mappe
-    // TODO rendere lo slider un menu a tendina
 }
 
-var slider = document.getElementById("myRange");
+var selected = document.getElementById("selectYear");
+
+for (let i = 2012; i <= 2021; ++i) {
+    selected.options[i - 2012] = new Option(`${i}`, `${i}`);
+}
+
 function redrawMaps(params) {
     var mapYear = this.value;
+    console.log(mapYear)
     document.getElementById("map1").innerHTML = "";
     document.getElementById("map2").innerHTML = "";
     drawMap("#map1", "/Project/map/CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), mapYear, "N20")
     drawMap("#map2", "/Project/map/CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), mapYear, "CH4")
 }
 
-slider.oninput = redrawMaps
+selected.oninput = redrawMaps
 drawMap("#map1", "/Project/map/CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), 2021, "N20")
 drawMap("#map2", "/Project/map/CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), 2021, "CH4")

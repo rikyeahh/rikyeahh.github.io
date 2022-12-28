@@ -1,11 +1,10 @@
-d3.json("/Project/sankey/sankey1new.json", function (error, graph) {
-
+d3version4.json("/Project/sankey/sankey1new.json", function (error, graph) {
     var margin = { top: 10, right: 0, bottom: 10, left: 10 },
         width = document.documentElement.clientWidth / 2 - margin.left - margin.right - 50,
         height = 700 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
-    var svg = d3.select("#graph1").append("svg")
+    var svg = d3version4.select("#graph1").append("svg")
         .attr("width", 350 + width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -20,7 +19,7 @@ d3.json("/Project/sankey/sankey1new.json", function (error, graph) {
     };
 
 
-    var sankey = d3.sankey()
+    var sankey = d3version4.sankey()
         .nodeWidth(15)
         .nodePadding(10)
         .nodeAlign(d3.sankeyLeft)
@@ -44,7 +43,7 @@ d3.json("/Project/sankey/sankey1new.json", function (error, graph) {
     link = link.data(graph.links)
         .enter()
         .append("path")
-        .attr("d", d3.sankeyLinkHorizontal())
+        .attr("d", d3version4.sankeyLinkHorizontal())
         .attr("class", "sankeyLink")
         .attr("stroke-width", d => Math.max(1, d.width))
         .attr("stroke", d => linkColor(d))
@@ -75,7 +74,7 @@ d3.json("/Project/sankey/sankey1new.json", function (error, graph) {
         .attr("text-anchor", "start");
 
     
-    const pinkTextX = 750 - 250
+    const pinkTextX = 750
     svg.append("text")
         .attr("x", pinkTextX)
         .attr("y", 350)
@@ -100,10 +99,8 @@ d3.json("/Project/sankey/sankey1new.json", function (error, graph) {
         .style("font-size", "30px")
         .attr("fill", "#ffaaaa")
 
-
-
     /* TOOLTIP AND HOVER */
-    const tooltip = d3.select("body")
+    const tooltip = d3version4.select("body")
         .append("div")
         .attr("class", "d3-tooltip")
         .style("position", "absolute")
