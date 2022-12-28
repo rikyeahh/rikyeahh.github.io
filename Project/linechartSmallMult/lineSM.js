@@ -2,11 +2,13 @@ function update(chemical) {
     document.getElementById("lineSM").innerHTML = '';
     d3.csv(`/Project/linechartSmallMult/${chemical}_tot.csv`).then(function (data) {
 
+        let id = chemical == "nitro" ? "smallMultButton2" : "smallMultButton1";
+        highlightSmallMult(id);
+
         const margin = { top: 30, right: 10, bottom: 30, left: 50 }
         const width = document.documentElement.clientWidth / 5 - 20 - margin.left - margin.right;
         const height = 300 - margin.top - margin.bottom;
 
-        console.log(data);
         // group the data: I want to draw one line per group
         const sumstat = d3.group(data, d => d.name) // nest function allows to group the calculation per level of a factor
 
@@ -26,7 +28,6 @@ function update(chemical) {
                 `translate(${margin.left},${margin.top})`);
 
         // Add X axis
-        console.log("EXTENT", d3.extent(data, function (d) { return parseInt(d.year); }));
         const x = d3.scaleLinear()
             .domain(d3.extent(data, function (d) { return parseInt(d.year); }))
             .range([0, width])
@@ -119,3 +120,18 @@ function update(chemical) {
 }
 
 update("nitro")
+highlightSmallMult("smallMultButton2")
+
+function highlightSmallMult(id) {
+    let barplotButtons = ["smallMultButton1", "smallMultButton2"]
+    barplotButtons.forEach(element => {
+        var button = document.getElementById(element);
+        if (element == id) {
+            if (!button.className.includes("selected"))
+                button.className += " selected"
+        } else {
+            if (button.className.includes("selected"))
+                button.className -= " selected"
+        }
+    });
+}

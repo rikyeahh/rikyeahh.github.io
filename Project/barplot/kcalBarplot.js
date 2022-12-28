@@ -91,6 +91,13 @@ function buildFoodBarplot(filename) {
         const label = filename == '/Project/barplot/landUsePer1000Kcal.csv' ? '1000 Kcal' :
             filename == '/Project/barplot/landUsePer100gProteins.csv' ? '100 g of proteins' :
             filename == '/Project/barplot/landUsePer1Kg.csv' ? '1 Kg of product' : "ERROR"
+            
+        const id = filename == '/Project/barplot/landUsePer1000Kcal.csv' ? 'barplotButton3' :
+            filename == '/Project/barplot/landUsePer100gProteins.csv' ? 'barplotButton2' :
+            filename == '/Project/barplot/landUsePer1Kg.csv' ? 'barplotButton1' : "ERROR"
+        highlight(id);
+
+
         // x axis label
         svg.append("text")
             .attr("x", x(Math.max(...data.map(d => d.LandUse)) / 2) - 120)
@@ -103,3 +110,18 @@ function buildFoodBarplot(filename) {
 }
 
 buildFoodBarplot("/Project/barplot/landUsePer1000Kcal.csv")
+highlight("barplotButton1");
+
+function highlight(id) {
+    let barplotButtons = ["barplotButton1", "barplotButton2", "barplotButton3"]
+    barplotButtons.forEach(element => {
+        var button = document.getElementById(element);
+        if (element == id) {
+            if (!button.className.includes("selected"))
+                button.className += " selected"
+        } else {
+            if (button.className.includes("selected"))
+                button.className -= " selected"
+        }
+    });
+}

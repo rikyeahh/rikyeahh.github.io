@@ -55,10 +55,10 @@ function drawBubbles(scaleCriterion, country) {
         scaleByLandPerKcal = true
         var bubbleRadius = (scaleCriterion, d) => {
             switch (scaleCriterion) {
-                case "fixedSize": return 10;
-                case "scaleByWeight": return Math.max(animals_sizes[d.animal_idx] / 50, 1);
-                case "LandPerKcal": return Math.max(land_use_per_1000_kcals[d.animal_idx] / 5, 1);
-                case "GHGPer1000Kcal": return Math.max(GHG_per_kg_of_food[d.animal_idx] / 5, 1)
+                case "fixedSize": highlightBubble("bubbleButton4"); return 10;
+                case "scaleByWeight": highlightBubble("bubbleButton3"); return Math.max(animals_sizes[d.animal_idx] / 50, 1);
+                case "LandPerKcal": highlightBubble("bubbleButton2"); return Math.max(land_use_per_1000_kcals[d.animal_idx] / 5, 1);
+                case "GHGPer1000Kcal": highlightBubble("bubbleButton1"); return Math.max(GHG_per_kg_of_food[d.animal_idx] / 5, 1)
                 default: return 10;
             }
         }
@@ -161,6 +161,22 @@ function drawBubbles(scaleCriterion, country) {
 }
 
 drawBubbles("GHGPer1000Kcal", "Spain")
+highlightBubble("bubbleButton1")
+
 document.getElementById('selectCountry').addEventListener('change', function () {
     drawBubbles("", this.value);
 });
+
+function highlightBubble(id) {
+    let barplotButtons = ["bubbleButton1", "bubbleButton2", "bubbleButton3", "bubbleButton4"]
+    barplotButtons.forEach(element => {
+        var button = document.getElementById(element);
+        if (element == id) {
+            if (!button.className.includes("selected"))
+                button.className += " selected"
+        } else {
+            if (button.className.includes("selected"))
+                button.className -= " selected"
+        }
+    });
+}

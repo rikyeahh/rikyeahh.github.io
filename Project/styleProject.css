@@ -57,24 +57,38 @@ p {
     border: 2px solid yellow;
 }  
 
-.left-section {
-    width: 50%;
-    padding-right: 10%;
-}
-
-.right-section {
-    width: 50%;
-    margin-right: 5%;
-}
-
 .text-and-viz {
+    /*height: 100vh;*/
     display: flex;
     align-items: center;
     flex-direction: row;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .text-and-viz-vertical {
+    /*height: 100vh;*/
     display: flex;
-    align-items: center;
     flex-direction: column;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+button {
+    background-color:#0a0a23;
+    color: #fff;
+    border:none; 
+    border-radius:10px; 
+    padding:15px;
+    min-height:30px; 
+    min-width: 120px;
+}
+
+button:hover {
+    background-color:#002ead;
+    transition: 0.3s;
+}
+
+.selected {
+    background-color:#002ead;
 }

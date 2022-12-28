@@ -18,7 +18,7 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
             .text("a simple tooltip");
 
         var height = 1000;
-        var width = document.documentElement.clientWidth / 2 - 20;
+        var width = document.documentElement.clientWidth / 2 - 150;
         const svg = d3.select(id)
             .append("svg")
             .attr("width", width)
