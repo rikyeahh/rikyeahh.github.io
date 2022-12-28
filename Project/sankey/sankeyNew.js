@@ -73,8 +73,7 @@ d3version4.json("/Project/sankey/sankey1new.json", function (error, graph) {
         .attr("x", d => d.x1 + 6)
         .attr("text-anchor", "start");
 
-    
-    const pinkTextX = 750
+    const pinkTextX = 700
     svg.append("text")
         .attr("x", pinkTextX)
         .attr("y", 350)
@@ -98,7 +97,7 @@ d3version4.json("/Project/sankey/sankey1new.json", function (error, graph) {
         .style("font-weight", "bold")
         .style("font-size", "30px")
         .attr("fill", "#ffaaaa")
-
+    
     /* TOOLTIP AND HOVER */
     const tooltip = d3version4.select("body")
         .append("div")
@@ -113,7 +112,6 @@ d3version4.json("/Project/sankey/sankey1new.json", function (error, graph) {
         .text("a simple tooltip");
 
     function onMouseOverLinks(event, d) {
-        //console.log(d);
         var link = graph.links[d]
         if ((link.source.node == 7) || (link.target.node == 7))
             msg = `${Math.round(link.value / 1000)} tonnes of greenhouse gases`

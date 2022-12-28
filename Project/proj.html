@@ -38,6 +38,7 @@
     </div>
     <!-- SEZIONE 2 - Sankey-->
     <div class="text-and-viz" id="cloud-container">
+        <div id="graph1"></div>
         <div>
             <h2>The not-so-green agricolture</h2>
             <p>
@@ -47,17 +48,9 @@
                 the infamous reputation of CO2, can be much more longeve and heat-retaining in the atmosphere.
             </p>
         </div>
-        <div id="graph1"></div>
     </div>
     <!-- SEZIONE 3 - Stacked barplot-->
     <div class="text-and-viz">
-        <div>
-            <button id="barplotButton1" onclick='buildFoodBarplot("/Project/barplot/landUsePer1Kg.csv")'>1 Kg of product</button>
-            <button id="barplotButton2" onclick='buildFoodBarplot("/Project/barplot/landUsePer100gProteins.csv")'>100g of proteins</button>
-            <button id="barplotButton3" onclick='buildFoodBarplot("/Project/barplot/landUsePer1000Kcal.csv")'>1000 Kcal of food</button>
-
-            <div id="foodBarplot" class="left-section"></div>
-        </div>
         <div>
             <h2>What product to impute to?</h2>
             <p>
@@ -67,9 +60,17 @@
                 Bovines and ruminants in general have in general the biggest GHG emissions by far!
             </p>
         </div>
+        <div>
+            <button id="barplotButton1" onclick='buildFoodBarplot("/Project/barplot/landUsePer1Kg.csv")'>1 Kg of product</button>
+            <button id="barplotButton2" onclick='buildFoodBarplot("/Project/barplot/landUsePer100gProteins.csv")'>100g of proteins</button>
+            <button id="barplotButton3" onclick='buildFoodBarplot("/Project/barplot/landUsePer1000Kcal.csv")'>1000 Kcal of food</button>
+            
+            <div id="foodBarplot" class="left-section"></div>
+        </div>
     </div>
     <!-- SEZIONE 4 - Spiegazione ruminanti-->
     <div class="text-and-viz">
+        <div id="stackedBarPlot"></div>
         <div>
             <h2>Why is that?</h2>
                 Ruminants have a very very "inefficent" digestive apparatus, in terms of converting food in energy.
@@ -78,17 +79,16 @@
                 - A lot of methane as a product of digestion, TODO da rutti e cacca
             </p>
         </div>
-        <div id="stackedBarPlot"></div>
     </div>
     <!-- SEZIONE 5 - Barplot & Draggable bubble-->
     <div class="text-and-viz-vertical">
         <div>
             <h2>CO2W - the bovines impact</h1>
             <p>
-                But wait! I can hear you say: beef is very proteic and caloric, so just one cow can feed many people!
+                But wait! I can hear you say: beef is very proteic and caloric, so just one cow can feed many people!<br>
                 While that is (partially) true, the ratio between final product and land used or GHG emitted is still
-                much worse when compared to other animals.
-            </p>
+                much <br> worse when compared to other animals.
+            </p><br>
         </div>
         <div>
             Country:
@@ -113,9 +113,10 @@
         <div>
             <h2>Who is doing better?</h2>
             <p>
-                Actually, no one. Even with small differences, the percentage of NH4 and N2O from agricolture is
+                Actually, no one. Even with small differences, the percentage of NH4 and N2O <br> from agricolture is
                 very high in all EU countries.
-            </p>
+            </p><br>
+            Year:
             <select id="selectYear"></select>
         </div>
         <div>
@@ -128,13 +129,14 @@
         <div>
             <h2>And it is not getting better</h2>
             <p>
-                Taking a look a this percentage of some of the most emitting countries thoughout the years, we can see that
+                Taking a look a this percentage of some of the most emitting countries thoughout the years, <br> we can see that
                 it is not decreasing.
-            </p>
+            </p><br>
         </div>
         <div>
             <button id="smallMultButton1" onclick="update('metano')">Methane</button>
             <button id="smallMultButton2" onclick="update('nitro')">Nitro</button>
+            <br><br><br>
             <div id="lineSM"></div>
         </div>
     </div>

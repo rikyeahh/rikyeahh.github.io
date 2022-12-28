@@ -42,7 +42,7 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
 
     svg.append("g")
         .call(yAxis)
-        .style("font-size", "13px")
+        .style("font-size", "11px")
 
     // draw bars
     const layers = svg.append('g')
@@ -130,7 +130,7 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
             .append('text')
             .attr("x", d => x(d["Methane"]) / 2 + x(d["Other Greenhouse gases"]))
             .attr("y", d => y(d.circoscrizione) + 1)
-            .text(d => { console.log(d["Methane"]); return d["Methane"] <= 4 ? '' : d["Methane"] + " kg" }) // to avoid text overlap
+            .text(d => { return d["Methane"] <= 4 ? '' : d["Methane"] + " kg" }) // to avoid text overlap
             .attr("transform", `translate(-13, 12)`)
             .attr("fill", "white")
             .style("font-size", "12px")
@@ -150,8 +150,7 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
     });
     // x axis label
     svg.append("text")
-        .attr("x", 100)
+        .attr("x", 160)
         .attr("y", height + 30)
         .text("Emissions per kg of food product")
-
 })

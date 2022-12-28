@@ -48,23 +48,21 @@ p {
     stroke-opacity: .5;
 }
 
-
-
 .text-and-viz {
-    /*height: 100vh;*/
     display: flex;
     align-items: center;
     flex-direction: row;
     margin-left: 2rem;
     margin-right: 2rem;
+    margin-bottom: 5rem;
 }
 
 .text-and-viz-vertical {
-    /*height: 100vh;*/
     display: flex;
     flex-direction: column;
     margin-left: 2rem;
     margin-right: 2rem;
+    margin-bottom: 5rem;
 }
 
 button {

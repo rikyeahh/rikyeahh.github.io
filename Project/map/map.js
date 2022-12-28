@@ -17,8 +17,12 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
             .style("color", "#fff")
             .text("a simple tooltip");
 
-        var height = 1000;
+        var height = 700;
         var width = document.documentElement.clientWidth / 2 - 150;
+
+        var map = document.getElementById(id.replace("#", ""))
+        map.innerHTML = "";
+
         const svg = d3.select(id)
             .append("svg")
             .attr("width", width)
@@ -78,8 +82,8 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
             .on("mouseleave", mouseLeave)
 
         svg.append("text")
-            .attr("x", 100)
-            .attr("y", 150)
+            .attr("x", 150)
+            .attr("y", 200)
             .text(chemical)
             .attr("fill", colormap(60))
             .style("font-size", "35px")
@@ -96,9 +100,8 @@ for (let i = 2012; i <= 2021; ++i) {
 
 function redrawMaps(params) {
     var mapYear = this.value;
-    console.log(mapYear)
-    document.getElementById("map1").innerHTML = "";
-    document.getElementById("map2").innerHTML = "";
+    //document.getElementById("map1").innerHTML = "";
+    //document.getElementById("map2").innerHTML = "";
     drawMap("#map1", "/Project/map/CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), mapYear, "N20")
     drawMap("#map2", "/Project/map/CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), mapYear, "CH4")
 }
