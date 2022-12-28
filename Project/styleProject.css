@@ -48,14 +48,7 @@ p {
     stroke-opacity: .5;
 }
 
-.textAndGraph {
-    display: flex;
-}
 
-.textAndGraph:first-child {
-    flex: 1;
-    border: 2px solid yellow;
-}  
 
 .left-section {
     width: 50%;
