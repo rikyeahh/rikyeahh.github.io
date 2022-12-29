@@ -88,6 +88,32 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
             .attr("fill", colormap(60))
             .style("font-size", "35px")
             .style("font-weight", "bold")
+
+
+        // create colobar
+        var colorData = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        var cmapWidth = 200;
+        svg.selectAll(".colorbar")
+            .data(colorData)
+            .enter()
+            .append("rect")
+            .attr("x", function (d, i) { return 50 + i * (cmapWidth / colorData.length) })
+            .attr("y", 100)
+            .attr("width", cmapWidth / colorData.length)
+            .attr("height", 10)
+            .attr("fill", d => colormap(d))
+        svg.append("text")
+            .attr("x", 50)
+            .attr("y", 125)
+            .text("0%")
+        svg.append("text")
+            .attr("x", 25 + cmapWidth)
+            .attr("y", 125)
+            .text("100%")
+        svg.append("text")
+            .attr("x", 35)
+            .attr("y", 90)
+            .text("% of emissions from agricolture")
     })
     // TODO aggiungere leggenda colorbar per entrambe le mappe
 }

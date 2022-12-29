@@ -52,7 +52,7 @@ p {
     display: flex;
     align-items: center;
     flex-direction: row;
-    margin-left: 2rem;
+    margin-left: 2rem;  
     margin-right: 2rem;
     margin-bottom: 5rem;
 }
