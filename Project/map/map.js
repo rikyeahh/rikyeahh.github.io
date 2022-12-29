@@ -85,7 +85,7 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
             .attr("x", 150)
             .attr("y", 200)
             .text(chemical)
-            .attr("fill", colormap(60))
+            .attr("fill", colormap(70))
             .style("font-size", "35px")
             .style("font-weight", "bold")
 
