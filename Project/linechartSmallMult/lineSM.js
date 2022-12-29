@@ -104,7 +104,7 @@ function update(chemical) {
         svg.append("text")
             .attr("x", legendLocationX + 12)
             .attr("y", legendLocationY + 10)
-            .text("Total emissions")
+            .text("Other sources")
             .style("font-size", "12px")
         svg.append("text")
             .attr("x", legendLocationX + 12)
