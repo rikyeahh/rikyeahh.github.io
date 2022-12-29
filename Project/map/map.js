@@ -115,7 +115,6 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
             .attr("y", 90)
             .text("% of emissions from agricolture")
     })
-    // TODO aggiungere leggenda colorbar per entrambe le mappe
 }
 
 var selected = document.getElementById("selectYear");

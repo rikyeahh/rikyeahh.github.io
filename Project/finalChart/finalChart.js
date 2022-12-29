@@ -122,7 +122,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .append('text')
             .attr("x", d => x(d["Pasture"]) + x(d["Cropland"]) + 5)
             .attr("y", d => y(d.circoscrizione) + y.bandwidth() / 2 + 3)
-            .text(d => (parseFloat(d.Pasture) + (parseFloat(d["Cropland"])) + " billion ha"))
+            .text(d => (parseFloat(d.Pasture) == 0 ? '' : (parseFloat(d.Pasture) + (parseFloat(d["Cropland"])) + " billion ha")))
 
         // text for cropland
         svg2.append('g')
@@ -130,7 +130,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .data(data)
             .enter()
             .append('text')
-            .attr("x", d => 20)
+            .attr("x", d => 10)
             .attr("y", d => y(d.circoscrizione) + y.bandwidth() / 2 + 3)
             .text(d => d["Cropland"] + " billion ha") // to avoid text overlap
             .attr("fill", "white")
@@ -167,5 +167,4 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
         .text("Billion hectares needed by type of diet")
         
     // TODO fix larghezza
-    // TODO evitare scritta bianca e nera nelle ultime 3 barre
 })

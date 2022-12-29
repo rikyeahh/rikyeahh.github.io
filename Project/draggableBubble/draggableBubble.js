@@ -154,9 +154,8 @@ function drawBubbles(scaleCriterion, country) {
                 .style("fill", "black")
                 .text(textToShow[i])
         }
-
     })
-    // TODO fare in modo che pulsante selezionato sia luminoso
+    // TODO fix bug: se cambio nazione con tasto != primo selezionato, lo ignora e plotta absolute count
     // TODO capire bug allineamento bolle sopra testo
 }
 
