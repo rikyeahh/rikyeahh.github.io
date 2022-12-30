@@ -1,6 +1,6 @@
 d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
 
-    const margin = { top: 20, right: 0, bottom: 60, left: 200 }
+    const margin = { top: 20, right: 70, bottom: 60, left: 200 }
     const width = 700 - margin.left - margin.right
     const height = 500 - margin.top - margin.bottom;
 
@@ -11,11 +11,11 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
-    const circoscrizioni = data.map(d => d.circoscrizione);
+    const landUsage = Object.keys(data[0]).filter(d => d != "Diet");
+    const diet = data.map(d => d.Diet);
 
     const stackedData = d3.stack()
-        .keys(plants)(data);
+        .keys(landUsage)(data);
 
     const xMax = d3.max(stackedData[stackedData.length - 1], d => d[1]);
 
@@ -25,11 +25,11 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
         .range([0, width]);
 
     const y = d3.scaleBand()
-        .domain(circoscrizioni)
+        .domain(diet)
         .range([0, height])
         .padding(0.1);
     const color = d3.scaleOrdinal()
-        .domain(plants)
+        .domain(landUsage)
         .range(["#b38074", "#5a7a5b"]);
 
     // axes
@@ -56,7 +56,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
 
     // add legend
     const legendX = 360
-    for (let i = 0; i < plants.length; i++) {
+    for (let i = 0; i < landUsage.length; i++) {
         svg.append("circle")
             .attr("cx", legendX)
             .attr("cy", 205 + i * 18)
@@ -65,7 +65,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
         svg.append("text")
             .attr("x", legendX + 10)
             .attr("y", 205 + i * 18)
-            .text(plants[i])
+            .text(landUsage[i])
             .style("font-size", "15px")
             .attr("alignment-baseline", "middle")
     }
@@ -78,7 +78,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .data(d => d)
             .join('rect')
             .attr('x', d => x(d[0]))
-            .attr('y', d => y(d.data.circoscrizione))
+            .attr('y', d => y(d.data.Diet))
             .attr('height', y.bandwidth())
             .attr('width', d => (x(d[1]) - x(d[0])))
 
@@ -89,7 +89,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .enter()
             .append('text')
             .attr("x", d => x(d["Pasture"]) + x(d["Cropland"]) + 5)
-            .attr("y", d => y(d.circoscrizione) + y.bandwidth() / 2 + 3)
+            .attr("y", d => y(d.Diet) + y.bandwidth() / 2 + 3)
             .text(d => (parseFloat(d.Pasture) == 0 ? '' : (parseFloat(d.Pasture) + (parseFloat(d["Cropland"])) + " billion ha")))
 
         // text for cropland
@@ -99,7 +99,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .enter()
             .append('text')
             .attr("x", d => 10)
-            .attr("y", d => y(d.circoscrizione) + y.bandwidth() / 2 + 3)
+            .attr("y", d => y(d.Diet) + y.bandwidth() / 2 + 3)
             .text(d => d["Cropland"] + " billion ha") // to avoid text overlap
             .attr("fill", "white")
 
@@ -110,7 +110,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .enter()
             .append('text')
             .attr("x", d => x(d["Cropland"]) + x(d["Pasture"]) / 2 - 50)
-            .attr("y", d => y(d.circoscrizione) + y.bandwidth() / 2 + 3)
+            .attr("y", d => y(d.Diet) + y.bandwidth() / 2 + 3)
             .text(d => d["Pasture"] == '0' ? '' : d["Pasture"] + " billion ha") // to avoid text overlap
             .attr("fill", "white")
     });

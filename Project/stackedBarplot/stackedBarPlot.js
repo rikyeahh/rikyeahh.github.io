@@ -11,11 +11,11 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const plants = Object.keys(data[0]).filter(d => d != "circoscrizione");
-    const circoscrizioni = data.map(d => d.circoscrizione);
+    const emissions = Object.keys(data[0]).filter(d => d != "Product");
+    const products = data.map(d => d.Product);
 
     const stackedData = d3.stack()
-        .keys(plants)(data);
+        .keys(emissions)(data);
 
     const xMax = d3.max(stackedData[stackedData.length - 1], d => d[1]);
 
@@ -25,11 +25,11 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
         .range([0, width]);
 
     const y = d3.scaleBand()
-        .domain(circoscrizioni)
+        .domain(products)
         .range([0, height])
         .padding(0.1);
     const color = d3.scaleOrdinal()
-        .domain(plants)
+        .domain(emissions)
         .range(d3.schemeTableau10);
 
     // axes
@@ -54,7 +54,7 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
 
     // tooltip
     const tooltip2 = [];
-    for (let i = 0; i < plants.length; i++) {
+    for (let i = 0; i < emissions.length; i++) {
         tooltip2[i] = d3.select("body")
             .append("div")
             .attr("class", "d3-tooltip")
@@ -69,7 +69,7 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
     }
 
     // add legend
-    for (let i = 0; i < plants.length; i++) {
+    for (let i = 0; i < emissions.length; i++) {
         svg.append("circle")
             .attr("cx", 250)
             .attr("cy", 100 + i * 18)
@@ -78,7 +78,7 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
         svg.append("text")
             .attr("x", 270)
             .attr("y", 100 + i * 18)
-            .text(plants[i])
+            .text(emissions[i])
             .style("font-size", "15px")
             .attr("alignment-baseline", "middle")
     }
@@ -91,11 +91,11 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
             .data(d => d)
             .join('rect')
             .attr('x', d => x(d[0]))
-            .attr('y', d => y(d.data.circoscrizione))
+            .attr('y', d => y(d.data.Product))
             .attr('height', y.bandwidth())
             .attr('width', d => (x(d[1]) - x(d[0])))
             .on("mouseover", function (d, j) {
-                tooltip2[i].html(`${plants[i]} : ${j[1] - j[0]} kg`)
+                tooltip2[i].html(`${emissions[i]} : ${j[1] - j[0]} kg`)
                     .style("visibility", "visible");
                 d3.select(this).attr("fill", "red");
             })
@@ -118,7 +118,7 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
             .enter()
             .append('text')
             .attr("x", d => x(d["Methane"]) + x(d["Other Greenhouse gases"]) + 5)
-            .attr("y", d => y(d.circoscrizione) + 1)
+            .attr("y", d => y(d.Product) + 1)
             .text(d => Math.round(parseFloat(d.Methane)) + Math.round(parseFloat(d["Other Greenhouse gases"])) + " Kg")
             .attr("transform", `translate(-2, 13)`)
 
@@ -129,7 +129,7 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
             .enter()
             .append('text')
             .attr("x", d => x(d["Methane"]) / 2 + x(d["Other Greenhouse gases"]))
-            .attr("y", d => y(d.circoscrizione) + 1)
+            .attr("y", d => y(d.Product) + 1)
             .text(d => { return d["Methane"] <= 4 ? '' : d["Methane"] + " kg" }) // to avoid text overlap
             .attr("transform", `translate(-13, 12)`)
             .attr("fill", "white")
@@ -142,7 +142,7 @@ d3.csv("/Project/stackedBarplot/emissionsByFood.csv").then(function (data) {
             .enter()
             .append('text')
             .attr("x", d => x(d["Other Greenhouse gases"]) / 2)
-            .attr("y", d => y(d.circoscrizione) + 1)
+            .attr("y", d => y(d.Product) + 1)
             .text(d => d["Other Greenhouse gases"] < 10 ? '' : d["Other Greenhouse gases"] + " kg") // to avoid text overlap
             .attr("transform", `translate(-20, 12)`)
             .attr("fill", "white")

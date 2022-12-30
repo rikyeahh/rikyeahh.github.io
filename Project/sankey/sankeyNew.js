@@ -112,7 +112,7 @@ d3version4.json("/Project/sankey/sankey1new.json", function (error, graph) {
         .text("a simple tooltip");
 
     function onMouseOverLinks(event, d) {
-        var link = graph.links[d]
+        var link = graph.links[d.index]
         if ((link.source.node == 7) || (link.target.node == 7))
             msg = `${Math.round(link.value / 1000)} tonnes of greenhouse gases`
         else
