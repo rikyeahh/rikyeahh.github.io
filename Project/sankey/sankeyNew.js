@@ -73,7 +73,7 @@ d3version4.json("/Project/sankey/sankey1new.json", function (error, graph) {
         .attr("x", d => d.x1 + 6)
         .attr("text-anchor", "start");
 
-    const pinkTextX = 700
+    const pinkTextX = width + 15
     svg.append("text")
         .attr("x", pinkTextX)
         .attr("y", 350)
