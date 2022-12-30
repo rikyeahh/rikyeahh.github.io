@@ -155,7 +155,6 @@ function drawBubbles(scaleCriterion, country) {
                 .text(textToShow[i])
         }
     })
-    // TODO fix bug: se cambio nazione con tasto != primo selezionato, lo ignora e plotta absolute count
     // TODO capire bug allineamento bolle sopra testo
 }
 
@@ -163,7 +162,15 @@ drawBubbles("GHGPer1000Kcal", "Spain")
 highlightBubble("bubbleButton1")
 
 document.getElementById('selectCountry').addEventListener('change', function () {
-    drawBubbles("", this.value);
+    let barplotButtons = ["bubbleButton1", "bubbleButton2", "bubbleButton3", "bubbleButton4"]
+    let params = ['GHGPer1000Kcal', 'LandPerKcal', 'scaleByWeight', 'fixedSize']
+    // get selected button
+    for (let i = 0; i < barplotButtons.length; i++) {
+        const id = barplotButtons[i];
+        var button = document.getElementById(id);
+        if(button.className.includes("selected"))
+            drawBubbles(params[i], this.value);
+    }
 });
 
 function highlightBubble(id) {

@@ -39,7 +39,7 @@ function update(chemical) {
             .attr("transform", `translate(0, ${height})`)
             .call(xAxis);
 
-        //Add Y axis
+        //Add Y axis and label
         const y = d3.scaleLinear()
             .domain([0, d3.max(data, function (d) { return +d.n; })])
             .range([height, 0]);
@@ -49,6 +49,13 @@ function update(chemical) {
             .tickFormat((d, i) => d / 1000 + "K");
         svg.append("g")
             .call(yAxis);
+        svg.append("text")
+            .attr("x", -170)
+            .attr("y", -35)
+            .text("Tons of " + (chemical == 'nitro' ? 'N₂O' : "CH₄") + " emissions")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", "12px")
+
 
         // Draw the line
         svg.append("path")
@@ -88,7 +95,7 @@ function update(chemical) {
         })
 
         const legendLocationX = 90
-        const legendLocationY = -12
+        const legendLocationY = -15
         svg.append("rect")
             .attr("x", legendLocationX)
             .attr("y", legendLocationY)
@@ -97,7 +104,7 @@ function update(chemical) {
             .attr("fill", "black")
         svg.append("rect")
             .attr("x", legendLocationX)
-            .attr("y", legendLocationY + 20)
+            .attr("y", legendLocationY + 17)
             .attr("width", 10)
             .attr("height", 10)
             .attr("fill", "red")
@@ -108,15 +115,11 @@ function update(chemical) {
             .style("font-size", "12px")
         svg.append("text")
             .attr("x", legendLocationX + 12)
-            .attr("y", legendLocationY + 20 + 10)
+            .attr("y", legendLocationY + 20 + 7)
             .text("From agricolture")
             .style("font-size", "12px")
-
     })
-    // TODO aggiungere hover carino magari
-    // TODO rendere piu chiara legenda: rosso = agricoltura DI METANO/NO2
-    // TODO aggiungere il fatto che pulsante selezionato sia illuminato e l altro no
-    // TODO aggiungere label all asse Y
+    // TODO fix colors?
 }
 
 update("nitro")
