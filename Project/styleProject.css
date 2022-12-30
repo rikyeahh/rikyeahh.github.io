@@ -7,6 +7,11 @@ p, body {
     font-family: 'Fira Sans', sans-serif;
 }
 
+img {
+    width: 40%;
+    height: 40%;
+}
+
 .title {
     margin-left: 2rem;  
 }

@@ -5,7 +5,6 @@
     <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Capybara">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,23 +13,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
 
     <!-- Title -->
-    <title>Capybara Team</title>
+    <title>CO₂W</title>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
-    <link rel="mask-icon" href="assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Project/assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Project/assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Project/assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/Project/assets/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/Project/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/Project/assets/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/Project/assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="./styleProject.css">
 </head>
 
 <body>
-    <div class="title">
-        <h1>CO<sub>2</sub>W: how bovines impact on GHG emissions</h1>
-        <h2>Riccardo Rorato, Alessandro Arata</h2>
-    </div>
+    <h1 class="title">CO<sub>2</sub>W: how bovines impact on GHG emissions</h1>
+    <h2 class="title">Riccardo Rorato, Alessandro Arata</h2>
     <!-- SEZIONE 1 - intro e picture sole e GHG -->
     <div class="text-and-viz">
         <div>
@@ -44,7 +46,7 @@
                 from melting glaciers, causing more distruptive monsoons and typhoons, increasing heat waves intensity.
             </p>
         </div>
-        <img src="ghg_earth.png" alt="Sun with greenhouse effect" width="40%" height="40%">
+        <img src="ghg_earth.png" alt="Sun with greenhouse effect">
     </div>
     <!-- SEZIONE 2 - Sankey-->
     <div class="text-and-viz">
@@ -96,7 +98,7 @@
     <!-- SEZIONE 5 - Barplot & Draggable bubble-->
     <div class="text-and-viz-vertical">
         <div>
-            <h2>The impact of bovines</h1>
+            <h2>The impact of bovines</h2>
             <p>
                 But wait! I can hear you say: beef is very proteic and caloric, so just one cow can feed many people!<br>
                 While that is (partially) true, the ratio between final product and land used or GHG emitted is still
@@ -105,7 +107,7 @@
         </div>
         <div>
             Country:
-            <select name="" id="selectCountry">
+            <select id="selectCountry">
                 <option value="Spain">Spain</option>
                 <option value="France">France</option>
                 <option value="Italy">Italy</option>
