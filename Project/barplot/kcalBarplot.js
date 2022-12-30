@@ -1,5 +1,4 @@
 function buildFoodBarplot(filename) {
-    document.getElementById("foodBarplot").innerHTML = ''
     d3.csv(filename).then(function (data) {
 
         //console.log(data);
@@ -10,6 +9,8 @@ function buildFoodBarplot(filename) {
         const margin = { top: 20, right: 30, bottom: 40, left: 90 }
         const width = 700 - margin.left - margin.right
         const height = 500 - margin.top - margin.bottom;
+
+        document.getElementById("foodBarplot").innerHTML = ''
 
         // append the svg object to the body of the page
         const svg = d3.select("#foodBarplot")

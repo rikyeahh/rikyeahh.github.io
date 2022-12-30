@@ -37,7 +37,7 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
 
         let mouseOver = function (event, d) {
             d3.selectAll(".Country")
-                .style("opacity", .5)
+                //.style("opacity", .5)
             d3.select(this)
                 .style("opacity", 1)
                 .style("stroke", "black")
@@ -49,7 +49,7 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
 
         let mouseLeave = function (d) {
             d3.selectAll(".Country")
-                .style("opacity", .8)
+                //.style("opacity", .8)
             d3.select(this)
                 .style("stroke", "transparent")
             tooltip.html(``).style("visibility", "hidden");
@@ -76,7 +76,7 @@ var drawMap = (id, data_url, colormap, mapYear, chemical) => {
             })
             .style("stroke", "transparent")
             .attr("class", function (d) { return "Country" })
-            .style("opacity", .8)
+            //.style("opacity", .8)
             .on("mouseover", mouseOver)
             .on("mousemove", mouseMove)
             .on("mouseleave", mouseLeave)

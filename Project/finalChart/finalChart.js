@@ -4,7 +4,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
     const width = 700 - margin.left - margin.right
     const height = 500 - margin.top - margin.bottom;
 
-    const svg2 = d3.select('#finalChart')
+    const svg = d3.select('#finalChart')
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
@@ -36,49 +36,33 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
     const xAxis = d3.axisBottom(x).ticks(5, '~s');
     const yAxis = d3.axisLeft(y);
 
-    svg2.append('g')
+    svg.append('g')
         .attr('transform', `translate(0,${height})`)
         .call(xAxis)
         .style("font-size", "20px")
 
-    svg2.append("g")
+    svg.append("g")
         .call(yAxis)
         .style("font-size", "15px")
 
 
     // draw bars
-    const layers = svg2.append('g')
+    const layers = svg.append('g')
         .selectAll('g')
         .data(stackedData)
         .join('g')
         .attr('fill', d => color(d.key));
 
 
-    // tooltip
-    const tooltip2 = [];
-    for (let i = 0; i < plants.length; i++) {
-        tooltip2[i] = d3.select("body")
-            .append("div")
-            .attr("class", "d3-tooltip")
-            .style("position", "absolute")
-            .style("z-index", "10")
-            .style("visibility", "hidden")
-            .style("padding", "15px")
-            .style("background", "rgba(0,0,0,0.6)")
-            .style("border-radius", "5px")
-            .style("color", "#fff")
-            .text("a simple tooltip");
-    }
-
     // add legend
     const legendX = 360
     for (let i = 0; i < plants.length; i++) {
-        svg2.append("circle")
+        svg.append("circle")
             .attr("cx", legendX)
             .attr("cy", 205 + i * 18)
             .attr("r", 6)
             .style("fill", color(i))
-        svg2.append("text")
+        svg.append("text")
             .attr("x", legendX + 10)
             .attr("y", 205 + i * 18)
             .text(plants[i])
@@ -97,25 +81,9 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .attr('y', d => y(d.data.circoscrizione))
             .attr('height', y.bandwidth())
             .attr('width', d => (x(d[1]) - x(d[0])))
-            .on("mouseover", function (d, j) {
-                tooltip2[i].html(`${plants[i]}: ${Math.round((j[1] - j[0]) * 100) / 100}`)
-                    .style("visibility", "visible");
-                d3.select(this).attr("fill", "red");
-            })
-            .on("mousemove", function () {
-                tooltip2[i]
-                    .style("top", (event.pageY - 10) + "px")
-                    .style("left", (event.pageX + 10) + "px");
-            })
-            .on("mouseout", function () {
-                tooltip2[i].html(``).style("visibility", "hidden");
-                d3.select(this).attr("fill", function () {
-                    return "" + color(i) + "";
-                })
-            })
 
         // text for total
-        svg2.append('g')
+        svg.append('g')
             .selectAll('text')
             .data(data)
             .enter()
@@ -125,7 +93,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .text(d => (parseFloat(d.Pasture) == 0 ? '' : (parseFloat(d.Pasture) + (parseFloat(d["Cropland"])) + " billion ha")))
 
         // text for cropland
-        svg2.append('g')
+        svg.append('g')
             .selectAll('text')
             .data(data)
             .enter()
@@ -136,7 +104,7 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .attr("fill", "white")
 
         // text for pasture
-        svg2.append('g')
+        svg.append('g')
             .selectAll('text')
             .data(data)
             .enter()
@@ -147,21 +115,21 @@ d3.csv("/Project/finalChart/finalChart.csv").then(function (data) {
             .attr("fill", "white")
     });
 
-    svg2.append("text")
+    svg.append("text")
         .attr("x", x(data[0]["Cropland"]) / 2 - 50)
         .attr("y", 0)
         .text("CROPLAND")
         .attr("fill", color(0))
         .style("font-weight", "bold")
 
-    svg2.append("text")
+    svg.append("text")
         .attr("x", x(data[0]["Cropland"]) + x(data[0]["Pasture"]) / 2 - 50)
         .attr("y", 0)
         .text("PASTURE")
         .attr("fill", color(1))
         .style("font-weight", "bold")
     
-    svg2.append("text")
+    svg.append("text")
         .attr("x", 100)
         .attr("y", 460)
         .text("Billion hectares needed by type of diet")

@@ -1,5 +1,4 @@
 function update(chemical) {
-    document.getElementById("lineSM").innerHTML = '';
     d3.csv(`/Project/linechartSmallMult/${chemical}_tot.csv`).then(function (data) {
 
         let id = chemical == "nitro" ? "smallMultButton2" : "smallMultButton1";
@@ -14,6 +13,8 @@ function update(chemical) {
 
         // What is the list of groups?
         allKeys = new Set(data.map(d => d.name))
+
+        document.getElementById("lineSM").innerHTML = '';
 
         // Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
         const svg = d3.select("#lineSM")
@@ -82,8 +83,8 @@ function update(chemical) {
             const sumstat = d3.group(data, d => d.name) // nest function allows to group the calculation per level of a factor
             svg.append("path")
                 .data(sumstat)
-                .attr("fill", "red")
-                .attr("stroke", d => "red")
+                .attr("fill", "#cc0000")
+                .attr("stroke", d => "#cc0000")
                 .attr("stroke-width", 1.9)
                 .attr("d", function (d) {
                     return d3.area()
@@ -107,7 +108,7 @@ function update(chemical) {
             .attr("y", legendLocationY + 17)
             .attr("width", 10)
             .attr("height", 10)
-            .attr("fill", "red")
+            .attr("fill", "#cc0000")
         svg.append("text")
             .attr("x", legendLocationX + 12)
             .attr("y", legendLocationY + 10)
