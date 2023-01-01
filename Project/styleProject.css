@@ -16,6 +16,10 @@ img {
     margin-left: 2rem;  
 }
 
+.title p {
+    max-width: 40%;
+}
+
 .bubbles {
     stroke-width: 1px;
     stroke: white;
