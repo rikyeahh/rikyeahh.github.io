@@ -1,0 +1,67 @@
+#capybaraTitleImage {
+    width: 30%;
+    height: auto;
+}
+
+h1,
+h2 {
+    font-family: 'Roboto Slab', serif;
+}
+
+p {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.titleAndPhoto {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.home-section {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.viz-section {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.grid line {
+    shape-rendering: crispEdges;
+    stroke-dasharray: 5.5;
+}
+
+.bubbles {
+    stroke-width: 1px;
+    stroke: white;
+}
+
+.bubbles:hover {
+    stroke: black;
+}
+
+.link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+}
+
+.link:hover {
+    stroke-opacity: .5;
+}
+
+.labSections > * {
+    min-width: 100px;
+    max-width: 300px;
+    background-color: hsl(224, 100%, 90%);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.labSections {
+    display: flex;
+    flex-wrap: wrap;
+}
