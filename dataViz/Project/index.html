@@ -16,14 +16,14 @@
     <title>CO₂W</title>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/Project/assets/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/Project/assets/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/Project/assets/favicons/favicon-16x16.png">
-    <link rel="manifest" href="/Project/assets/favicons/site.webmanifest">
-    <link rel="mask-icon" href="/Project/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/Project/assets/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicons/site.webmanifest">
+    <link rel="mask-icon" href="./assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="./assets/favicons/favicon.ico">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/Project/assets/favicons/browserconfig.xml">
+    <meta name="msapplication-config" content="./assets/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
     <!-- Styles -->
@@ -89,9 +89,9 @@
             </p>
         </div>
         <div>
-            <button id="barplotButton1" onclick='buildFoodBarplot("/Project/barplot/landUsePer1Kg.csv")'>1 Kg of product</button>
-            <button id="barplotButton2" onclick='buildFoodBarplot("/Project/barplot/landUsePer100gProteins.csv")'>100g of proteins</button>
-            <button id="barplotButton3" onclick='buildFoodBarplot("/Project/barplot/landUsePer1000Kcal.csv")'>1000 Kcal of food</button>
+            <button id="barplotButton1" onclick='buildFoodBarplot("./barplot/landUsePer1Kg.csv")'>1 Kg of product</button>
+            <button id="barplotButton2" onclick='buildFoodBarplot("./barplot/landUsePer100gProteins.csv")'>100g of proteins</button>
+            <button id="barplotButton3" onclick='buildFoodBarplot("./barplot/landUsePer1000Kcal.csv")'>1000 Kcal of food</button>
             
             <div id="foodBarplot" class="left-section"></div>
         </div>
@@ -197,13 +197,14 @@
     <script src="https://unpkg.com/d3-path@1"></script>
     <script src="https://unpkg.com/d3-shape@1"></script>
     <script src="https://unpkg.com/d3-sankey@0"></script>
-    <script src="sankey/sankeyNew.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+    <!--my scripts-->
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="barplot/kcalBarplot.js"></script>
     <script src="draggableBubble/draggableBubble.js"></script>
     <script src="map/legendscript.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="sankey/sankeyNew.js"></script>
     <script src="map/map.js"></script>
     <script src="linechartSmallMult/lineSM.js"></script>
     <script src="finalChart/finalChart.js"></script>
