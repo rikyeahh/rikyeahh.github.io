@@ -1,4 +1,4 @@
-d3version4.json("./sankey1new.json", function (error, graph) {
+d3version4.json("./sankey/sankey1new.json", function (error, graph) {
     var margin = { top: 10, right: 0, bottom: 10, left: 10 },
         width = document.documentElement.clientWidth / 2 - margin.left - margin.right - 50,
         height = 700 - margin.top - margin.bottom;

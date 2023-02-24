@@ -127,10 +127,10 @@ function redrawMaps(params) {
     var mapYear = this.value;
     //document.getElementById("map1").innerHTML = "";
     //document.getElementById("map2").innerHTML = "";
-    drawMap("#map1", "./CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), mapYear, "N₂O")
-    drawMap("#map2", "./CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), mapYear, "CH₄")
+    drawMap("#map1", "./map/CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), mapYear, "N₂O")
+    drawMap("#map2", "./map/CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), mapYear, "CH₄")
 }
 
 selected.oninput = redrawMaps
-drawMap("#map1", "./CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), 2021, "N₂O")
-drawMap("#map2", "./CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), 2021, "CH₄")
+drawMap("#map1", "./map/CLEAN_nitro_perc.csv", d => d3.interpolateBlues(d / 100), 2021, "N₂O")
+drawMap("#map2", "./map/CLEAN_metano_perc.csv", d => d3.interpolateOranges(d / 100), 2021, "CH₄")

@@ -1,4 +1,4 @@
-d3.csv("./finalChart.csv").then(function (data) {
+d3.csv("./finalChart/finalChart.csv").then(function (data) {
 
     const margin = { top: 20, right: 70, bottom: 60, left: 200 }
     const width = 700 - margin.left - margin.right

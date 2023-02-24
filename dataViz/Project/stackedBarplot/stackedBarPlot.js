@@ -1,4 +1,4 @@
-d3.csv("./emissionsByFood.csv").then(function (data) {
+d3.csv("./stackedBarplot/emissionsByFood.csv").then(function (data) {
 
     const margin = { top: 20, right: 100, bottom: 40, left: 90 }
     const width = 700 - margin.left - margin.right
