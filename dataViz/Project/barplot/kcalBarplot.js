@@ -114,7 +114,7 @@ function buildFoodBarplot(filename) {
     })
 }
 
-buildFoodBarplot("/Project/barplot/landUsePer1000Kcal.csv")
+buildFoodBarplot("./landUsePer1000Kcal.csv")
 highlight("barplotButton1");
 
 function highlight(id) {

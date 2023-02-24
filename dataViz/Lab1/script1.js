@@ -16,7 +16,7 @@ const svg = d3.select("#graph1")
 
 
 // get the data
-d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data1.csv").then(function (data) {
+d3.csv("../assets/data1.csv").then(function (data) {
 
     data = data.slice(0, 10) // just top 10 tree species
 

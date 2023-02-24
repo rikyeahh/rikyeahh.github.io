@@ -1,6 +1,6 @@
 // Boxplot
 
-d3.json("../../assets/data6.json").then(function (sumstat) {
+d3.json("../assets/data6.json").then(function (sumstat) {
 
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 30, bottom: 60, left: 180 },

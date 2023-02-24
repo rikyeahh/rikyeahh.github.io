@@ -1,5 +1,5 @@
 function update(chemical) {
-    d3.csv(`/Project/linechartSmallMult/${chemical}_tot.csv`).then(function (data) {
+    d3.csv(`./${chemical}_tot.csv`).then(function (data) {
 
         let id = chemical == "nitro" ? "smallMultButton2" : "smallMultButton1";
         highlightSmallMult(id);

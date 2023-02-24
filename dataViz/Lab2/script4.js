@@ -1,5 +1,5 @@
 //Scatter plot small multiples
-d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data5.csv").then(function (data) {
+d3.csv("../assets/data5.csv").then(function (data) {
 
     // set the dimensions and margins of the graph
     const margin = { top: 10, right: 20, bottom: 30, left: 30 },

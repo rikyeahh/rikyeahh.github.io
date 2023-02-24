@@ -1,4 +1,4 @@
-d3.csv("https://raw.githubusercontent.com/rikyeahh/rikyeahh.github.io/main/assets/data3.csv").then(function (data) {
+d3.csv("../assets/data3.csv").then(function (data) {
 
     // reorganize data
     other = data.pop()
