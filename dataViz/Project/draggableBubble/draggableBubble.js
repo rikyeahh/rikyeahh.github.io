@@ -1,5 +1,5 @@
 function drawBubbles(scaleCriterion, country) {
-    d3.csv("./animals_per_country.csv").then(function (graph, err) {
+    d3.csv("./draggableBubble/animals_per_country.csv").then(function (graph, err) {
 
         document.getElementById("animalBubbles").innerHTML = '';
         // set the dimensions and margins of the graph

@@ -89,13 +89,13 @@ function buildFoodBarplot(filename) {
                 .style("fill", color(element))
         }
 
-        const label = filename == './landUsePer1000Kcal.csv' ? '1000 Kcal' :
-            filename == './landUsePer100gProteins.csv' ? '100 g of proteins' :
-            filename == './landUsePer1Kg.csv' ? '1 Kg of product' : "ERROR"
+        const label = filename == './barplot/landUsePer1000Kcal.csv' ? '1000 Kcal' :
+            filename == './barplot/landUsePer100gProteins.csv' ? '100 g of proteins' :
+            filename == './barplot/landUsePer1Kg.csv' ? '1 Kg of product' : "ERROR"
             
-        const id = filename == './landUsePer1000Kcal.csv' ? 'barplotButton3' :
-            filename == './landUsePer100gProteins.csv' ? 'barplotButton2' :
-            filename == './landUsePer1Kg.csv' ? 'barplotButton1' : "ERROR"
+        const id = filename == './barplot/landUsePer1000Kcal.csv' ? 'barplotButton3' :
+            filename == './barplot/landUsePer100gProteins.csv' ? 'barplotButton2' :
+            filename == './barplot/landUsePer1Kg.csv' ? 'barplotButton1' : "ERROR"
         highlight(id);
 
 
@@ -114,7 +114,7 @@ function buildFoodBarplot(filename) {
     })
 }
 
-buildFoodBarplot("./landUsePer1000Kcal.csv")
+buildFoodBarplot("./barplot/landUsePer1000Kcal.csv")
 highlight("barplotButton1");
 
 function highlight(id) {
