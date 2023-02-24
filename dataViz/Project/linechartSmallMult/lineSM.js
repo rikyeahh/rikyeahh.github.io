@@ -79,7 +79,7 @@ function update(chemical) {
             .text(function (d) { return (d[0]) })
             .style("fill", "blue")
 
-        d3.csv(`/Project/linechartSmallMult/${chemical}_agri.csv`).then(function (data) {
+        d3.csv(`./linechartSmallMult/${chemical}_agri.csv`).then(function (data) {
             const sumstat = d3.group(data, d => d.name) // nest function allows to group the calculation per level of a factor
             svg.append("path")
                 .data(sumstat)
